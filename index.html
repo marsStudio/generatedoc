@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v19 (Live AI)</title>
+<title>Smart Dokumen Indonesia — v20 (Secure API)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -37,7 +37,6 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
 
-/* NAV */
 .nav{height:60px;background:var(--s);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 24px;gap:16px;position:sticky;top:0;z-index:300}
 .logo{display:flex;align-items:center;gap:10px;cursor:pointer}
 .logo-m{width:32px;height:32px;background:linear-gradient(135deg,var(--p),var(--b));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--fb);font-weight:800;font-size:14px;flex-shrink:0}
@@ -59,10 +58,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .ibt{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--i3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s;flex-shrink:0}
 .ibt:hover{color:var(--i);background:var(--bg2)}
 
-/* LAYOUT */
 .shell{display:flex;height:calc(100vh - 60px);overflow:hidden}
-
-/* LEFT SIDEBAR */
 .lsb{width:260px;flex-shrink:0;background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column;overflow:hidden}
 .lsb-search{padding:16px;border-bottom:1px solid var(--bd)}
 .lsb-search-input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--bd2);border-radius:8px;font-size:13px;font-family:var(--fb);color:var(--i);background:var(--bg);outline:none;transition:border-color .15s}
@@ -75,15 +71,11 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .lsb-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--i3);transition:all .15s;border-right:3px solid transparent}
 .lsb-item:hover{background:var(--bg2);color:var(--i)}
 .lsb-item.on{background:var(--pl);color:var(--p);border-right-color:var(--p);font-weight:700}
-.lsb-item i{font-size:16px;flex-shrink:0}
 
-/* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* GEN TOPBAR */
 .gen-top{padding:20px 28px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
 .gen-title{font-family:var(--fb);font-size:24px;font-weight:800;color:var(--i);line-height:1.2;margin-bottom:6px;letter-spacing:-0.02em}
-.gen-meta{font-size:12.5px;font-weight:500;color:var(--i4);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.gen-meta{font-size:12.5px;font-weight:500;color:var(--i4);display:flex;align-items:center;gap:12px}
 .cpill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
 .cp-red{background:var(--rl);color:var(--r)}
 .cp-blue{background:var(--bl);color:var(--bm)}
@@ -91,7 +83,6 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .cp-green{background:var(--gnl);color:var(--gnm)}
 .cp-purple{background:var(--pl);color:var(--p)}
 
-/* BODY SPLIT */
 .gen-body{flex:1;display:grid;grid-template-columns:1fr 440px;overflow:hidden}
 .form-col{overflow-y:auto;padding:24px 28px}
 .prev-col{border-left:1px solid var(--bd);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
@@ -105,23 +96,17 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .exp-row{display:flex;gap:10px}
 .exp-btn{flex:1;padding:10px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--fb);border:none;transition:all .18s}
 .exp-docx{background:var(--bl);color:var(--bm);border:1px solid rgba(36,113,163,.2)}
-.exp-docx:hover{background:#c5dff8}
 .exp-pdf{background:var(--pl);color:var(--p);border:1px solid #e9d5ff}
-.exp-pdf:hover{background:#f3e8ff}
 
-/* FORM ELEMENTS */
 .fsec{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--i3);margin:24px 0 14px;display:flex;align-items:center;gap:10px}
 .fsec::after{content:'';flex:1;height:1px;background:var(--bd)}
 .fg{margin-bottom:16px}
 .fl{font-size:12px;font-weight:700;color:var(--i2);margin-bottom:6px;display:flex;align-items:center;gap:4px;text-transform:uppercase;letter-spacing:.03em}
-.fl .req{color:var(--r)}
 .fi{width:100%;padding:10px 14px;border:1px solid var(--bd2);border-radius:8px;font-size:13.5px;font-family:var(--fb);font-weight:500;color:var(--i);background:var(--s);transition:all .15s;outline:none}
 .fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(168,85,247,.15)}
-.fi::placeholder{color:var(--i4)}
 textarea.fi{resize:vertical;min-height:80px}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
-/* UPLOAD ZONES */
 .upload-row{display:grid;gap:14px;margin-bottom:24px}
 .upload-z{border:1.5px dashed var(--bd2);border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .18s;background:var(--bg)}
 .upload-z:hover{border-color:var(--p);background:var(--pl)}
@@ -130,7 +115,6 @@ textarea.fi{resize:vertical;min-height:80px}
 .upload-z p{font-size:13px;font-weight:700;color:var(--i3)}
 .upload-z span{font-size:11px;color:var(--i4);font-weight:500; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 
-/* SYSTEM BOX STYLES */
 .ai-wrap{background:var(--bg);border:1px solid var(--bd2);border-radius:12px;padding:24px;margin:24px 0}
 [data-dark] .ai-wrap{background:#1a1c23;border-color:var(--bd2)}
 .ai-head{font-size:15px;font-weight:800;color:var(--i);display:flex;align-items:center;gap:8px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em}
@@ -141,18 +125,15 @@ textarea.fi{resize:vertical;min-height:80px}
 @keyframes spin{100%{transform:rotate(360deg)}}
 .ti-spin{animation:spin 1s linear infinite}
 
-/* INVOICE & SLIP TABLE */
 .inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
 .inv-table th{background:var(--bg2);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--i3);border:1px solid var(--bd)}
 .inv-table td{padding:9px 12px;border:1px solid var(--bd)}
 .inv-table td input,.inv-table td select{width:100%;border:none;background:transparent;font-size:12px;font-weight:500;font-family:var(--fb);color:var(--i);outline:none;padding:2px 0;min-width:60px}
 .inv-table tr:last-child td{border-bottom:1px solid var(--bd)}
 .add-row-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--bm);cursor:pointer;padding:10px 0;border:none;background:none;font-family:var(--fb)}
-.add-row-btn:hover{color:var(--p)}
 .inv-total-row{background:var(--bg2)}
 .inv-total-row td{font-weight:700;color:var(--i)}
 
-/* DOCUMENT PAPER (A4 Ratio) */
 .doc-paper{background:#fff;border-radius:8px;box-shadow:var(--sh2);padding:40px 36px;font-size:11px;line-height:1.85;color:#111;min-height:550px;font-family:'Times New Roman',serif;overflow:hidden;}
 .doc-paper h3,.doc-paper h2,.doc-paper p,.doc-paper td,.doc-paper th{color:#111}
 .dp-lh{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:3px double #333}
@@ -170,7 +151,6 @@ textarea.fi{resize:vertical;min-height:80px}
 .dp-sign-box{text-align:center}
 .dp-sign-box p{font-size:10.5px;color:#111}
 
-/* INVOICE PREVIEW */
 .inv-prev-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #333}
 .inv-prev-from{font-family:Arial,sans-serif;font-size:10px;color:#555}
 .inv-prev-from strong{font-size:13px;color:#111;display:block;margin-bottom:3px}
@@ -180,12 +160,10 @@ textarea.fi{resize:vertical;min-height:80px}
 .inv-prev-tbl td{padding:8px 10px;border-bottom:1px solid #eee;color:#333}
 .inv-prev-tbl .num{text-align:right}
 
-/* TOAST */
 .toast-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}
 .toast{background:var(--i);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:var(--sh3);transform:translateX(110%);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .toast.show{transform:none}
 
-/* STEPS */
 .steps-bar{display:flex;align-items:center;gap:0;padding:14px 28px;border-bottom:1px solid var(--bd);background:var(--bg);flex-shrink:0}
 .step{display:flex;align-items:center;gap:10px}
 .step-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--i4);flex-shrink:0;background:var(--s)}
@@ -232,6 +210,7 @@ textarea.fi{resize:vertical;min-height:80px}
     <button class="nl on">Auto Generator</button>
   </div>
   <div class="nav-r">
+    <button class="btn btn-ghost btn-sm" onclick="setApiKey()"><i class="ti ti-key"></i> Set API Key</button>
     <button class="ibt" onclick="toggleDark()" id="dk-btn" title="Dark mode"><i class="ti ti-moon"></i></button>
   </div>
 </nav>
@@ -261,7 +240,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span id="gen-mode"><i class="ti ti-bolt"></i> Terkoneksi dengan AI Asli</span>
+          <span id="gen-mode"><i class="ti ti-brain"></i> Terkoneksi dengan Google AI</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -297,9 +276,18 @@ textarea.fi{resize:vertical;min-height:80px}
 
 <script>
 // =====================================================================
-// API KEY GEMINI AI
+// MANAJEMEN API KEY GOOGLE GEMINI
 // =====================================================================
-const GEMINI_API_KEY = "AIzaSyBl2xNj1i8zskWNUaWy_-tseDqwWgGMKA0";
+let USER_API_KEY = localStorage.getItem('gemini_api_key') || "";
+
+function setApiKey() {
+    const key = prompt("Masukkan Google Gemini API Key Anda:", USER_API_KEY);
+    if(key !== null) {
+        USER_API_KEY = key.trim();
+        localStorage.setItem('gemini_api_key', USER_API_KEY);
+        toast('✅', 'API Key berhasil disimpan di memori browser!');
+    }
+}
 // =====================================================================
 
 // ═══════════════ DATA ═══════════════
@@ -341,10 +329,8 @@ let isPpnActive = false;
 let uploadedLogo = '';
 let uploadedSign = '';
 
-// ═══════════════ FORMAT ANGKA RUPIAH UTILS ═══════════════
 function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
 
-// ═══════════════ DYNAMIC FORM GENERATOR ═══════════════
 function getFormDef(tmpl) {
   let hasLogo = true;
   let hasSign = true;
@@ -417,7 +403,6 @@ function getFormDef(tmpl) {
   };
 }
 
-// ═══════════════ SIDEBAR & RENDER ═══════════════
 function buildSidebar(search='') {
   let html = '';
   Object.keys(CATS).forEach(cat => {
@@ -496,7 +481,6 @@ function renderForm() {
   def.sections.forEach(sec => {
     html += `<div class="fsec">${sec.title}</div>`;
     
-    // RENDER BLOK AI REAL
     if(sec.ai) {
       html += `
       <div class="ai-wrap">
@@ -534,7 +518,6 @@ function renderField(f) {
   return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" placeholder="Ketik di sini..." oninput="updatePreview()"></div>`;
 }
 
-// ═══════════════ LIVE DOM UPDATE (Kalkulator) ═══════════════
 function updateInvoiceTotals() {
   const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
   const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
@@ -562,7 +545,6 @@ function updateSlipGajiTotals() {
   if(elDeduct) elDeduct.textContent = fmt(totalDeduct);
 }
 
-// ═══════════════ INVOICE EXTRAS ═══════════════
 function renderInvoiceExtras() {
   let rows = invItems.map((it,i)=>`
     <tr>
@@ -598,7 +580,6 @@ function renderInvoiceExtras() {
 function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm();updatePreview();}
 function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm();updatePreview();}}
 
-// ═══════════════ SLIP GAJI EXTRAS (DYNAMIC) ═══════════════
 function renderSlipGajiExtras() {
   let earnRows = earnItems.map((it,i)=>`
     <tr>
@@ -641,7 +622,6 @@ function removeEarnRow(i){earnItems.splice(i,1);renderForm();updatePreview();}
 function addDeductRow(){deductItems.push({desc:'',amount:0});renderForm();updatePreview();}
 function removeDeductRow(i){deductItems.splice(i,1);renderForm();updatePreview();}
 
-// ═══════════════ UPLOAD LOGIC ═══════════════
 function handleImageUpload(input, type) {
   if (input.files && input.files[0]) {
     const file = input.files[0];
@@ -671,8 +651,9 @@ async function runSystemSimulation() {
   const btn = document.getElementById('ai-btn');
   const area = document.getElementById('f-ai_content');
   
-  if(GEMINI_API_KEY === "KOSONG" || !GEMINI_API_KEY) {
-      toast('⚠️', 'Gagal: API Key Gemini belum diatur di dalam kode.');
+  if(!USER_API_KEY) {
+      toast('⚠️', 'Mohon klik tombol "Set API Key" di pojok kanan atas terlebih dahulu.');
+      setApiKey();
       return;
   }
   
@@ -680,7 +661,6 @@ async function runSystemSimulation() {
   btn.classList.add('loading');
   area.style.display = 'block';
 
-  // Ambil Data Konteks yang diketik user (kosong defaultnya)
   const nama = g('nama');
   const posisi = g('posisi');
   const company = g('company');
@@ -688,7 +668,6 @@ async function runSystemSimulation() {
   const p2 = g('p2');
   const tmplName = currentTmpl.name;
   
-  // Susun Prompt
   let promptText = `Tuliskan draf isi dokumen formal untuk dokumen berjudul "${tmplName}".\n`;
   promptText += `Berikut adalah data yang dimasukkan oleh pengguna, gunakan data ini sebagai referensi utama (jika kosong, gunakan [Placeholder] yang relevan):\n`;
   promptText += `- Nama Pemohon/Terkait: ${nama ? nama : 'Kosong'}\n`;
@@ -705,7 +684,7 @@ async function runSystemSimulation() {
   5. JANGAN gunakan format markdown (seperti tanda bintang ** atau #). Tulis sebagai plain text biasa.`;
 
   try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${USER_API_KEY}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -721,7 +700,6 @@ async function runSystemSimulation() {
 
       let aiResponseText = data.candidates[0].content.parts[0].text;
       
-      // Typing effect
       area.value = '';
       let i = 0;
       function typeIt() {
@@ -729,7 +707,7 @@ async function runSystemSimulation() {
           area.value += aiResponseText.charAt(i);
           i++;
           updatePreview();
-          setTimeout(typeIt, 10); // kecepatan ketik 10ms
+          setTimeout(typeIt, 10);
         } else {
           btn.innerHTML = '<i class="ti ti-check"></i> Selesai Ditulis oleh AI';
           btn.classList.remove('loading');
@@ -740,15 +718,11 @@ async function runSystemSimulation() {
 
   } catch (error) {
       console.error(error);
-      area.value = `Maaf, terjadi kesalahan saat menghubungi AI: ${error.message}`;
+      area.value = `Maaf, terjadi kesalahan API: ${error.message}\n\nPastikan API Key Google Gemini Anda valid dan memiliki kuota yang cukup.`;
       btn.innerHTML = '<i class="ti ti-alert-triangle"></i> Gagal (Coba Lagi)';
       btn.classList.remove('loading');
   }
 }
-
-// ═══════════════ PREVIEW BUILDER ═══════════════
-function g(id){const el=document.getElementById('f-'+id);return el?el.value:'';}
-function fmtDate(d){if(!d)return '...';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
 
 function updatePreview(){
   const prev = document.getElementById('doc-preview');
@@ -833,7 +807,6 @@ function buildUniversalAIPreview() {
   return html;
 }
 
-// KHUSUS PREVIEW FINANSIAL
 function buildInvoicePreview(){
   const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
   const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
@@ -932,7 +905,6 @@ function buildKwitansiPreview(){
   </div>`;
 }
 
-// ═══════════════ EXPORT REAL LOGIC ═══════════════
 function doGenerate(){
   step3done=true;
   document.getElementById('st2').className='step done';
