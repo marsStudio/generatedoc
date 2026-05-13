@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Dokumen Indonesia</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@400;500;600;700&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --c-red:#c0392b;--c-red-light:#fef5f4;--c-red-mid:#e74c3c;
+    --c-blue:#1e3a5f;--c-blue-mid:#2980b9;--c-blue-light:#eaf3fb;
+    --c-gold:#d4a017;--c-gold-light:#fef9ec;
+    --c-green:#155724;--c-green-light:#d4edda;--c-green-mid:#28a745;
+    --c-gray-50:#f8f9fa;--c-gray-100:#f0f2f5;--c-gray-200:#e8ecf0;
+    --c-gray-300:#d1d9e0;--c-gray-500:#6c757d;--c-gray-700:#343a40;--c-gray-900:#1a1d20;
+    --c-white:#ffffff;
+    --font-display:'Bricolage Grotesque',sans-serif;
+    --font-body:'Plus Jakarta Sans',sans-serif;
+    --radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:20px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md:0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
+  }
+  body{font-family:var(--font-body);background:var(--c-gray-50);color:var(--c-gray-900);min-height:100vh;font-size:14px}
+
+  /* NAV */
+  .nav{background:var(--c-white);border-bottom:1px solid var(--c-gray-200);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+  .nav-logo-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--c-red),#e74c3c);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:800;font-family:var(--font-display)}
+  .nav-logo-text{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--c-gray-900)}
+  .nav-logo-text span{color:var(--c-red)}
+  .nav-links{display:flex;align-items:center;gap:4px}
+  .nav-link{padding:6px 12px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--c-gray-700);cursor:pointer;transition:all .15s;border:none;background:none}
+  .nav-link:hover{background:var(--c-gray-100)}
+  .nav-link.active{background:var(--c-red-light);color:var(--c-red)}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .btn{padding:7px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;border:none;font-family:var(--font-body)}
+  .btn-outline{background:transparent;border:1px solid var(--c-gray-300);color:var(--c-gray-700)}
+  .btn-outline:hover{border-color:var(--c-red);color:var(--c-red)}
+  .btn-primary{background:var(--c-red);color:white}
+  .btn-primary:hover{background:var(--c-red-mid);transform:translateY(-1px)}
+  .btn-blue{background:var(--c-blue);color:white}
+  .btn-blue:hover{background:var(--c-blue-mid)}
+  .btn-green{background:var(--c-green-mid);color:white}
+  .btn-green:hover{opacity:.9}
+  .btn-lg{padding:11px 24px;font-size:14px;border-radius:var(--radius-md)}
+  .btn-sm{padding:5px 12px;font-size:12px}
+
+  /* PAGES */
+  .page{display:none;animation:fadeIn .25s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* LANDING */
+  .hero{background:var(--c-white);padding:72px 32px 80px;text-align:center;border-bottom:1px solid var(--c-gray-200)}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--c-red-light);color:var(--c-red);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px}
+  .hero h1{font-family:var(--font-display);font-size:42px;font-weight:800;line-height:1.15;color:var(--c-gray-900);max-width:640px;margin:0 auto 16px}
+  .hero h1 span{color:var(--c-red)}
+  .hero p{font-size:16px;color:var(--c-gray-500);max-width:500px;margin:0 auto 32px;line-height:1.65}
+  .hero-cta{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+  .hero-stats{display:flex;justify-content:center;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--c-gray-200)}
+  .hero-stat{text-align:center}
+  .hero-stat-num{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--c-gray-900)}
+  .hero-stat-label{font-size:12px;color:var(--c-gray-500);margin-top:2px}
+
+  /* CATEGORIES SECTION */
+  .section{padding:56px 32px;max-width:1080px;margin:0 auto}
+  .section-header{margin-bottom:32px}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-red);margin-bottom:8px}
+  .section-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--c-gray-900)}
+  .section-sub{font-size:14px;color:var(--c-gray-500);margin-top:6px}
+
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .cat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 16px;cursor:pointer;transition:all .18s;text-align:center}
+  .cat-card:hover{border-color:var(--c-red);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+  .cat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px}
+  .cat-icon.red{background:var(--c-red-light);color:var(--c-red)}
+  .cat-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .cat-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
+  .cat-icon.green{background:var(--c-green-light);color:var(--c-green-mid)}
+  .cat-icon.purple{background:#f0eeff;color:#7c3aed}
+  .cat-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
+  .cat-count{font-size:11px;color:var(--c-gray-500);margin-top:3px}
+
+  /* TEMPLATE GRID */
+  .tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .tmpl-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .18s}
+  .tmpl-card:hover{border-color:var(--c-blue-mid);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+  .tmpl-preview{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .tmpl-preview-doc{width:70px;background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:8px 6px;box-shadow:var(--shadow-sm)}
+  .tmpl-preview-line{height:3px;background:var(--c-gray-200);border-radius:2px;margin-bottom:5px}
+  .tmpl-preview-line.title{height:4px;background:var(--c-gray-300);width:60%}
+  .tmpl-preview-line.short{width:50%}
+  .tmpl-preview-line.accent{background:var(--c-red);width:40%}
+  .tmpl-preview-badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+  .tmpl-preview-badge.free{background:var(--c-green-light);color:var(--c-green)}
+  .tmpl-preview-badge.pro{background:var(--c-gold-light);color:var(--c-gold)}
+  .tmpl-info{padding:12px 14px}
+  .tmpl-name{font-size:13px;font-weight:600;color:var(--c-gray-900);margin-bottom:3px}
+  .tmpl-cat{font-size:11px;color:var(--c-gray-500)}
+  .tmpl-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .tmpl-use-btn{font-size:11px;font-weight:600;color:var(--c-red);cursor:pointer;padding:4px 10px;border:1px solid var(--c-red);border-radius:var(--radius-sm);background:none;font-family:var(--font-body)}
+  .tmpl-use-btn:hover{background:var(--c-red-light)}
+
+  /* FILTER PILLS */
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .filter-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-gray-300);background:var(--c-white);color:var(--c-gray-700);transition:all .15s}
+  .filter-pill:hover{border-color:var(--c-red);color:var(--c-red)}
+  .filter-pill.active{background:var(--c-red);border-color:var(--c-red);color:white}
+
+  /* DASHBOARD */
+  .dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 58px)}
+  .dash-sidebar{background:var(--c-white);border-right:1px solid var(--c-gray-200);padding:20px 0}
+  .sidebar-section{margin-bottom:24px}
+  .sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-gray-500);padding:0 20px;margin-bottom:6px}
+  .sidebar-item{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;font-size:13px;font-weight:500;color:var(--c-gray-700);transition:all .15s}
+  .sidebar-item:hover{background:var(--c-gray-100)}
+  .sidebar-item.active{background:var(--c-red-light);color:var(--c-red);font-weight:600}
+  .sidebar-item i{font-size:16px}
+  .sidebar-badge{margin-left:auto;background:var(--c-red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+
+  .dash-main{padding:28px 32px;overflow-y:auto}
+  .dash-greeting{margin-bottom:28px}
+  .dash-greeting h2{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+  .dash-greeting p{font-size:13px;color:var(--c-gray-500)}
+
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .stat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 18px}
+  .stat-label{font-size:11px;font-weight:600;color:var(--c-gray-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .stat-label i{font-size:14px}
+  .stat-val{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--c-gray-900)}
+  .stat-change{font-size:11px;margin-top:4px}
+  .stat-change.up{color:var(--c-green-mid)}
+  .stat-change.neutral{color:var(--c-gray-500)}
+
+  .dash-row{display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:20px}
+  .panel{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 20px}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .panel-title{font-size:14px;font-weight:700;color:var(--c-gray-900)}
+  .panel-action{font-size:12px;color:var(--c-red);cursor:pointer;font-weight:600}
+
+  .doc-list-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--c-gray-100)}
+  .doc-list-item:last-child{border-bottom:none}
+  .doc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .doc-icon.red{background:var(--c-red-light);color:var(--c-red)}
+  .doc-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .doc-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
+  .doc-meta{flex:1}
+  .doc-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
+  .doc-date{font-size:11px;color:var(--c-gray-500);margin-top:2px}
+  .doc-actions{display:flex;gap:6px}
+  .doc-actions button{background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:var(--radius-sm);color:var(--c-gray-500);font-size:15px;transition:all .15s}
+  .doc-actions button:hover{background:var(--c-gray-100);color:var(--c-gray-900)}
+
+  .quick-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .quick-action{background:var(--c-gray-50);border:1px solid var(--c-gray-200);border-radius:var(--radius-md);padding:12px;cursor:pointer;transition:all .15s;text-align:center}
+  .quick-action:hover{border-color:var(--c-red);background:var(--c-red-light)}
+  .quick-action i{font-size:20px;color:var(--c-red);margin-bottom:5px}
+  .quick-action p{font-size:11px;font-weight:600;color:var(--c-gray-700)}
+
+  /* GENERATOR */
+  .gen-layout{max-width:900px;margin:0 auto;padding:28px 32px}
+  .gen-header{margin-bottom:28px}
+  .gen-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+  .gen-sub{font-size:13px;color:var(--c-gray-500)}
+
+  .gen-steps{display:flex;align-items:center;gap:0;margin-bottom:32px;background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 20px}
+  .gen-step{display:flex;align-items:center;gap:10px;flex:1}
+  .gen-step-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-gray-300);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--c-gray-500);flex-shrink:0}
+  .gen-step.active .gen-step-num{background:var(--c-red);border-color:var(--c-red);color:white}
+  .gen-step.done .gen-step-num{background:var(--c-green-mid);border-color:var(--c-green-mid);color:white}
+  .gen-step-info p{font-size:12px;font-weight:600;color:var(--c-gray-700)}
+  .gen-step-info span{font-size:11px;color:var(--c-gray-500)}
+  .gen-step-sep{width:32px;height:1px;background:var(--c-gray-200);flex-shrink:0}
+
+  .gen-body{display:grid;grid-template-columns:1fr 300px;gap:16px}
+  .gen-form{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:22px}
+  .gen-preview{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px;position:sticky;top:74px}
+
+  .form-group{margin-bottom:16px}
+  .form-label{font-size:12px;font-weight:600;color:var(--c-gray-700);margin-bottom:6px;display:block}
+  .form-input{width:100%;padding:8px 12px;border:1px solid var(--c-gray-200);border-radius:var(--radius-sm);font-size:13px;font-family:var(--font-body);color:var(--c-gray-900);background:var(--c-white);transition:all .15s;outline:none}
+  .form-input:focus{border-color:var(--c-red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
+  .form-input::placeholder{color:var(--c-gray-300)}
+  textarea.form-input{resize:vertical;min-height:80px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-hint{font-size:11px;color:var(--c-gray-500);margin-top:4px}
+  .form-divider{border:none;border-top:1px solid var(--c-gray-100);margin:20px 0}
+
+  .preview-doc{background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:16px 14px;font-size:10.5px;line-height:1.7;color:var(--c-gray-900);min-height:300px}
+  .preview-header{text-align:center;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--c-red)}
+  .preview-header .logo-placeholder{width:48px;height:48px;background:var(--c-gray-100);border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--c-gray-400)}
+  .preview-header h3{font-size:11px;font-weight:700;color:var(--c-gray-900)}
+  .preview-header p{font-size:9px;color:var(--c-gray-500)}
+  .preview-title{text-align:center;font-weight:700;font-size:11px;margin:10px 0;text-decoration:underline;text-transform:uppercase}
+  .preview-num{text-align:center;font-size:9px;color:var(--c-gray-500);margin-bottom:10px}
+  .preview-body p{margin-bottom:5px;font-size:9.5px}
+  .preview-sign{margin-top:20px;display:flex;justify-content:flex-end}
+  .preview-sign-box{text-align:center;width:100px}
+  .preview-sign-box p{font-size:9px}
+  .preview-sign-line{width:80px;height:1px;background:var(--c-gray-900);margin:24px auto 4px}
+
+  .preview-label{font-size:11px;font-weight:600;color:var(--c-gray-700);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .preview-badge{font-size:10px;background:var(--c-green-light);color:var(--c-green);padding:2px 8px;border-radius:20px;font-weight:600}
+
+  .export-row{display:flex;gap:8px;margin-top:14px}
+  .export-btn{flex:1;padding:9px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;font-family:var(--font-body)}
+  .export-btn.docx{background:var(--c-blue-light);color:var(--c-blue);border:1px solid #b5d4f4}
+  .export-btn.docx:hover{background:#c5dff8}
+  .export-btn.pdf{background:var(--c-red-light);color:var(--c-red);border:1px solid #f5c0bb}
+  .export-btn.pdf:hover{background:#fde0dd}
+
+  /* UPLOAD AREA */
+  .upload-area{border:2px dashed var(--c-gray-300);border-radius:var(--radius-md);padding:16px;text-align:center;cursor:pointer;transition:all .15s}
+  .upload-area:hover{border-color:var(--c-red);background:var(--c-red-light)}
+  .upload-area i{font-size:24px;color:var(--c-gray-400);margin-bottom:6px}
+  .upload-area p{font-size:12px;color:var(--c-gray-500)}
+
+  /* PRICING */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto}
+  .pricing-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-xl);padding:28px 24px}
+  .pricing-card.featured{border:2px solid var(--c-red);position:relative}
+  .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--c-red);color:white;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
+  .pricing-name{font-size:13px;font-weight:700;color:var(--c-gray-500);margin-bottom:12px}
+  .pricing-price{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--c-gray-900);margin-bottom:4px}
+  .pricing-price span{font-size:14px;font-weight:500;color:var(--c-gray-500)}
+  .pricing-desc{font-size:12px;color:var(--c-gray-500);margin-bottom:20px}
+  .pricing-features{list-style:none;margin-bottom:24px}
+  .pricing-features li{font-size:13px;color:var(--c-gray-700);padding:5px 0;display:flex;align-items:center;gap:8px}
+  .pricing-features li i{color:var(--c-green-mid);font-size:15px}
+  .pricing-features li.off i{color:var(--c-gray-300)}
+  .pricing-features li.off{color:var(--c-gray-400)}
+
+  /* BADGE */
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+  .badge.red{background:var(--c-red-light);color:var(--c-red)}
+  .badge.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .badge.green{background:var(--c-green-light);color:var(--c-green)}
+  .badge.gold{background:var(--c-gold-light);color:var(--c-gold)}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--c-gray-900);color:white;padding:12px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:8px}
+  .toast.show{transform:translateY(0);opacity:1}
+
+  /* ADMIN */
+  .admin-table{width:100%;border-collapse:collapse}
+  .admin-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-gray-500);padding:8px 12px;border-bottom:1px solid var(--c-gray-200)}
+  .admin-table td{padding:10px 12px;border-bottom:1px solid var(--c-gray-100);font-size:13px;color:var(--c-gray-700)}
+  .admin-table tr:hover td{background:var(--c-gray-50)}
+
+  /* MODAL OVERLAY */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--c-white);border-radius:var(--radius-xl);width:560px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+  .modal-header{padding:20px 24px;border-bottom:1px solid var(--c-gray-200);display:flex;align-items:center;justify-content:space-between}
+  .modal-title{font-size:16px;font-weight:700;font-family:var(--font-display)}
+  .modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-gray-500);padding:4px}
+  .modal-close:hover{color:var(--c-gray-900)}
+  .modal-body{padding:24px}
+
+  /* JSON PREVIEW */
+  .json-box{background:var(--c-gray-900);color:#a8d5a2;border-radius:var(--radius-md);padding:14px;font-family:monospace;font-size:11px;line-height:1.7;overflow-x:auto;white-space:pre}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px;height:4px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:var(--c-gray-300);border-radius:4px}
+
+  /* RESPONSIVE */
+  @media(max-width:700px){
+    .hero h1{font-size:28px}
+    .hero-stats{gap:20px}
+    .dash-layout{grid-template-columns:1fr}
+    .dash-sidebar{display:none}
+    .gen-body{grid-template-columns:1fr}
+    .pricing-grid{grid-template-columns:1fr}
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .dash-row{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('landing')">
+    <div class="nav-logo-badge">AI</div>
+    <div class="nav-logo-text">Dokumen<span>Indonesia</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="showPage('landing')">Beranda</button>
+    <button class="nav-link" onclick="showPage('gallery')">Template</button>
+    <button class="nav-link" onclick="showPage('pricing')">Harga</button>
+    <button class="nav-link" onclick="showPage('dashboard')">Dashboard</button>
+  </div>
+  <div class="nav-right">
+    <button class="btn btn-outline" onclick="showPage('dashboard')">Masuk</button>
+    <button class="btn btn-primary" onclick="showPage('generator')">Buat Dokumen</button>
+  </div>
+</nav>
+
+<!-- LANDING PAGE -->
+<div id="page-landing" class="page active">
+  <div class="hero">
+    <div class="hero-badge"><i class="ti ti-bolt"></i> Platform Dokumen #1 Indonesia</div>
+    <h1>Buat Dokumen Resmi Indonesia dalam <span>Hitungan Detik</span></h1>
+    <p>Generate surat, invoice, kontrak, dan dokumen lainnya secara otomatis dalam format DOCX/PDF siap pakai. Tanpa repot, tanpa error format.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary btn-lg" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Mulai Gratis</button>
+      <button class="btn btn-outline btn-lg" onclick="showPage('gallery')"><i class="ti ti-template"></i> Lihat Template</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">42+</div>
+        <div class="hero-stat-label">Template Dokumen</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">12K+</div>
+        <div class="hero-stat-label">Pengguna Aktif</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">98K+</div>
+        <div class="hero-stat-label">Dokumen Dibuat</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Kategori Dokumen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Kategori</div>
+      <div class="section-title">Semua Jenis Dokumen</div>
+      <div class="section-sub">Pilih kategori sesuai kebutuhan Anda</div>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="showGallery('warga')">
+        <div class="cat-icon red"><i class="ti ti-home"></i></div>
+        <div class="cat-name">Surat Warga</div>
+        <div class="cat-count">13 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('bisnis')">
+        <div class="cat-icon blue"><i class="ti ti-building-store"></i></div>
+        <div class="cat-name">Bisnis</div>
+        <div class="cat-count">5 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('hr')">
+        <div class="cat-icon gold"><i class="ti ti-users"></i></div>
+        <div class="cat-name">HR & SDM</div>
+        <div class="cat-count">6 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('legal')">
+        <div class="cat-icon purple"><i class="ti ti-scale"></i></div>
+        <div class="cat-name">Legal</div>
+        <div class="cat-count">6 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('karier')">
+        <div class="cat-icon green"><i class="ti ti-briefcase"></i></div>
+        <div class="cat-name">Karier</div>
+        <div class="cat-count">4 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('rtrw')">
+        <div class="cat-icon red"><i class="ti ti-map-pin"></i></div>
+        <div class="cat-name">RT/RW</div>
+        <div class="cat-count">8 template</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="background:var(--c-white);border-top:1px solid var(--c-gray-200);border-bottom:1px solid var(--c-gray-200)">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-label">Cara Kerja</div>
+        <div class="section-title">Mudah dalam 3 Langkah</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-red-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-red)"><i class="ti ti-template"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-red);margin-bottom:4px">01</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Pilih Template</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Pilih dari 42+ template dokumen resmi Indonesia yang tersedia</div>
+        </div>
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-blue-mid)"><i class="ti ti-forms"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-blue-mid);margin-bottom:4px">02</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Isi Formulir</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Isi data melalui form sederhana. Preview dokumen tampil real-time</div>
+        </div>
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-green-mid)"><i class="ti ti-download"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-green-mid);margin-bottom:4px">03</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Download</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Export ke DOCX atau PDF langsung. Simpan ke history untuk akses ulang</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING TEASER -->
+  <div class="section" style="text-align:center">
+    <div class="section-label" style="text-align:center">Harga</div>
+    <div class="section-title">Gratis untuk Mulai</div>
+    <div class="section-sub">Upgrade ke Pro untuk fitur premium tanpa batas</div>
+    <div style="margin-top:20px">
+      <button class="btn btn-primary btn-lg" onclick="showPage('pricing')">Lihat Paket Harga</button>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATE GALLERY -->
+<div id="page-gallery" class="page">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Template Gallery</div>
+      <div class="section-title">Pilih Template Dokumen</div>
+    </div>
+    <div class="filter-row" id="filter-row">
+      <div class="filter-pill active" onclick="filterCat('semua',this)">Semua</div>
+      <div class="filter-pill" onclick="filterCat('warga',this)">Surat Warga</div>
+      <div class="filter-pill" onclick="filterCat('bisnis',this)">Bisnis</div>
+      <div class="filter-pill" onclick="filterCat('hr',this)">HR & SDM</div>
+      <div class="filter-pill" onclick="filterCat('legal',this)">Legal</div>
+      <div class="filter-pill" onclick="filterCat('karier',this)">Karier</div>
+      <div class="filter-pill" onclick="filterCat('rtrw',this)">RT/RW</div>
+    </div>
+    <div class="tmpl-grid" id="tmpl-grid"></div>
+  </div>
+</div>
+
+<!-- GENERATOR -->
+<div id="page-generator" class="page">
+  <div class="gen-layout">
+    <div class="gen-header">
+      <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
+      <div class="gen-sub">Isi data di bawah untuk generate dokumen otomatis</div>
+    </div>
+    <div class="gen-steps">
+      <div class="gen-step done" id="step1">
+        <div class="gen-step-num"><i class="ti ti-check" style="font-size:12px"></i></div>
+        <div class="gen-step-info"><p>Pilih Template</p><span>Selesai</span></div>
+      </div>
+      <div class="gen-step-sep"></div>
+      <div class="gen-step active" id="step2">
+        <div class="gen-step-num">2</div>
+        <div class="gen-step-info"><p>Isi Data</p><span>Sedang berjalan</span></div>
+      </div>
+      <div class="gen-step-sep"></div>
+      <div class="gen-step" id="step3">
+        <div class="gen-step-num">3</div>
+        <div class="gen-step-info"><p>Preview & Export</p><span>Menunggu</span></div>
+      </div>
+    </div>
+    <div class="gen-body">
+      <div class="gen-form" id="gen-form-container">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div style="font-size:14px;font-weight:700">Data Dokumen</div>
+          <span class="badge green"><i class="ti ti-shield-check"></i> Format Resmi</span>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:20px">
+          <div class="upload-area" style="flex:1">
+            <i class="ti ti-photo"></i>
+            <p>Upload Logo</p>
+          </div>
+          <div class="upload-area" style="flex:1">
+            <i class="ti ti-writing"></i>
+            <p>Tanda Tangan</p>
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div class="form-group">
+          <label class="form-label">Nomor Surat</label>
+          <input class="form-input" id="f-nomor" value="001/RT.01/V/2026" oninput="updatePreview()">
+          <div class="form-hint"><i class="ti ti-info-circle" style="font-size:12px"></i> Auto-generated. Bisa diubah manual.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nama Pemohon</label>
+          <input class="form-input" id="f-nama" placeholder="cth: Budi Santoso" oninput="updatePreview()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">NIK</label>
+            <input class="form-input" id="f-nik" placeholder="16 digit NIK" maxlength="16" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tempat, Tgl Lahir</label>
+            <input class="form-input" id="f-ttl" placeholder="Jakarta, 01 Januari 1990" oninput="updatePreview()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Alamat Lengkap</label>
+          <input class="form-input" id="f-alamat" placeholder="Jl. Melati No.5, RT 01 RW 02, Kelurahan..." oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Keperluan / Tujuan Surat</label>
+          <textarea class="form-input" id="f-tujuan" placeholder="cth: Keperluan pembuatan KTP / Daftar BPJS..." oninput="updatePreview()"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Kota</label>
+            <input class="form-input" id="f-kota" placeholder="Jakarta" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal Surat</label>
+            <input class="form-input" type="date" id="f-tanggal" oninput="updatePreview()">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nama Ketua RT</label>
+            <input class="form-input" id="f-ketua" placeholder="Nama Ketua RT" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jabatan</label>
+            <input class="form-input" id="f-jabatan" placeholder="Ketua RT 01/RW 02" oninput="updatePreview()">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-blue" onclick="generateJSON()"><i class="ti ti-code"></i> Lihat JSON</button>
+          <button class="btn btn-primary btn-lg" style="flex:1" onclick="markStep3()"><i class="ti ti-eye"></i> Preview & Export</button>
+        </div>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div class="gen-preview">
+        <div class="preview-label"><i class="ti ti-file-text"></i> Preview Live <span class="preview-badge">Real-time</span></div>
+        <div class="preview-doc" id="preview-doc">
+          <div class="preview-header">
+            <div class="logo-placeholder"><i class="ti ti-home"></i></div>
+            <h3>PEMERINTAH DESA / KELURAHAN</h3>
+            <p>RT 01 RW 02 — Jl. Contoh No.1 Jakarta</p>
+          </div>
+          <div class="preview-title">Surat Pengantar</div>
+          <div class="preview-num" id="prev-nomor">Nomor: 001/RT.01/V/2026</div>
+          <div class="preview-body">
+            <p>Yang bertanda tangan di bawah ini, Ketua RT 01 RW 02 menerangkan bahwa:</p>
+            <p><strong>Nama:</strong> <span id="prev-nama">-</span></p>
+            <p><strong>NIK:</strong> <span id="prev-nik">-</span></p>
+            <p><strong>TTL:</strong> <span id="prev-ttl">-</span></p>
+            <p><strong>Alamat:</strong> <span id="prev-alamat">-</span></p>
+            <br>
+            <p>Adalah benar warga kami dan diperlukan untuk keperluan:</p>
+            <p><strong><span id="prev-tujuan">-</span></strong></p>
+            <br>
+            <p>Demikian surat pengantar ini dibuat untuk digunakan sebagaimana mestinya.</p>
+          </div>
+          <div class="preview-sign">
+            <div class="preview-sign-box">
+              <p id="prev-kota-tgl">Jakarta, 12 Mei 2026</p>
+              <p id="prev-jabatan">Ketua RT 01/RW 02</p>
+              <div class="preview-sign-line"></div>
+              <p id="prev-ketua">( ________________ )</p>
+            </div>
+          </div>
+        </div>
+        <div class="export-row">
+          <button class="export-btn docx" onclick="showToast('📄 Mengunduh file DOCX...')"><i class="ti ti-file-word"></i> DOCX</button>
+          <button class="export-btn pdf" onclick="showToast('📋 Mengunduh file PDF...')"><i class="ti ti-file-type-pdf"></i> PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Menu Utama</div>
+        <div class="sidebar-item active"><i class="ti ti-dashboard"></i> Dashboard</div>
+        <div class="sidebar-item" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Buat Dokumen</div>
+        <div class="sidebar-item" onclick="showPage('gallery')"><i class="ti ti-template"></i> Template Gallery</div>
+        <div class="sidebar-item"><i class="ti ti-history"></i> Riwayat Dokumen <span class="sidebar-badge">8</span></div>
+        <div class="sidebar-item"><i class="ti ti-cloud-download"></i> Unduhan</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Akun</div>
+        <div class="sidebar-item"><i class="ti ti-user-circle"></i> Profil Saya</div>
+        <div class="sidebar-item" onclick="showPage('pricing')"><i class="ti ti-crown"></i> Upgrade Pro</div>
+        <div class="sidebar-item" onclick="showAdminPanel()"><i class="ti ti-settings"></i> Admin Panel</div>
+        <div class="sidebar-item"><i class="ti ti-logout"></i> Keluar</div>
+      </div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-greeting">
+        <h2>Selamat datang, Jiku 👋</h2>
+        <p>Hari ini Selasa, 12 Mei 2026 — PT Uniktif Media Indonesia</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-files"></i> Total Dokumen</div>
+          <div class="stat-val">28</div>
+          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +4 minggu ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-download"></i> Diunduh</div>
+          <div class="stat-val">61</div>
+          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +12 bulan ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-template"></i> Template Aktif</div>
+          <div class="stat-val">42</div>
+          <div class="stat-change neutral">6 kategori tersedia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-crown"></i> Paket</div>
+          <div class="stat-val" style="font-size:18px">Free</div>
+          <div class="stat-change" style="color:var(--c-red);cursor:pointer" onclick="showPage('pricing')">Upgrade ke Pro →</div>
+        </div>
+      </div>
+
+      <div class="dash-row">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Dokumen Terbaru</div>
+            <div class="panel-action">Lihat Semua</div>
+          </div>
+          <div id="doc-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Aksi Cepat</div>
+          </div>
+          <div class="quick-action-grid">
+            <div class="quick-action" onclick="openGenerator('Surat Domisili')">
+              <i class="ti ti-home"></i>
+              <p>Surat Domisili</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Invoice')">
+              <i class="ti ti-receipt"></i>
+              <p>Invoice</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Surat Lamaran')">
+              <i class="ti ti-briefcase"></i>
+              <p>Surat Lamaran</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Kontrak Kerja')">
+              <i class="ti ti-file-certificate"></i>
+              <p>Kontrak Kerja</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('NDA')">
+              <i class="ti ti-lock"></i>
+              <p>NDA</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Slip Gaji')">
+              <i class="ti ti-coin"></i>
+              <p>Slip Gaji</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div id="page-pricing" class="page">
+  <div class="section" style="text-align:center;padding-bottom:20px">
+    <div class="section-label">Harga</div>
+    <div class="section-title">Pilih Paket yang Tepat</div>
+    <div class="section-sub">Mulai gratis, upgrade kapan saja</div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">GRATIS</div>
+        <div class="pricing-price">Rp 0<span>/bulan</span></div>
+        <div class="pricing-desc">Cocok untuk personal & percobaan</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> 5 dokumen/bulan</li>
+          <li><i class="ti ti-check"></i> Export DOCX</li>
+          <li><i class="ti ti-check"></i> Template dasar (20+)</li>
+          <li><i class="ti ti-check"></i> Preview dokumen</li>
+          <li class="off"><i class="ti ti-x"></i> Upload logo</li>
+          <li class="off"><i class="ti ti-x"></i> Tanda tangan digital</li>
+          <li class="off"><i class="ti ti-x"></i> Export PDF</li>
+          <li class="off"><i class="ti ti-x"></i> Cloud storage</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%">Mulai Gratis</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Paling Populer</div>
+        <div class="pricing-name">PRO</div>
+        <div class="pricing-price">Rp 49K<span>/bulan</span></div>
+        <div class="pricing-desc">Untuk UMKM, freelancer & startup</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> Unlimited dokumen</li>
+          <li><i class="ti ti-check"></i> Export DOCX + PDF</li>
+          <li><i class="ti ti-check"></i> Semua template (42+)</li>
+          <li><i class="ti ti-check"></i> Upload logo & tanda tangan</li>
+          <li><i class="ti ti-check"></i> Cloud storage 1GB</li>
+          <li><i class="ti ti-check"></i> Tanpa watermark</li>
+          <li><i class="ti ti-check"></i> History dokumen</li>
+          <li class="off"><i class="ti ti-x"></i> Multi-user team</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%" onclick="showToast('🚀 Redirecting ke halaman pembayaran...')">Upgrade Pro</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">BISNIS</div>
+        <div class="pricing-price">Rp 149K<span>/bulan</span></div>
+        <div class="pricing-desc">Untuk perusahaan & tim HR</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> Semua fitur Pro</li>
+          <li><i class="ti ti-check"></i> Multi-user (5 akun)</li>
+          <li><i class="ti ti-check"></i> Template kustom</li>
+          <li><i class="ti ti-check"></i> Cloud storage 10GB</li>
+          <li><i class="ti ti-check"></i> Admin panel</li>
+          <li><i class="ti ti-check"></i> Branding perusahaan</li>
+          <li><i class="ti ti-check"></i> Prioritas support</li>
+          <li><i class="ti ti-check"></i> API access</li>
+        </ul>
+        <button class="btn btn-blue" style="width:100%" onclick="showToast('📞 Tim kami akan menghubungi Anda...')">Hubungi Tim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JSON MODAL -->
+<div class="modal-overlay" id="json-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-code"></i> Structured JSON — Template Engine</div>
+      <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--c-gray-500);margin-bottom:14px">Data ini di-inject ke template DOCX via Docxtemplater. Format konsisten, stabil, dan scalable.</p>
+      <div class="json-box" id="json-output"></div>
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn btn-primary" onclick="closeModal();showToast('📄 DOCX berhasil digenerate!')"><i class="ti ti-file-word"></i> Generate DOCX</button>
+        <button class="btn btn-outline" onclick="closeModal();showToast('📋 PDF berhasil digenerate!')"><i class="ti ti-file-type-pdf"></i> Generate PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal" style="width:680px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-settings"></i> Admin Panel</div>
+      <button class="modal-close" onclick="closeAdminModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Total User</div>
+          <div class="stat-val" style="font-size:20px">12,481</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Pro User</div>
+          <div class="stat-val" style="font-size:20px">1,840</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Dokumen/Hari</div>
+          <div class="stat-val" style="font-size:20px">347</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">MRR</div>
+          <div class="stat-val" style="font-size:20px">90M</div>
+        </div>
+      </div>
+      <div class="panel-title" style="margin-bottom:12px">User Terbaru</div>
+      <table class="admin-table">
+        <thead><tr><th>Nama</th><th>Email</th><th>Paket</th><th>Dokumen</th><th>Status</th></tr></thead>
+        <tbody id="admin-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const TEMPLATES = [
+  {name:'Surat Pengantar RT/RW',cat:'warga',free:true},
+  {name:'Surat Domisili',cat:'warga',free:true},
+  {name:'Surat Keterangan Usaha',cat:'warga',free:true},
+  {name:'Surat Keterangan Tidak Mampu',cat:'warga',free:true},
+  {name:'Surat Keterangan Kehilangan',cat:'warga',free:false},
+  {name:'Surat Kuasa',cat:'warga',free:true},
+  {name:'Surat Pernyataan',cat:'warga',free:true},
+  {name:'Surat Pengantar Nikah',cat:'warga',free:false},
+  {name:'Surat Izin Acara',cat:'rtrw',free:true},
+  {name:'Surat Pindah Domisili',cat:'warga',free:false},
+  {name:'Surat Izin Tidak Masuk',cat:'warga',free:true},
+  {name:'Surat Permohonan',cat:'warga',free:true},
+  {name:'Surat Keterangan Kerja',cat:'warga',free:false},
+  {name:'CV ATS',cat:'karier',free:true},
+  {name:'Surat Lamaran Kerja',cat:'karier',free:true},
+  {name:'Surat Pengunduran Diri',cat:'karier',free:true},
+  {name:'Cover Letter',cat:'karier',free:false},
+  {name:'Invoice',cat:'bisnis',free:true},
+  {name:'Quotation / Penawaran Harga',cat:'bisnis',free:true},
+  {name:'Purchase Order',cat:'bisnis',free:false},
+  {name:'Kwitansi',cat:'bisnis',free:true},
+  {name:'Surat Jalan',cat:'bisnis',free:false},
+  {name:'Kontrak Kerja',cat:'hr',free:false},
+  {name:'Offering Letter',cat:'hr',free:false},
+  {name:'Warning Letter',cat:'hr',free:false},
+  {name:'NDA Karyawan',cat:'hr',free:false},
+  {name:'Slip Gaji',cat:'hr',free:false},
+  {name:'Form Cuti',cat:'hr',free:true},
+  {name:'NDA Agreement',cat:'legal',free:false},
+  {name:'MOU',cat:'legal',free:false},
+  {name:'Perjanjian Kerja Sama',cat:'legal',free:false},
+  {name:'Perjanjian Freelance',cat:'legal',free:false},
+  {name:'Perjanjian Hutang Piutang',cat:'legal',free:false},
+  {name:'Perjanjian Sewa Rumah',cat:'legal',free:false},
+  {name:'Surat Izin RT/RW',cat:'rtrw',free:true},
+  {name:'Surat Pengantar Warga RT',cat:'rtrw',free:true},
+  {name:'Berita Acara Rapat RT',cat:'rtrw',free:true},
+  {name:'Surat Keterangan Warga',cat:'rtrw',free:true},
+  {name:'Surat Rekomendasi Warga',cat:'rtrw',free:false},
+  {name:'Buku Tamu RT',cat:'rtrw',free:false},
+];
+
+const RECENT_DOCS = [
+  {name:'Invoice PT Uniktif — April 2026',cat:'bisnis',date:'08 Mei 2026',icon:'red'},
+  {name:'Surat Pengantar — Karyawan Baru',cat:'warga',date:'05 Mei 2026',icon:'blue'},
+  {name:'NDA Karyawan — Dev Team',cat:'hr',date:'02 Mei 2026',icon:'gold'},
+  {name:'Surat Domisili — Koordinator',cat:'warga',date:'28 Apr 2026',icon:'blue'},
+  {name:'Kontrak Freelance — Barito Pacific',cat:'legal',date:'22 Apr 2026',icon:'red'},
+];
+
+const ADMIN_USERS = [
+  {name:'Rina Wahyuni',email:'rina@gmail.com',plan:'Pro',docs:24,status:'Aktif'},
+  {name:'Budi Santoso',email:'budi.s@umkm.id',plan:'Gratis',docs:7,status:'Aktif'},
+  {name:'Siti Rahayu',email:'siti@company.co.id',plan:'Bisnis',docs:156,status:'Aktif'},
+  {name:'Ahmad Fauzi',email:'ahmad.f@mail.com',plan:'Gratis',docs:3,status:'Aktif'},
+  {name:'Dewi Kusuma',email:'dewi@startup.id',plan:'Pro',docs:41,status:'Aktif'},
+];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+}
+
+function showGallery(cat){
+  filterCat(cat, null);
+  showPage('gallery');
+  document.querySelectorAll('.filter-pill').forEach(p=>{
+    p.classList.remove('active');
+    if(p.textContent.toLowerCase().includes(cat) || (cat==='warga' && p.textContent==='Surat Warga')) p.classList.add('active');
+  });
+}
+
+function renderTemplates(cat='semua'){
+  const grid = document.getElementById('tmpl-grid');
+  const filtered = cat==='semua' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===cat);
+  grid.innerHTML = filtered.map(t=>`
+    <div class="tmpl-card" onclick="openGenerator('${t.name}')">
+      <div class="tmpl-preview" style="background:${t.cat==='bisnis'?'#eaf3fb':t.cat==='legal'?'#f0eeff':t.cat==='hr'?'#fef9ec':t.cat==='karier'?'#d4edda':'#fef5f4'}">
+        <div class="tmpl-preview-doc">
+          <div class="tmpl-preview-line title"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line accent"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line short"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line short"></div>
+        </div>
+        <span class="tmpl-preview-badge ${t.free?'free':'pro'}">${t.free?'Gratis':'Pro'}</span>
+      </div>
+      <div class="tmpl-info">
+        <div class="tmpl-name">${t.name}</div>
+        <div class="tmpl-cat">${{warga:'Surat Warga',bisnis:'Bisnis',hr:'HR & SDM',legal:'Legal',karier:'Karier',rtrw:'RT/RW'}[t.cat]}</div>
+        <div class="tmpl-footer">
+          <span class="badge ${t.free?'green':'gold'}">${t.free?'Free':'Pro'}</span>
+          <button class="tmpl-use-btn">Gunakan →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCat(cat, el){
+  if(el){
+    document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+    el.classList.add('active');
+  }
+  renderTemplates(cat);
+}
+
+function renderDocList(){
+  const list = document.getElementById('doc-list');
+  list.innerHTML = RECENT_DOCS.map(d=>`
+    <div class="doc-list-item">
+      <div class="doc-icon ${d.icon}"><i class="ti ti-file-text"></i></div>
+      <div class="doc-meta">
+        <div class="doc-name">${d.name}</div>
+        <div class="doc-date"><i class="ti ti-calendar" style="font-size:10px"></i> ${d.date}</div>
+      </div>
+      <div class="doc-actions">
+        <button title="Unduh DOCX" onclick="showToast('📄 Mengunduh DOCX...')"><i class="ti ti-file-word"></i></button>
+        <button title="Unduh PDF" onclick="showToast('📋 Mengunduh PDF...')"><i class="ti ti-file-type-pdf"></i></button>
+        <button title="Edit ulang" onclick="showPage('generator')"><i class="ti ti-edit"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openGenerator(name){
+  document.getElementById('gen-title').textContent = name;
+  showPage('generator');
+}
+
+function updatePreview(){
+  const g = id => document.getElementById(id)?.value || '';
+  const el = id => document.getElementById(id);
+  if(el('prev-nama')) el('prev-nama').textContent = g('f-nama') || '-';
+  if(el('prev-nik')) el('prev-nik').textContent = g('f-nik') || '-';
+  if(el('prev-ttl')) el('prev-ttl').textContent = g('f-ttl') || '-';
+  if(el('prev-alamat')) el('prev-alamat').textContent = g('f-alamat') || '-';
+  if(el('prev-tujuan')) el('prev-tujuan').textContent = g('f-tujuan') || '-';
+  if(el('prev-nomor')) el('prev-nomor').textContent = 'Nomor: '+(g('f-nomor')||'001/RT.01/V/2026');
+  const kota = g('f-kota')||'Jakarta';
+  let tgl = g('f-tanggal');
+  if(tgl){const d=new Date(tgl);tgl=d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});}
+  else tgl='12 Mei 2026';
+  if(el('prev-kota-tgl')) el('prev-kota-tgl').textContent = kota+', '+tgl;
+  if(el('prev-ketua')) el('prev-ketua').textContent = '( '+(g('f-ketua')||'________________')+' )';
+  if(el('prev-jabatan')) el('prev-jabatan').textContent = g('f-jabatan')||'Ketua RT 01/RW 02';
+}
+
+function generateJSON(){
+  const g = id => document.getElementById(id)?.value || '';
+  const json = {
+    nomor_surat: g('f-nomor')||'001/RT.01/V/2026',
+    nama: g('f-nama'),
+    nik: g('f-nik'),
+    tempat_tanggal_lahir: g('f-ttl'),
+    alamat: g('f-alamat'),
+    keperluan: g('f-tujuan'),
+    kota: g('f-kota')||'Jakarta',
+    tanggal_surat: g('f-tanggal')||'2026-05-12',
+    ketua_rt: g('f-ketua'),
+    jabatan: g('f-jabatan')||'Ketua RT 01/RW 02',
+    template: 'surat_pengantar_rt_rw',
+    _meta: {generated_at: new Date().toISOString(), engine:'Docxtemplater+PizZip',version:'1.0'}
+  };
+  document.getElementById('json-output').textContent = JSON.stringify(json,null,2);
+  document.getElementById('json-modal').classList.add('open');
+}
+
+function closeModal(){document.getElementById('json-modal').classList.remove('open')}
+
+function markStep3(){
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step2').classList.add('done');
+  document.getElementById('step2').querySelector('.gen-step-num').innerHTML='<i class="ti ti-check" style="font-size:12px"></i>';
+  document.getElementById('step3').classList.add('active');
+  showToast('✅ Preview siap! Klik DOCX atau PDF untuk download.');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function showAdminPanel(){
+  const tbody = document.getElementById('admin-table-body');
+  tbody.innerHTML = ADMIN_USERS.map(u=>`
+    <tr>
+      <td><strong>${u.name}</strong></td>
+      <td style="color:var(--c-gray-500)">${u.email}</td>
+      <td><span class="badge ${u.plan==='Pro'?'gold':u.plan==='Bisnis'?'blue':'green'}">${u.plan}</span></td>
+      <td>${u.docs}</td>
+      <td><span class="badge green">Aktif</span></td>
+    </tr>
+  `).join('');
+  document.getElementById('admin-modal').classList.add('open');
+}
+
+function closeAdminModal(){document.getElementById('admin-modal').classList.remove('open')}
+
+// Set default date
+const today = new Date().toISOString().split('T')[0];
+const dateInput = document.getElementById('f-tanggal');
+if(dateInput) dateInput.value = today;
+
+// Init
+renderTemplates();
+renderDocList();
+</script>
+</body>
+</html>
