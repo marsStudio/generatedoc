@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v12</title>
+<title>Smart Dokumen Indonesia — v13</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -262,7 +262,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
+          <span><i class="ti ti-bolt"></i> Tersedia Pengisian Otomatis</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -361,7 +361,7 @@ function getFormDef(tmpl) {
       {id:'untuk',label:'Untuk Pembayaran',type:'text'}
     ];
 
-    return { hasLogo: hasLogo, hasSign: hasSign, aiFin: true, sections: [{title: 'Data Dokumen', fields: fields}] };
+    return { hasLogo: hasLogo, hasSign: hasSign, sections: [{title: 'Data Dokumen', fields: fields}] };
   }
 
   let headerFields = [];
@@ -513,7 +513,6 @@ function renderForm() {
 
   document.getElementById('form-col').innerHTML = html;
   
-  // Setel tanggal hari ini khusus untuk input type date yang kosong
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
   
   document.querySelectorAll('.fi').forEach(el=>el.addEventListener('input',updatePreview));
@@ -602,7 +601,7 @@ function runSystemSimulation() {
     } else if(id === 'pks' || id === 'mou') {
       txt = `PASAL 1 - RUANG LINGKUP KERJA SAMA\n${p1} dan ${p2} sepakat untuk menjalin kerja sama strategis dalam ruang lingkup yang telah disetujui bersama, dengan mengedepankan prinsip profesionalisme dan saling menguntungkan.\n\nPASAL 2 - HAK DAN KEWAJIBAN\nPara pihak wajib melaksanakan seluruh komitmen operasional maupun administratif sesuai dengan kesepakatan awal. Rincian teknis pelaksanaan akan diatur lebih lanjut dalam lampiran terpisah yang menjadi satu kesatuan dengan dokumen ini.\n\nPASAL 3 - PENYELESAIAN SENGKETA\nApabila terjadi perbedaan penafsiran atau perselisihan dalam pelaksanaan kerja sama ini, ${p1} dan ${p2} sepakat untuk menyelesaikannya secara musyawarah mufakat.`;
     } else if(id === 'kontrak') {
-      txt = `PASAL 1 - PENEMPATAN DAN TUGAS\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama dan akan menempati posisi sebagai ${posisi}. Pihak Kedua wajib melaksanakan tugas dan tanggung jawabnya sesuai dengan standar operasional (SOP) yang ditetapkan oleh ${company}.\n\nPASAL 2 - FASILITAS DAN KOMPENSASI\nAtas pelaksanaan pekerjaan tersebut, Pihak Pertama berkewajiban memberikan hak-hak Pihak Kedua berupa kompensasi finansial dan fasilitas penunjang kerja sesuai dengan peraturan perusahaan yang berlaku.\n\nPASAL 3 - KETENTUAN KEDISIPLINAN\nPihak Kedua wajib mematuhi seluruh peraturan kedisiplinan dan menjaga kerahasiaan data (confidentiality) milik perusahaan selama masa kontrak maupun setelah kontrak berakhir.`;
+      txt = `PASAL 1 - PENEMPATAN DAN TUGAS\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama dan akan menempati posisi sebagai ${posisi}. Pihak Kedua wajib melaksanakan tugas dan tanggung jawabnya sesuai dengan standar operasional (SOP) yang ditetapkan oleh Pihak Pertama.\n\nPASAL 2 - FASILITAS DAN KOMPENSASI\nAtas pelaksanaan pekerjaan tersebut, Pihak Pertama berkewajiban memberikan hak-hak Pihak Kedua berupa kompensasi finansial dan fasilitas penunjang kerja sesuai dengan peraturan perusahaan yang berlaku.\n\nPASAL 3 - KETENTUAN KEDISIPLINAN\nPihak Kedua wajib mematuhi seluruh peraturan kedisiplinan dan menjaga kerahasiaan data (confidentiality) milik perusahaan selama masa kontrak maupun setelah kontrak berakhir.`;
     } else if(id === 'resign') {
       txt = `Melalui surat ini, saya bermaksud menyampaikan pengunduran diri saya secara resmi dari posisi ${posisi} di ${company}, efektif berlaku terhitung satu bulan sejak tanggal penyerahan dokumen ini sesuai dengan ketentuan yang berlaku.\n\nSaya sangat mengapresiasi arahan manajemen dan kesempatan berharga yang telah diberikan selama saya bergabung. Saya berkomitmen penuh untuk menyusun dan menyelesaikan proses serah terima (handover) seluruh tugas dan tanggung jawab saya kepada rekan yang ditunjuk, agar transisi operasional dapat berjalan dengan lancar tanpa hambatan.\n\nSaya berharap yang terbaik untuk kesuksesan dan kemajuan ${company} di masa mendatang.`;
     } else if(id === 'pengantar_rt' || id === 'domisili') {
@@ -635,7 +634,7 @@ function runSystemFinansial() {
   btn.classList.add('loading');
 
   setTimeout(() => {
-    // Hanya mengisi angka dan deskripsi saja. Identitas form (nama/perusahaan) tetap kosong sesuai request.
+    // Hanya mengisi angka dan deskripsi saja. Identitas form (nama/perusahaan) tetap kosong.
     if(currentTmpl.id === 'invoice') {
       invItems = [
         {desc: 'Jasa Konsultasi & Pengembangan Sistem', qty: 1, harga: 5000000},
@@ -720,7 +719,7 @@ function buildUniversalAIPreview() {
     html += meta;
   }
 
-  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks profil Anda. ]</i>';
+  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks input Anda. ]</i>';
   html += `<div style="white-space:pre-wrap; text-align:justify; font-size:11px; line-height:1.8; color:#111; margin-bottom:24px;">${aiContent}</div>`;
 
   let signHtml = uploadedSign 
