@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v17</title>
+<title>Smart Dokumen Indonesia — v19 (Live AI)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -170,7 +170,7 @@ textarea.fi{resize:vertical;min-height:80px}
 .dp-sign-box{text-align:center}
 .dp-sign-box p{font-size:10.5px;color:#111}
 
-/* INVOICE & SLIP PREVIEW (FINANSIAL PREVIEW) */
+/* INVOICE PREVIEW */
 .inv-prev-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #333}
 .inv-prev-from{font-family:Arial,sans-serif;font-size:10px;color:#555}
 .inv-prev-from strong{font-size:13px;color:#111;display:block;margin-bottom:3px}
@@ -261,7 +261,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span id="gen-mode"><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
+          <span id="gen-mode"><i class="ti ti-bolt"></i> Terkoneksi dengan AI Asli</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -296,6 +296,12 @@ textarea.fi{resize:vertical;min-height:80px}
 <div class="toast-wrap" id="toast-wrap"></div>
 
 <script>
+// =====================================================================
+// API KEY GEMINI AI
+// =====================================================================
+const GEMINI_API_KEY = "AIzaSyBl2xNj1i8zskWNUaWy_-tseDqwWgGMKA0";
+// =====================================================================
+
 // ═══════════════ DATA ═══════════════
 const CATS = {
   warga:{label:'Surat Warga',color:'cp-purple',icon:'ti-home'},
@@ -325,9 +331,9 @@ const TEMPLATES = [
 let currentTmpl = TEMPLATES[0];
 
 // State untuk tabel Dinamis
-let invItems = [{desc:'',qty:1,harga:0}]; // Untuk Invoice
-let earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan',amount:0}]; // Untuk Slip Gaji (Pendapatan)
-let deductItems = [{desc:'BPJS',amount:0}]; // Untuk Slip Gaji (Potongan)
+let invItems = [{desc:'',qty:1,harga:0}]; 
+let earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan Transport',amount:0}];
+let deductItems = [{desc:'Pajak / PPh 21',amount:0}];
 
 let step3done = false;
 let isPpnActive = false;
@@ -405,7 +411,7 @@ function getFormDef(tmpl) {
     hasSign: hasSign,
     sections: [
       {title: '1. Kop & Metadata', fields: headerFields},
-      {title: '⚙️ 2. Konfigurasi Sistem', ai: true},
+      {title: '🧠 2. AI Content Generator', ai: true},
       {title: '3. Penandatanganan', fields: footerFields}
     ]
   };
@@ -441,7 +447,6 @@ function selectTemplate(id) {
   document.getElementById('st3').querySelector('.step-dot').textContent='3';
   document.getElementById('st2').className='step active';
   
-  // Reset array tabel dinamis
   invItems = [{desc:'',qty:1,harga:0}];
   earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan Transport',amount:0}];
   deductItems = [{desc:'Pajak / PPh 21',amount:0}];
@@ -455,10 +460,9 @@ function selectTemplate(id) {
   document.getElementById('gen-title').textContent=currentTmpl.name;
   document.getElementById('gen-cat').textContent=CATS[currentTmpl.cat].label;
   
-  // Ubah badge tulisan di atas
   document.getElementById('gen-mode').innerHTML = currentTmpl.isFin 
     ? `<span><i class="ti ti-calculator"></i> Kalkulasi Finansial Otomatis</span>`
-    : `<span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>`;
+    : `<span><i class="ti ti-brain"></i> Terkoneksi dengan Google AI</span>`;
   
   updatePreview();
 }
@@ -489,27 +493,17 @@ function renderForm() {
     html += `</div>`;
   }
 
-  if(currentTmpl.isFin) {
-    html += `
-    <div class="ai-wrap" style="padding:20px; margin-top:0">
-      <div class="ai-head"><i class="ti ti-bolt"></i> 1-Click Document Filler</div>
-      <p class="ai-desc" style="margin-bottom:16px;">Sistem akan menghasilkan baris item/data finansial secara acak untuk keperluan demonstrasi.</p>
-      <button class="ai-btn" id="ai-btn-fin" style="margin:0" onclick="runSystemFinansial()">
-        <i class="ti ti-wand"></i> Auto-Generate Data Tabel Dummy
-      </button>
-    </div>`;
-  }
-
   def.sections.forEach(sec => {
     html += `<div class="fsec">${sec.title}</div>`;
     
+    // RENDER BLOK AI REAL
     if(sec.ai) {
       html += `
       <div class="ai-wrap">
-        <div class="ai-head"><i class="ti ti-settings"></i> System Auto-Writer</div>
-        <p class="ai-desc">Sistem akan membaca form di atas (Posisi, Perusahaan, dll) dan menyusun kerangka teks profesional secara instan.</p>
-        <button class="ai-btn" id="ai-btn" onclick="runSystemSimulation()"><i class="ti ti-bolt"></i> Auto-Generate Isi Dokumen</button>
-        <textarea class="fi" id="f-ai_content" style="margin-top:20px; min-height:160px; font-family:'Times New Roman',serif; font-size:14px; line-height:1.6; display:none;" oninput="updatePreview()" placeholder="Hasil generate..."></textarea>
+        <div class="ai-head"><i class="ti ti-brain"></i> Google Gemini AI</div>
+        <p class="ai-desc">AI akan menyusun kerangka dokumen yang unik dan profesional berdasarkan konteks yang kamu ketik di form atas.</p>
+        <button class="ai-btn" id="ai-btn" onclick="runSystemSimulation()"><i class="ti ti-sparkles"></i> Generate Isi dengan AI</button>
+        <textarea class="fi" id="f-ai_content" style="margin-top:20px; min-height:160px; font-family:'Times New Roman',serif; font-size:14px; line-height:1.6; display:none;" oninput="updatePreview()" placeholder="Hasil generate AI..."></textarea>
       </div>`;
     } 
     else if(sec.fields) {
@@ -525,7 +519,6 @@ function renderForm() {
     }
   });
 
-  // Render Ekstra Komponen Finansial
   if(currentTmpl.id === 'invoice') html += renderInvoiceExtras();
   else if(currentTmpl.id === 'slip_gaji') html += renderSlipGajiExtras();
 
@@ -673,92 +666,84 @@ function handleImageUpload(input, type) {
   }
 }
 
-// ═══════════════ SYSTEM AUTO-WRITER LOGIC ═══════════════
-function runSystemSimulation() {
+// ═══════════════ REAL AI GENERATOR LOGIC ═══════════════
+async function runSystemSimulation() {
   const btn = document.getElementById('ai-btn');
   const area = document.getElementById('f-ai_content');
-  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Merangkai Konteks...';
-  btn.classList.add('loading');
   
+  if(GEMINI_API_KEY === "KOSONG" || !GEMINI_API_KEY) {
+      toast('⚠️', 'Gagal: API Key Gemini belum diatur di dalam kode.');
+      return;
+  }
+  
+  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> AI Sedang Berpikir...';
+  btn.classList.add('loading');
   area.style.display = 'block';
 
-  const nama = g('nama') || '[Nama Pemohon/Subjek]';
-  const posisi = g('posisi') || '[Posisi/Jabatan]';
-  const company = g('company') || '[Nama Perusahaan/Instansi]';
-  const p1 = g('p1') || '[Pihak Pertama]';
-  const p2 = g('p2') || '[Pihak Kedua]';
+  // Ambil Data Konteks yang diketik user (kosong defaultnya)
+  const nama = g('nama');
+  const posisi = g('posisi');
+  const company = g('company');
+  const p1 = g('p1');
+  const p2 = g('p2');
+  const tmplName = currentTmpl.name;
   
-  let txt = "";
-  const id = currentTmpl.id;
+  // Susun Prompt
+  let promptText = `Tuliskan draf isi dokumen formal untuk dokumen berjudul "${tmplName}".\n`;
+  promptText += `Berikut adalah data yang dimasukkan oleh pengguna, gunakan data ini sebagai referensi utama (jika kosong, gunakan [Placeholder] yang relevan):\n`;
+  promptText += `- Nama Pemohon/Terkait: ${nama ? nama : 'Kosong'}\n`;
+  promptText += `- Jabatan/Posisi: ${posisi ? posisi : 'Kosong'}\n`;
+  promptText += `- Nama Perusahaan/Instansi: ${company ? company : 'Kosong'}\n`;
+  promptText += `- Pihak Pertama (1): ${p1 ? p1 : 'Kosong'}\n`;
+  promptText += `- Pihak Kedua (2): ${p2 ? p2 : 'Kosong'}\n`;
+  
+  promptText += `\nInstruksi Penting:
+  1. Tulis HANYA bagian ISI atau BODY dokumen saja. Jangan tuliskan tanggal di atas, jangan tuliskan kop surat, dan jangan tuliskan bagian tanda tangan (hormat saya, nama terang) di bagian bawah.
+  2. Gunakan bahasa Indonesia yang sangat formal, baku, EYD, dan profesional.
+  3. Jika ini berupa surat (seperti lamaran, resign, pengantar), awali dengan kata sapaan seperti "Dengan hormat,".
+  4. Jika ini berupa perjanjian/kontrak (MOU, NDA, Kontrak), buat format dalam bentuk PASAL 1, PASAL 2, dst.
+  5. JANGAN gunakan format markdown (seperti tanda bintang ** atau #). Tulis sebagai plain text biasa.`;
 
-  setTimeout(() => {
-    if(id === 'lamaran') {
-      txt = `Dengan hormat,\n\nMelalui surat ini, saya bermaksud menyampaikan ketertarikan saya untuk melamar posisi ${posisi} di ${company}. Saya memiliki latar belakang pendidikan dan rekam jejak pengalaman yang relevan dengan kualifikasi yang dibutuhkan untuk posisi tersebut.\n\nSaya terbiasa bekerja dalam tim maupun secara mandiri, serta memiliki komitmen untuk terus belajar dan beradaptasi dengan lingkungan kerja yang dinamis. Saya yakin bahwa keterampilan yang saya miliki dapat memberikan kontribusi positif bagi pencapaian target ${company}.\n\nBesar harapan saya agar Bapak/Ibu bersedia memberikan kesempatan wawancara, sehingga saya dapat menjelaskan lebih detail mengenai kualifikasi dan potensi yang saya miliki.\n\nAtas waktu dan pertimbangan Bapak/Ibu, saya ucapkan terima kasih.`;
-    } else if(id === 'form_cuti') {
-      txt = `Bersama formulir administrasi ini, saya mengajukan permohonan cuti untuk keperluan pribadi/keluarga.\n\nSelama masa absen tersebut, saya telah memastikan bahwa seluruh tanggung jawab operasional terkait posisi saya sebagai ${posisi} akan didelegasikan dan dikomunikasikan dengan baik kepada rekan tim terkait. Hal ini bertujuan agar seluruh alur pekerjaan dan target departemen tetap berjalan sesuai dengan timeline yang telah ditentukan.\n\nMohon peninjauan dan persetujuan dari Bapak/Ibu atas pengajuan cuti ini.`;
-    } else if(id === 'pks' || id === 'mou') {
-      txt = `PASAL 1 - RUANG LINGKUP KERJA SAMA\n${p1} dan ${p2} sepakat untuk menjalin kerja sama strategis dalam ruang lingkup yang telah disetujui bersama, dengan mengedepankan prinsip profesionalisme dan saling menguntungkan.\n\nPASAL 2 - HAK DAN KEWAJIBAN\nPara pihak wajib melaksanakan seluruh komitmen operasional maupun administratif sesuai dengan kesepakatan awal. Rincian teknis pelaksanaan akan diatur lebih lanjut dalam lampiran terpisah yang menjadi satu kesatuan dengan dokumen ini.\n\nPASAL 3 - PENYELESAIAN SENGKETA\nApabila terjadi perbedaan penafsiran atau perselisihan dalam pelaksanaan kerja sama ini, ${p1} dan ${p2} sepakat untuk menyelesaikannya secara musyawarah mufakat.`;
-    } else if(id === 'kontrak') {
-      txt = `PASAL 1 - PENEMPATAN DAN TUGAS\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama dan akan menempati posisi sebagai ${posisi}. Pihak Kedua wajib melaksanakan tugas dan tanggung jawabnya sesuai dengan standar operasional (SOP) yang ditetapkan oleh Pihak Pertama.\n\nPASAL 2 - FASILITAS DAN KOMPENSASI\nAtas pelaksanaan pekerjaan tersebut, Pihak Pertama berkewajiban memberikan hak-hak Pihak Kedua berupa kompensasi finansial dan fasilitas penunjang kerja sesuai dengan peraturan perusahaan yang berlaku.\n\nPASAL 3 - KETENTUAN KEDISIPLINAN\nPihak Kedua wajib mematuhi seluruh peraturan kedisiplinan dan menjaga kerahasiaan data (confidentiality) milik perusahaan selama masa kontrak maupun setelah kontrak berakhir.`;
-    } else if(id === 'resign') {
-      txt = `Melalui surat ini, saya bermaksud menyampaikan pengunduran diri saya secara resmi dari posisi ${posisi} di ${company}, efektif berlaku terhitung satu bulan sejak tanggal penyerahan dokumen ini sesuai dengan ketentuan yang berlaku.\n\nSaya sangat mengapresiasi arahan manajemen dan kesempatan berharga yang telah diberikan selama saya bergabung. Saya berkomitmen penuh untuk menyusun dan menyelesaikan proses serah terima (handover) seluruh tugas dan tanggung jawab saya kepada rekan yang ditunjuk, agar transisi operasional dapat berjalan dengan lancar tanpa hambatan.\n\nSaya berharap yang terbaik untuk kesuksesan dan kemajuan ${company} di masa mendatang.`;
-    } else if(id === 'pengantar_rt' || id === 'domisili') {
-      txt = `Yang bertanda tangan di bawah ini menerangkan dengan sesungguhnya bahwa saudara/i ${nama} adalah benar warga/penduduk yang berdomisili sah di wilayah administrasi kami.\n\nBerdasarkan pengamatan dan catatan kependudukan yang kami miliki, yang bersangkutan senantiasa berkelakuan baik, mematuhi tata tertib lingkungan, dan tidak pernah memiliki catatan riwayat pelanggaran hukum atau norma masyarakat apa pun.\n\nDemikian surat keterangan ini diterbitkan untuk dipergunakan sebagai syarat kelengkapan administrasi. Agar instansi terkait yang berkepentingan dapat memakluminya dan memberikan pelayanan sebagaimana mestinya.`;
-    } else {
-      txt = `Dokumen ini diterbitkan oleh sistem sebagai wujud perikatan atau permohonan yang resmi secara administratif.\n\nSubjek yang tercantum dalam dokumen ini menyatakan telah menyetujui seluruh ketentuan dan klausul yang tertuang di dalamnya. Segala bentuk perbedaan pendapat teknis atau sengketa prosedural yang mungkin timbul di masa mendatang disarankan untuk diselesaikan terlebih dahulu melalui proses musyawarah mufakat. Jika penyelesaian secara kekeluargaan tidak membuahkan hasil, tahapan penyelesaian akan merujuk pada standar ketentuan hukum yang berlaku umum.`;
-    }
+  try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              contents: [{ parts: [{ text: promptText }] }]
+          })
+      });
 
-    area.value = '';
-    let i = 0;
-    function typeIt() {
-      if(i < txt.length) {
-        area.value += txt.charAt(i);
-        i++;
-        updatePreview();
-        setTimeout(typeIt, 5);
-      } else {
-        btn.innerHTML = '<i class="ti ti-check"></i> Selesai Disusun';
-        btn.classList.remove('loading');
-        setTimeout(() => { btn.innerHTML = '<i class="ti ti-bolt"></i> Auto-Generate Ulang'; }, 2000);
+      const data = await response.json();
+      
+      if(data.error) {
+          throw new Error(data.error.message);
       }
-    }
-    typeIt();
-  }, 500);
-}
 
-function runSystemFinansial() {
-  const btn = document.getElementById('ai-btn-fin');
-  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Menyiapkan Data Dummy...';
-  btn.classList.add('loading');
+      let aiResponseText = data.candidates[0].content.parts[0].text;
+      
+      // Typing effect
+      area.value = '';
+      let i = 0;
+      function typeIt() {
+        if(i < aiResponseText.length) {
+          area.value += aiResponseText.charAt(i);
+          i++;
+          updatePreview();
+          setTimeout(typeIt, 10); // kecepatan ketik 10ms
+        } else {
+          btn.innerHTML = '<i class="ti ti-check"></i> Selesai Ditulis oleh AI';
+          btn.classList.remove('loading');
+          setTimeout(() => { btn.innerHTML = '<i class="ti ti-sparkles"></i> Generate Ulang dengan AI'; }, 3000);
+        }
+      }
+      typeIt();
 
-  setTimeout(() => {
-    if(currentTmpl.id === 'invoice') {
-      invItems = [
-        {desc: 'Jasa Konsultasi & Pengembangan Sistem', qty: 1, harga: 5000000},
-        {desc: 'Biaya Maintenance & Server (Bulan berjalan)', qty: 1, harga: 1500000}
-      ];
-    } else if(currentTmpl.id === 'slip_gaji') {
-      earnItems = [
-        {desc: 'Gaji Pokok', amount: 15000000},
-        {desc: 'Tunjangan Transport', amount: 2000000},
-        {desc: 'Tunjangan Komunikasi', amount: 500000}
-      ];
-      deductItems = [
-        {desc: 'BPJS Kesehatan', amount: 150000},
-        {desc: 'BPJS Ketenagakerjaan', amount: 300000},
-        {desc: 'Pajak PPh 21', amount: 500000}
-      ];
-    } else if(currentTmpl.id === 'kwitansi') {
-      const f3 = document.getElementById('f-jumlah'); if(f3 && !f3.value) f3.value = '2500000';
-      const f4 = document.getElementById('f-untuk'); if(f4 && !f4.value) f4.value = 'Pembayaran Jasa Termin 1';
-    }
-
-    renderForm(); 
-    updatePreview();
-    btn.innerHTML = '<i class="ti ti-check"></i> Tabel Disusun';
-    btn.classList.remove('loading');
-    setTimeout(() => { btn.innerHTML = '<i class="ti ti-wand"></i> Generate Ulang Tabel'; }, 2000);
-  }, 600);
+  } catch (error) {
+      console.error(error);
+      area.value = `Maaf, terjadi kesalahan saat menghubungi AI: ${error.message}`;
+      btn.innerHTML = '<i class="ti ti-alert-triangle"></i> Gagal (Coba Lagi)';
+      btn.classList.remove('loading');
+  }
 }
 
 // ═══════════════ PREVIEW BUILDER ═══════════════
@@ -824,7 +809,7 @@ function buildUniversalAIPreview() {
     html += meta;
   }
 
-  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks profil Anda. ]</i>';
+  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Generate Isi dengan AI" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks profil Anda. ]</i>';
   html += `<div style="white-space:pre-wrap; text-align:justify; font-size:11px; line-height:1.8; color:#111; margin-bottom:24px;">${aiContent}</div>`;
 
   let signHtml = uploadedSign 
@@ -886,7 +871,6 @@ function buildInvoicePreview(){
   </div>`;
 }
 
-// FORMAT SLIP GAJI DINAMIS BARU
 function buildSlipGajiPreview(){
   const totalEarn = earnItems.reduce((a,it)=>a+it.amount,0);
   const totalDeduct = deductItems.reduce((a,it)=>a+it.amount,0);
@@ -1012,7 +996,6 @@ function resetForm(){
   
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
   
-  // Reset array tabel
   invItems = [{desc:'',qty:1,harga:0}];
   earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan Transport',amount:0}];
   deductItems = [{desc:'Pajak / PPh 21',amount:0}];
