@@ -3,1316 +3,1003 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Dokumen Indonesia — v2 Full Templates</title>
+<title>AI Dokumen Indonesia</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
---r:#c0392b;--rd:#a93226;--rl:#fff0ee;--rm:#e74c3c;
---b:#1a3a5c;--bm:#2471a3;--bl:#eaf3fb;
---g:#d4a017;--gl:#fffaeb;
---gn:#155a32;--gnm:#1e8449;--gnl:#e9f7ef;
---p:#5b2d8e;--pl:#f3eeff;
---i:#111827;--i2:#374151;--i3:#6b7280;--i4:#9ca3af;
---s:#fff;--bg:#f5f6f8;--bg2:#edf0f3;
---bd:#e5e7eb;--bd2:#d1d5db;
---fh:'Syne',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
---sh1:0 1px 3px rgba(0,0,0,.06);--sh2:0 4px 16px rgba(0,0,0,.08);--sh3:0 8px 32px rgba(0,0,0,.14);
-}
-[data-dark]{
---r:#e05c4d;--rd:#c0392b;--rl:#2d1a18;--rm:#e74c3c;
---b:#4a9fdb;--bm:#5dade2;--bl:#0f1f2d;
---g:#f0b429;--gl:#2a1f00;
---gn:#2ecc71;--gnm:#27ae60;--gnl:#0a1f0f;
---p:#a855f7;--pl:#1e0a36;
---i:#f3f4f6;--i2:#d1d5db;--i3:#9ca3af;--i4:#6b7280;
---s:#1e2024;--bg:#16181c;--bg2:#252830;
---bd:#2d3139;--bd2:#3d4350;
-}
-body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;font-size:14px;line-height:1.6;transition:background .25s,color .25s}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@400;500;600;700&display=swap');
 
-/* NAV */
-.nav{height:54px;background:var(--s);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:300}
-.logo{display:flex;align-items:center;gap:9px;cursor:pointer}
-.logo-m{width:30px;height:30px;background:var(--r);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--fh);font-weight:800;font-size:13px}
-.logo-t{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--i)}
-.logo-t em{color:var(--r);font-style:normal}
-.nav-links{display:flex;gap:2px;margin-left:8px}
-.nl{padding:5px 11px;border-radius:7px;font-size:12px;font-weight:500;color:var(--i3);cursor:pointer;border:none;background:none;font-family:var(--fb);transition:all .15s}
-.nl:hover{color:var(--i);background:var(--bg2)}
-.nl.on{color:var(--r);background:var(--rl);font-weight:600}
-.nav-r{display:flex;align-items:center;gap:7px;margin-left:auto}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:var(--fb);transition:all .18s;line-height:1}
-.btn i{font-size:14px}
-.btn-ghost{background:transparent;color:var(--i3);border:1px solid var(--bd)}
-.btn-ghost:hover{color:var(--i);border-color:var(--bd2);background:var(--bg2)}
-.btn-red{background:var(--r);color:#fff}
-.btn-red:hover{background:var(--rd);transform:translateY(-1px);box-shadow:0 4px 12px rgba(192,57,43,.3)}
-.btn-blue{background:var(--b);color:#fff}
-.btn-blue:hover{opacity:.9}
-.btn-green{background:var(--gnm);color:#fff}
-.btn-sm{padding:5px 11px;font-size:11px}
-.btn-lg{padding:10px 20px;font-size:13px;border-radius:9px}
-.ibt{width:32px;height:32px;border-radius:7px;border:1px solid var(--bd);background:transparent;color:var(--i3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .15s}
-.ibt:hover{color:var(--i);background:var(--bg2)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --c-red:#c0392b;--c-red-light:#fef5f4;--c-red-mid:#e74c3c;
+    --c-blue:#1e3a5f;--c-blue-mid:#2980b9;--c-blue-light:#eaf3fb;
+    --c-gold:#d4a017;--c-gold-light:#fef9ec;
+    --c-green:#155724;--c-green-light:#d4edda;--c-green-mid:#28a745;
+    --c-gray-50:#f8f9fa;--c-gray-100:#f0f2f5;--c-gray-200:#e8ecf0;
+    --c-gray-300:#d1d9e0;--c-gray-500:#6c757d;--c-gray-700:#343a40;--c-gray-900:#1a1d20;
+    --c-white:#ffffff;
+    --font-display:'Bricolage Grotesque',sans-serif;
+    --font-body:'Plus Jakarta Sans',sans-serif;
+    --radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:20px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md:0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
+  }
+  body{font-family:var(--font-body);background:var(--c-gray-50);color:var(--c-gray-900);min-height:100vh;font-size:14px}
 
-/* LAYOUT */
-.shell{display:flex;height:calc(100vh - 54px);overflow:hidden}
+  /* NAV */
+  .nav{background:var(--c-white);border-bottom:1px solid var(--c-gray-200);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+  .nav-logo-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--c-red),#e74c3c);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:800;font-family:var(--font-display)}
+  .nav-logo-text{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--c-gray-900)}
+  .nav-logo-text span{color:var(--c-red)}
+  .nav-links{display:flex;align-items:center;gap:4px}
+  .nav-link{padding:6px 12px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--c-gray-700);cursor:pointer;transition:all .15s;border:none;background:none}
+  .nav-link:hover{background:var(--c-gray-100)}
+  .nav-link.active{background:var(--c-red-light);color:var(--c-red)}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .btn{padding:7px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;border:none;font-family:var(--font-body)}
+  .btn-outline{background:transparent;border:1px solid var(--c-gray-300);color:var(--c-gray-700)}
+  .btn-outline:hover{border-color:var(--c-red);color:var(--c-red)}
+  .btn-primary{background:var(--c-red);color:white}
+  .btn-primary:hover{background:var(--c-red-mid);transform:translateY(-1px)}
+  .btn-blue{background:var(--c-blue);color:white}
+  .btn-blue:hover{background:var(--c-blue-mid)}
+  .btn-green{background:var(--c-green-mid);color:white}
+  .btn-green:hover{opacity:.9}
+  .btn-lg{padding:11px 24px;font-size:14px;border-radius:var(--radius-md)}
+  .btn-sm{padding:5px 12px;font-size:12px}
 
-/* LEFT SIDEBAR */
-.lsb{width:240px;flex-shrink:0;background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column;overflow:hidden}
-.lsb-search{padding:12px 14px;border-bottom:1px solid var(--bd)}
-.lsb-search-input{width:100%;padding:7px 10px 7px 32px;border:1px solid var(--bd2);border-radius:7px;font-size:12px;font-family:var(--fb);color:var(--i);background:var(--bg);outline:none;transition:border-color .15s}
-.lsb-search-input:focus{border-color:var(--r)}
-.lsb-search-input::placeholder{color:var(--i4)}
-.lsb-search-wrap{position:relative}
-.lsb-search-wrap i{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--i4);font-size:15px}
-.lsb-scroll{flex:1;overflow-y:auto;padding:8px 0}
-.lsb-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--i4);padding:10px 14px 5px}
-.lsb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;cursor:pointer;font-size:12px;font-weight:500;color:var(--i3);transition:all .15s;border-right:2px solid transparent}
-.lsb-item:hover{background:var(--bg2);color:var(--i)}
-.lsb-item.on{background:var(--rl);color:var(--r);border-right-color:var(--r);font-weight:700}
-.lsb-item i{font-size:14px;flex-shrink:0}
-.lsb-item .badge-pill{margin-left:auto;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
-.bp-free{background:var(--gnl);color:var(--gn)}
-.bp-pro{background:var(--gl);color:var(--g)}
+  /* PAGES */
+  .page{display:none;animation:fadeIn .25s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  /* LANDING */
+  .hero{background:var(--c-white);padding:72px 32px 80px;text-align:center;border-bottom:1px solid var(--c-gray-200)}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--c-red-light);color:var(--c-red);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px}
+  .hero h1{font-family:var(--font-display);font-size:42px;font-weight:800;line-height:1.15;color:var(--c-gray-900);max-width:640px;margin:0 auto 16px}
+  .hero h1 span{color:var(--c-red)}
+  .hero p{font-size:16px;color:var(--c-gray-500);max-width:500px;margin:0 auto 32px;line-height:1.65}
+  .hero-cta{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+  .hero-stats{display:flex;justify-content:center;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--c-gray-200)}
+  .hero-stat{text-align:center}
+  .hero-stat-num{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--c-gray-900)}
+  .hero-stat-label{font-size:12px;color:var(--c-gray-500);margin-top:2px}
 
-/* GEN TOPBAR */
-.gen-top{padding:14px 22px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.gen-title{font-family:var(--fh);font-size:17px;font-weight:800;color:var(--i)}
-.gen-meta{font-size:11px;color:var(--i4);margin-top:2px;display:flex;align-items:center;gap:8px}
-.cpill{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:800}
-.cp-red{background:var(--rl);color:var(--r)}
-.cp-blue{background:var(--bl);color:var(--bm)}
-.cp-gold{background:var(--gl);color:var(--g)}
-.cp-green{background:var(--gnl);color:var(--gnm)}
-.cp-purple{background:var(--pl);color:var(--p)}
+  /* CATEGORIES SECTION */
+  .section{padding:56px 32px;max-width:1080px;margin:0 auto}
+  .section-header{margin-bottom:32px}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-red);margin-bottom:8px}
+  .section-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--c-gray-900)}
+  .section-sub{font-size:14px;color:var(--c-gray-500);margin-top:6px}
 
-/* BODY SPLIT */
-.gen-body{flex:1;display:grid;grid-template-columns:1fr 340px;overflow:hidden}
-.form-col{overflow-y:auto;padding:22px 24px}
-.prev-col{border-left:1px solid var(--bd);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
-.prev-head{padding:12px 16px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.prev-head span{font-size:12px;font-weight:700;color:var(--i)}
-.live-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--gnm);background:var(--gnl);padding:2px 9px;border-radius:20px}
-.live-dot{width:5px;height:5px;background:var(--gnm);border-radius:50%;animation:blink 1.4s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.prev-scroll{flex:1;overflow-y:auto;padding:14px}
-.prev-actions{padding:12px 14px;border-top:1px solid var(--bd);background:var(--s);flex-shrink:0}
-.exp-row{display:flex;gap:8px}
-.exp-btn{flex:1;padding:8px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;font-family:var(--fb);border:none;transition:all .18s}
-.exp-docx{background:var(--bl);color:var(--bm);border:1px solid rgba(36,113,163,.2)}
-.exp-docx:hover{background:#c5dff8}
-.exp-pdf{background:var(--rl);color:var(--r);border:1px solid rgba(192,57,43,.2)}
-.exp-pdf:hover{background:#ffd9d4}
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .cat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 16px;cursor:pointer;transition:all .18s;text-align:center}
+  .cat-card:hover{border-color:var(--c-red);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+  .cat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px}
+  .cat-icon.red{background:var(--c-red-light);color:var(--c-red)}
+  .cat-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .cat-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
+  .cat-icon.green{background:var(--c-green-light);color:var(--c-green-mid)}
+  .cat-icon.purple{background:#f0eeff;color:#7c3aed}
+  .cat-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
+  .cat-count{font-size:11px;color:var(--c-gray-500);margin-top:3px}
 
-/* FORM ELEMENTS */
-.fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--i3);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
-.fsec::after{content:'';flex:1;height:1px;background:var(--bd)}
-.fg{margin-bottom:14px}
-.fl{font-size:11px;font-weight:700;color:var(--i2);margin-bottom:5px;display:flex;align-items:center;gap:4px;text-transform:uppercase;letter-spacing:.03em}
-.fl .req{color:var(--r)}
-.fi{width:100%;padding:8px 11px;border:1px solid var(--bd2);border-radius:7px;font-size:13px;font-family:var(--fb);color:var(--i);background:var(--s);transition:all .15s;outline:none}
-.fi:focus{border-color:var(--r);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
-.fi::placeholder{color:var(--i4)}
-textarea.fi{resize:vertical;min-height:64px}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
-.fhint{font-size:10px;color:var(--i4);margin-top:3px;display:flex;align-items:center;gap:3px}
-.upload-z{border:1.5px dashed var(--bd2);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .18s;background:var(--bg)}
-.upload-z:hover{border-color:var(--r);background:var(--rl)}
-.upload-z i{font-size:22px;color:var(--i4);display:block;margin-bottom:5px}
-.upload-z p{font-size:12px;color:var(--i3)}
-.upload-z span{font-size:10px;color:var(--i4)}
-.upload-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:18px}
+  /* TEMPLATE GRID */
+  .tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .tmpl-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .18s}
+  .tmpl-card:hover{border-color:var(--c-blue-mid);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+  .tmpl-preview{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .tmpl-preview-doc{width:70px;background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:8px 6px;box-shadow:var(--shadow-sm)}
+  .tmpl-preview-line{height:3px;background:var(--c-gray-200);border-radius:2px;margin-bottom:5px}
+  .tmpl-preview-line.title{height:4px;background:var(--c-gray-300);width:60%}
+  .tmpl-preview-line.short{width:50%}
+  .tmpl-preview-line.accent{background:var(--c-red);width:40%}
+  .tmpl-preview-badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+  .tmpl-preview-badge.free{background:var(--c-green-light);color:var(--c-green)}
+  .tmpl-preview-badge.pro{background:var(--c-gold-light);color:var(--c-gold)}
+  .tmpl-info{padding:12px 14px}
+  .tmpl-name{font-size:13px;font-weight:600;color:var(--c-gray-900);margin-bottom:3px}
+  .tmpl-cat{font-size:11px;color:var(--c-gray-500)}
+  .tmpl-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .tmpl-use-btn{font-size:11px;font-weight:600;color:var(--c-red);cursor:pointer;padding:4px 10px;border:1px solid var(--c-red);border-radius:var(--radius-sm);background:none;font-family:var(--font-body)}
+  .tmpl-use-btn:hover{background:var(--c-red-light)}
 
-/* INVOICE ITEMS TABLE */
-.inv-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}
-.inv-table th{background:var(--bg2);padding:7px 10px;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--i3);border:1px solid var(--bd)}
-.inv-table td{padding:7px 10px;border:1px solid var(--bd)}
-.inv-table td input,.inv-table td select{width:100%;border:none;background:transparent;font-size:11px;font-family:var(--fb);color:var(--i);outline:none;padding:2px 0}
-.inv-table tr:last-child td{border-bottom:1px solid var(--bd)}
-.add-row-btn{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--bm);cursor:pointer;padding:6px 0;border:none;background:none;font-family:var(--fb)}
-.add-row-btn:hover{color:var(--r)}
-.inv-total-row{background:var(--rl)}
-.inv-total-row td{font-weight:700;color:var(--r)}
+  /* FILTER PILLS */
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .filter-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-gray-300);background:var(--c-white);color:var(--c-gray-700);transition:all .15s}
+  .filter-pill:hover{border-color:var(--c-red);color:var(--c-red)}
+  .filter-pill.active{background:var(--c-red);border-color:var(--c-red);color:white}
 
-/* JSON BOX */
-.json-box{background:var(--i);color:#a8d8a8;border-radius:9px;padding:13px 15px;font-family:'Courier New',monospace;font-size:10.5px;line-height:1.75;overflow-x:auto;white-space:pre;margin-top:13px;border:1px solid var(--bd);display:none}
-.json-box.open{display:block}
+  /* DASHBOARD */
+  .dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 58px)}
+  .dash-sidebar{background:var(--c-white);border-right:1px solid var(--c-gray-200);padding:20px 0}
+  .sidebar-section{margin-bottom:24px}
+  .sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-gray-500);padding:0 20px;margin-bottom:6px}
+  .sidebar-item{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;font-size:13px;font-weight:500;color:var(--c-gray-700);transition:all .15s}
+  .sidebar-item:hover{background:var(--c-gray-100)}
+  .sidebar-item.active{background:var(--c-red-light);color:var(--c-red);font-weight:600}
+  .sidebar-item i{font-size:16px}
+  .sidebar-badge{margin-left:auto;background:var(--c-red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
 
-/* DOCUMENT PAPER */
-.doc-paper{background:#fff;border-radius:6px;box-shadow:var(--sh2);padding:24px 22px;font-size:9.5px;line-height:1.85;color:#111;min-height:460px;font-family:'Times New Roman',serif}
-.doc-paper h3,.doc-paper h2,.doc-paper p,.doc-paper td,.doc-paper th{color:#111}
-.dp-lh{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:3px double #c0392b}
-.dp-logo-box{width:48px;height:48px;background:#f0f0f0;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ccc;flex-shrink:0}
-.dp-org-name{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#111;font-family:Arial,sans-serif;margin-bottom:2px}
-.dp-org-sub{font-size:8.5px;color:#555;font-family:Arial,sans-serif}
-.dp-doc-title{text-align:center;font-family:Arial,sans-serif;margin:12px 0 4px}
-.dp-doc-title h2{font-size:11.5px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;text-decoration:underline;color:#111}
-.dp-doc-num{text-align:center;font-size:8.5px;color:#555;font-family:Arial,sans-serif;margin-bottom:10px}
-.dp-body{font-family:Arial,sans-serif}
-.dp-body p{font-size:9.5px;margin-bottom:5px;color:#111}
-.dp-tbl{width:100%;font-family:Arial,sans-serif;border-collapse:collapse;font-size:9px;margin:8px 0}
-.dp-tbl td:first-child{width:36%;color:#555;vertical-align:top}
-.dp-tbl td:nth-child(2){width:5%;vertical-align:top}
-.dp-sign{margin-top:20px;display:flex;justify-content:flex-end;font-family:Arial,sans-serif}
-.dp-sign-box{text-align:center}
-.dp-sign-box p{font-size:9px;color:#111}
-.dp-sign-line{height:1px;background:#111;width:110px;margin:26px auto 5px}
+  .dash-main{padding:28px 32px;overflow-y:auto}
+  .dash-greeting{margin-bottom:28px}
+  .dash-greeting h2{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+  .dash-greeting p{font-size:13px;color:var(--c-gray-500)}
 
-/* INVOICE PREVIEW */
-.inv-prev-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid #c0392b}
-.inv-prev-from{font-family:Arial,sans-serif;font-size:9px;color:#555}
-.inv-prev-from strong{font-size:11px;color:#111;display:block;margin-bottom:2px}
-.inv-badge{background:#c0392b;color:#fff;font-size:13px;font-weight:900;font-family:Arial,sans-serif;padding:4px 12px;border-radius:2px}
-.inv-prev-tbl{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:8.5px;margin:10px 0}
-.inv-prev-tbl th{background:#f0f0f0;padding:5px 8px;text-align:left;font-weight:700;color:#333;border-bottom:1px solid #ddd}
-.inv-prev-tbl td{padding:5px 8px;border-bottom:1px solid #eee;color:#333}
-.inv-prev-tbl .num{text-align:right}
-.inv-total-box{display:flex;flex-direction:column;align-items:flex-end;font-family:Arial,sans-serif;margin-top:10px}
-.inv-total-row-p{display:flex;gap:20px;font-size:8.5px;color:#555;margin-bottom:3px}
-.inv-total-row-p.grand{font-size:10px;font-weight:900;color:#c0392b}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .stat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 18px}
+  .stat-label{font-size:11px;font-weight:600;color:var(--c-gray-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .stat-label i{font-size:14px}
+  .stat-val{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--c-gray-900)}
+  .stat-change{font-size:11px;margin-top:4px}
+  .stat-change.up{color:var(--c-green-mid)}
+  .stat-change.neutral{color:var(--c-gray-500)}
 
-/* SLIP GAJI */
-.slip-header{background:#1a3a5c;color:#fff;padding:12px 14px;border-radius:4px 4px 0 0;font-family:Arial,sans-serif;display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
-.slip-header h3{font-size:11px;font-weight:700;color:#fff}
-.slip-header p{font-size:8.5px;color:rgba(255,255,255,.7);margin-top:2px}
-.slip-body{border:1px solid #ddd;border-top:none;font-family:Arial,sans-serif}
-.slip-row{display:flex;justify-content:space-between;padding:5px 14px;border-bottom:1px solid #eee;font-size:8.5px;color:#333}
-.slip-row.total{background:#f8f8f8;font-weight:700;font-size:9.5px;color:#1a3a5c}
-.slip-row.gaji-pokok{background:#eaf3fb}
-.slip-section{background:#f0f0f0;padding:4px 14px;font-size:8px;font-weight:700;text-transform:uppercase;color:#666;letter-spacing:.04em}
+  .dash-row{display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:20px}
+  .panel{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 20px}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .panel-title{font-size:14px;font-weight:700;color:var(--c-gray-900)}
+  .panel-action{font-size:12px;color:var(--c-red);cursor:pointer;font-weight:600}
 
-/* CONTRACT PREVIEW */
-.contract-intro{font-size:9.5px;font-family:Arial,sans-serif;color:#333;text-align:justify;margin-bottom:8px;line-height:1.7}
-.contract-pasal{font-size:10px;font-weight:700;font-family:Arial,sans-serif;color:#1a3a5c;margin:10px 0 4px;text-transform:uppercase}
-.contract-point{font-size:9px;font-family:Arial,sans-serif;color:#333;padding-left:14px;margin-bottom:3px;line-height:1.6}
-.contract-sign-row{display:flex;justify-content:space-between;margin-top:20px;font-family:Arial,sans-serif}
-.contract-sign-col{text-align:center;width:45%}
-.contract-sign-col p{font-size:9px;color:#333}
-.contract-sign-line{height:1px;background:#333;width:90%;margin:24px auto 5px}
+  .doc-list-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--c-gray-100)}
+  .doc-list-item:last-child{border-bottom:none}
+  .doc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .doc-icon.red{background:var(--c-red-light);color:var(--c-red)}
+  .doc-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .doc-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
+  .doc-meta{flex:1}
+  .doc-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
+  .doc-date{font-size:11px;color:var(--c-gray-500);margin-top:2px}
+  .doc-actions{display:flex;gap:6px}
+  .doc-actions button{background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:var(--radius-sm);color:var(--c-gray-500);font-size:15px;transition:all .15s}
+  .doc-actions button:hover{background:var(--c-gray-100);color:var(--c-gray-900)}
 
-/* TOAST */
-.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:7px}
-.toast{background:var(--i);color:#fff;padding:10px 16px;border-radius:10px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:var(--sh3);transform:translateX(110%);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
-.toast.show{transform:none}
+  .quick-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .quick-action{background:var(--c-gray-50);border:1px solid var(--c-gray-200);border-radius:var(--radius-md);padding:12px;cursor:pointer;transition:all .15s;text-align:center}
+  .quick-action:hover{border-color:var(--c-red);background:var(--c-red-light)}
+  .quick-action i{font-size:20px;color:var(--c-red);margin-bottom:5px}
+  .quick-action p{font-size:11px;font-weight:600;color:var(--c-gray-700)}
 
-/* STEPS */
-.steps-bar{display:flex;align-items:center;gap:0;padding:11px 22px;border-bottom:1px solid var(--bd);background:var(--bg);flex-shrink:0}
-.step{display:flex;align-items:center;gap:8px}
-.step-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--i4);flex-shrink:0;background:var(--s)}
-.step.done .step-dot{background:var(--gnm);border-color:var(--gnm);color:#fff}
-.step.active .step-dot{background:var(--r);border-color:var(--r);color:#fff}
-.step-label{font-size:11px;font-weight:600;color:var(--i4)}
-.step.active .step-label{color:var(--r)}
-.step.done .step-label{color:var(--gnm)}
-.step-line{flex:1;height:1px;background:var(--bd);margin:0 10px}
+  /* GENERATOR */
+  .gen-layout{max-width:900px;margin:0 auto;padding:28px 32px}
+  .gen-header{margin-bottom:28px}
+  .gen-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+  .gen-sub{font-size:13px;color:var(--c-gray-500)}
 
-@media(max-width:768px){
-.lsb{display:none}.gen-body{grid-template-columns:1fr}.prev-col{display:none}
-}
+  .gen-steps{display:flex;align-items:center;gap:0;margin-bottom:32px;background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 20px}
+  .gen-step{display:flex;align-items:center;gap:10px;flex:1}
+  .gen-step-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-gray-300);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--c-gray-500);flex-shrink:0}
+  .gen-step.active .gen-step-num{background:var(--c-red);border-color:var(--c-red);color:white}
+  .gen-step.done .gen-step-num{background:var(--c-green-mid);border-color:var(--c-green-mid);color:white}
+  .gen-step-info p{font-size:12px;font-weight:600;color:var(--c-gray-700)}
+  .gen-step-info span{font-size:11px;color:var(--c-gray-500)}
+  .gen-step-sep{width:32px;height:1px;background:var(--c-gray-200);flex-shrink:0}
+
+  .gen-body{display:grid;grid-template-columns:1fr 300px;gap:16px}
+  .gen-form{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:22px}
+  .gen-preview{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px;position:sticky;top:74px}
+
+  .form-group{margin-bottom:16px}
+  .form-label{font-size:12px;font-weight:600;color:var(--c-gray-700);margin-bottom:6px;display:block}
+  .form-input{width:100%;padding:8px 12px;border:1px solid var(--c-gray-200);border-radius:var(--radius-sm);font-size:13px;font-family:var(--font-body);color:var(--c-gray-900);background:var(--c-white);transition:all .15s;outline:none}
+  .form-input:focus{border-color:var(--c-red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
+  .form-input::placeholder{color:var(--c-gray-300)}
+  textarea.form-input{resize:vertical;min-height:80px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-hint{font-size:11px;color:var(--c-gray-500);margin-top:4px}
+  .form-divider{border:none;border-top:1px solid var(--c-gray-100);margin:20px 0}
+
+  .preview-doc{background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:16px 14px;font-size:10.5px;line-height:1.7;color:var(--c-gray-900);min-height:300px}
+  .preview-header{text-align:center;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--c-red)}
+  .preview-header .logo-placeholder{width:48px;height:48px;background:var(--c-gray-100);border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--c-gray-400)}
+  .preview-header h3{font-size:11px;font-weight:700;color:var(--c-gray-900)}
+  .preview-header p{font-size:9px;color:var(--c-gray-500)}
+  .preview-title{text-align:center;font-weight:700;font-size:11px;margin:10px 0;text-decoration:underline;text-transform:uppercase}
+  .preview-num{text-align:center;font-size:9px;color:var(--c-gray-500);margin-bottom:10px}
+  .preview-body p{margin-bottom:5px;font-size:9.5px}
+  .preview-sign{margin-top:20px;display:flex;justify-content:flex-end}
+  .preview-sign-box{text-align:center;width:100px}
+  .preview-sign-box p{font-size:9px}
+  .preview-sign-line{width:80px;height:1px;background:var(--c-gray-900);margin:24px auto 4px}
+
+  .preview-label{font-size:11px;font-weight:600;color:var(--c-gray-700);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .preview-badge{font-size:10px;background:var(--c-green-light);color:var(--c-green);padding:2px 8px;border-radius:20px;font-weight:600}
+
+  .export-row{display:flex;gap:8px;margin-top:14px}
+  .export-btn{flex:1;padding:9px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;font-family:var(--font-body)}
+  .export-btn.docx{background:var(--c-blue-light);color:var(--c-blue);border:1px solid #b5d4f4}
+  .export-btn.docx:hover{background:#c5dff8}
+  .export-btn.pdf{background:var(--c-red-light);color:var(--c-red);border:1px solid #f5c0bb}
+  .export-btn.pdf:hover{background:#fde0dd}
+
+  /* UPLOAD AREA */
+  .upload-area{border:2px dashed var(--c-gray-300);border-radius:var(--radius-md);padding:16px;text-align:center;cursor:pointer;transition:all .15s}
+  .upload-area:hover{border-color:var(--c-red);background:var(--c-red-light)}
+  .upload-area i{font-size:24px;color:var(--c-gray-400);margin-bottom:6px}
+  .upload-area p{font-size:12px;color:var(--c-gray-500)}
+
+  /* PRICING */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto}
+  .pricing-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-xl);padding:28px 24px}
+  .pricing-card.featured{border:2px solid var(--c-red);position:relative}
+  .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--c-red);color:white;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
+  .pricing-name{font-size:13px;font-weight:700;color:var(--c-gray-500);margin-bottom:12px}
+  .pricing-price{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--c-gray-900);margin-bottom:4px}
+  .pricing-price span{font-size:14px;font-weight:500;color:var(--c-gray-500)}
+  .pricing-desc{font-size:12px;color:var(--c-gray-500);margin-bottom:20px}
+  .pricing-features{list-style:none;margin-bottom:24px}
+  .pricing-features li{font-size:13px;color:var(--c-gray-700);padding:5px 0;display:flex;align-items:center;gap:8px}
+  .pricing-features li i{color:var(--c-green-mid);font-size:15px}
+  .pricing-features li.off i{color:var(--c-gray-300)}
+  .pricing-features li.off{color:var(--c-gray-400)}
+
+  /* BADGE */
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+  .badge.red{background:var(--c-red-light);color:var(--c-red)}
+  .badge.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
+  .badge.green{background:var(--c-green-light);color:var(--c-green)}
+  .badge.gold{background:var(--c-gold-light);color:var(--c-gold)}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--c-gray-900);color:white;padding:12px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:8px}
+  .toast.show{transform:translateY(0);opacity:1}
+
+  /* ADMIN */
+  .admin-table{width:100%;border-collapse:collapse}
+  .admin-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-gray-500);padding:8px 12px;border-bottom:1px solid var(--c-gray-200)}
+  .admin-table td{padding:10px 12px;border-bottom:1px solid var(--c-gray-100);font-size:13px;color:var(--c-gray-700)}
+  .admin-table tr:hover td{background:var(--c-gray-50)}
+
+  /* MODAL OVERLAY */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--c-white);border-radius:var(--radius-xl);width:560px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+  .modal-header{padding:20px 24px;border-bottom:1px solid var(--c-gray-200);display:flex;align-items:center;justify-content:space-between}
+  .modal-title{font-size:16px;font-weight:700;font-family:var(--font-display)}
+  .modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-gray-500);padding:4px}
+  .modal-close:hover{color:var(--c-gray-900)}
+  .modal-body{padding:24px}
+
+  /* JSON PREVIEW */
+  .json-box{background:var(--c-gray-900);color:#a8d5a2;border-radius:var(--radius-md);padding:14px;font-family:monospace;font-size:11px;line-height:1.7;overflow-x:auto;white-space:pre}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px;height:4px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:var(--c-gray-300);border-radius:4px}
+
+  /* RESPONSIVE */
+  @media(max-width:700px){
+    .hero h1{font-size:28px}
+    .hero-stats{gap:20px}
+    .dash-layout{grid-template-columns:1fr}
+    .dash-sidebar{display:none}
+    .gen-body{grid-template-columns:1fr}
+    .pricing-grid{grid-template-columns:1fr}
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .dash-row{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="logo" onclick="navTo('home')">
-    <div class="logo-m">AI</div>
-    <div class="logo-t">Dokumen<em>Indonesia</em></div>
+  <div class="nav-logo" onclick="showPage('landing')">
+    <div class="nav-logo-badge">AI</div>
+    <div class="nav-logo-text">Dokumen<span>Indonesia</span></div>
   </div>
   <div class="nav-links">
-    <button class="nl" id="nl-home" onclick="navTo('home')">Beranda</button>
-    <button class="nl on" id="nl-gen" onclick="navTo('gen')">Generator</button>
-    <button class="nl" id="nl-history" onclick="navTo('history')">Riwayat</button>
-    <button class="nl" id="nl-admin" onclick="navTo('admin')">Admin</button>
+    <button class="nav-link" onclick="showPage('landing')">Beranda</button>
+    <button class="nav-link" onclick="showPage('gallery')">Template</button>
+    <button class="nav-link" onclick="showPage('pricing')">Harga</button>
+    <button class="nav-link" onclick="showPage('dashboard')">Dashboard</button>
   </div>
-  <div class="nav-r">
-    <button class="ibt" onclick="toggleDark()" id="dk-btn" title="Dark mode"><i class="ti ti-moon"></i></button>
-    <button class="ibt" onclick="toggleJSON()" title="Lihat JSON"><i class="ti ti-code"></i></button>
-    <button class="btn btn-ghost btn-sm" onclick="exportDoc('DOCX')"><i class="ti ti-file-word"></i> DOCX</button>
-    <button class="btn btn-red btn-sm" onclick="exportDoc('PDF')"><i class="ti ti-file-type-pdf"></i> PDF</button>
+  <div class="nav-right">
+    <button class="btn btn-outline" onclick="showPage('dashboard')">Masuk</button>
+    <button class="btn btn-primary" onclick="showPage('generator')">Buat Dokumen</button>
   </div>
 </nav>
 
-<!-- SHELL: SIDEBAR + MAIN -->
-<div class="shell">
-
-  <!-- LEFT SIDEBAR -->
-  <div class="lsb">
-    <div class="lsb-search">
-      <div class="lsb-search-wrap">
-        <i class="ti ti-search"></i>
-        <input class="lsb-search-input" id="tmpl-search" placeholder="Cari template..." oninput="filterSidebar(this.value)">
+<!-- LANDING PAGE -->
+<div id="page-landing" class="page active">
+  <div class="hero">
+    <div class="hero-badge"><i class="ti ti-bolt"></i> Platform Dokumen #1 Indonesia</div>
+    <h1>Buat Dokumen Resmi Indonesia dalam <span>Hitungan Detik</span></h1>
+    <p>Generate surat, invoice, kontrak, dan dokumen lainnya secara otomatis dalam format DOCX/PDF siap pakai. Tanpa repot, tanpa error format.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary btn-lg" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Mulai Gratis</button>
+      <button class="btn btn-outline btn-lg" onclick="showPage('gallery')"><i class="ti ti-template"></i> Lihat Template</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">42+</div>
+        <div class="hero-stat-label">Template Dokumen</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">12K+</div>
+        <div class="hero-stat-label">Pengguna Aktif</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">98K+</div>
+        <div class="hero-stat-label">Dokumen Dibuat</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Kategori Dokumen</div>
       </div>
     </div>
-    <div class="lsb-scroll" id="sidebar-list"></div>
   </div>
 
-  <!-- MAIN AREA -->
-  <div class="main" id="main-area">
-
-    <!-- STEPS BAR -->
-    <div class="steps-bar">
-      <div class="step done" id="st1"><div class="step-dot"><i class="ti ti-check" style="font-size:11px"></i></div><div class="step-label">Pilih Template</div></div>
-      <div class="step-line"></div>
-      <div class="step active" id="st2"><div class="step-dot">2</div><div class="step-label">Isi Data</div></div>
-      <div class="step-line"></div>
-      <div class="step" id="st3"><div class="step-dot">3</div><div class="step-label">Preview & Export</div></div>
+  <!-- CATEGORIES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Kategori</div>
+      <div class="section-title">Semua Jenis Dokumen</div>
+      <div class="section-sub">Pilih kategori sesuai kebutuhan Anda</div>
     </div>
-
-    <!-- GEN TOPBAR -->
-    <div class="gen-top">
-      <div>
-        <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
-        <div class="gen-meta">
-          <span class="cpill cp-red" id="gen-cat">Surat Warga</span>
-          <span>Format resmi Indonesia</span>
-          <span>·</span>
-          <span>Auto nomor surat</span>
-        </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="showGallery('warga')">
+        <div class="cat-icon red"><i class="ti ti-home"></i></div>
+        <div class="cat-name">Surat Warga</div>
+        <div class="cat-count">13 template</div>
       </div>
-      <div style="display:flex;gap:7px;align-items:center">
-        <button class="btn btn-ghost btn-sm" onclick="resetForm()"><i class="ti ti-refresh"></i> Reset</button>
-        <button class="btn btn-red btn-sm" onclick="doGenerate()"><i class="ti ti-sparkles"></i> Generate</button>
+      <div class="cat-card" onclick="showGallery('bisnis')">
+        <div class="cat-icon blue"><i class="ti ti-building-store"></i></div>
+        <div class="cat-name">Bisnis</div>
+        <div class="cat-count">5 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('hr')">
+        <div class="cat-icon gold"><i class="ti ti-users"></i></div>
+        <div class="cat-name">HR & SDM</div>
+        <div class="cat-count">6 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('legal')">
+        <div class="cat-icon purple"><i class="ti ti-scale"></i></div>
+        <div class="cat-name">Legal</div>
+        <div class="cat-count">6 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('karier')">
+        <div class="cat-icon green"><i class="ti ti-briefcase"></i></div>
+        <div class="cat-name">Karier</div>
+        <div class="cat-count">4 template</div>
+      </div>
+      <div class="cat-card" onclick="showGallery('rtrw')">
+        <div class="cat-icon red"><i class="ti ti-map-pin"></i></div>
+        <div class="cat-name">RT/RW</div>
+        <div class="cat-count">8 template</div>
       </div>
     </div>
+  </div>
 
-    <!-- BODY SPLIT -->
-    <div class="gen-body">
-
-      <!-- FORM COLUMN -->
-      <div class="form-col" id="form-col"></div>
-
-      <!-- PREVIEW COLUMN -->
-      <div class="prev-col">
-        <div class="prev-head">
-          <span><i class="ti ti-file-text" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Preview</span>
-          <div class="live-pill"><div class="live-dot"></div>Live</div>
+  <!-- HOW IT WORKS -->
+  <div style="background:var(--c-white);border-top:1px solid var(--c-gray-200);border-bottom:1px solid var(--c-gray-200)">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-label">Cara Kerja</div>
+        <div class="section-title">Mudah dalam 3 Langkah</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-red-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-red)"><i class="ti ti-template"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-red);margin-bottom:4px">01</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Pilih Template</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Pilih dari 42+ template dokumen resmi Indonesia yang tersedia</div>
         </div>
-        <div class="prev-scroll">
-          <div class="doc-paper" id="doc-preview"></div>
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-blue-mid)"><i class="ti ti-forms"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-blue-mid);margin-bottom:4px">02</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Isi Formulir</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Isi data melalui form sederhana. Preview dokumen tampil real-time</div>
         </div>
-        <div class="prev-actions">
-          <div style="font-size:10px;color:var(--i4);text-align:center;margin-bottom:7px">Siap diexport</div>
-          <div class="exp-row">
-            <button class="exp-btn exp-docx" onclick="exportDoc('DOCX')"><i class="ti ti-file-word"></i> DOCX</button>
-            <button class="exp-btn exp-pdf" onclick="exportDoc('PDF')"><i class="ti ti-file-type-pdf"></i> PDF</button>
-          </div>
+        <div style="text-align:center;padding:20px">
+          <div style="width:56px;height:56px;background:var(--c-green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-green-mid)"><i class="ti ti-download"></i></div>
+          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-green-mid);margin-bottom:4px">03</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Download</div>
+          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Export ke DOCX atau PDF langsung. Simpan ke history untuk akses ulang</div>
         </div>
       </div>
+    </div>
+  </div>
 
+  <!-- PRICING TEASER -->
+  <div class="section" style="text-align:center">
+    <div class="section-label" style="text-align:center">Harga</div>
+    <div class="section-title">Gratis untuk Mulai</div>
+    <div class="section-sub">Upgrade ke Pro untuk fitur premium tanpa batas</div>
+    <div style="margin-top:20px">
+      <button class="btn btn-primary btn-lg" onclick="showPage('pricing')">Lihat Paket Harga</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST CONTAINER -->
-<div class="toast-wrap" id="toast-wrap"></div>
+<!-- TEMPLATE GALLERY -->
+<div id="page-gallery" class="page">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Template Gallery</div>
+      <div class="section-title">Pilih Template Dokumen</div>
+    </div>
+    <div class="filter-row" id="filter-row">
+      <div class="filter-pill active" onclick="filterCat('semua',this)">Semua</div>
+      <div class="filter-pill" onclick="filterCat('warga',this)">Surat Warga</div>
+      <div class="filter-pill" onclick="filterCat('bisnis',this)">Bisnis</div>
+      <div class="filter-pill" onclick="filterCat('hr',this)">HR & SDM</div>
+      <div class="filter-pill" onclick="filterCat('legal',this)">Legal</div>
+      <div class="filter-pill" onclick="filterCat('karier',this)">Karier</div>
+      <div class="filter-pill" onclick="filterCat('rtrw',this)">RT/RW</div>
+    </div>
+    <div class="tmpl-grid" id="tmpl-grid"></div>
+  </div>
+</div>
+
+<!-- GENERATOR -->
+<div id="page-generator" class="page">
+  <div class="gen-layout">
+    <div class="gen-header">
+      <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
+      <div class="gen-sub">Isi data di bawah untuk generate dokumen otomatis</div>
+    </div>
+    <div class="gen-steps">
+      <div class="gen-step done" id="step1">
+        <div class="gen-step-num"><i class="ti ti-check" style="font-size:12px"></i></div>
+        <div class="gen-step-info"><p>Pilih Template</p><span>Selesai</span></div>
+      </div>
+      <div class="gen-step-sep"></div>
+      <div class="gen-step active" id="step2">
+        <div class="gen-step-num">2</div>
+        <div class="gen-step-info"><p>Isi Data</p><span>Sedang berjalan</span></div>
+      </div>
+      <div class="gen-step-sep"></div>
+      <div class="gen-step" id="step3">
+        <div class="gen-step-num">3</div>
+        <div class="gen-step-info"><p>Preview & Export</p><span>Menunggu</span></div>
+      </div>
+    </div>
+    <div class="gen-body">
+      <div class="gen-form" id="gen-form-container">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div style="font-size:14px;font-weight:700">Data Dokumen</div>
+          <span class="badge green"><i class="ti ti-shield-check"></i> Format Resmi</span>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:20px">
+          <div class="upload-area" style="flex:1">
+            <i class="ti ti-photo"></i>
+            <p>Upload Logo</p>
+          </div>
+          <div class="upload-area" style="flex:1">
+            <i class="ti ti-writing"></i>
+            <p>Tanda Tangan</p>
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div class="form-group">
+          <label class="form-label">Nomor Surat</label>
+          <input class="form-input" id="f-nomor" value="001/RT.01/V/2026" oninput="updatePreview()">
+          <div class="form-hint"><i class="ti ti-info-circle" style="font-size:12px"></i> Auto-generated. Bisa diubah manual.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nama Pemohon</label>
+          <input class="form-input" id="f-nama" placeholder="cth: Budi Santoso" oninput="updatePreview()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">NIK</label>
+            <input class="form-input" id="f-nik" placeholder="16 digit NIK" maxlength="16" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tempat, Tgl Lahir</label>
+            <input class="form-input" id="f-ttl" placeholder="Jakarta, 01 Januari 1990" oninput="updatePreview()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Alamat Lengkap</label>
+          <input class="form-input" id="f-alamat" placeholder="Jl. Melati No.5, RT 01 RW 02, Kelurahan..." oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Keperluan / Tujuan Surat</label>
+          <textarea class="form-input" id="f-tujuan" placeholder="cth: Keperluan pembuatan KTP / Daftar BPJS..." oninput="updatePreview()"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Kota</label>
+            <input class="form-input" id="f-kota" placeholder="Jakarta" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal Surat</label>
+            <input class="form-input" type="date" id="f-tanggal" oninput="updatePreview()">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nama Ketua RT</label>
+            <input class="form-input" id="f-ketua" placeholder="Nama Ketua RT" oninput="updatePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jabatan</label>
+            <input class="form-input" id="f-jabatan" placeholder="Ketua RT 01/RW 02" oninput="updatePreview()">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-blue" onclick="generateJSON()"><i class="ti ti-code"></i> Lihat JSON</button>
+          <button class="btn btn-primary btn-lg" style="flex:1" onclick="markStep3()"><i class="ti ti-eye"></i> Preview & Export</button>
+        </div>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div class="gen-preview">
+        <div class="preview-label"><i class="ti ti-file-text"></i> Preview Live <span class="preview-badge">Real-time</span></div>
+        <div class="preview-doc" id="preview-doc">
+          <div class="preview-header">
+            <div class="logo-placeholder"><i class="ti ti-home"></i></div>
+            <h3>PEMERINTAH DESA / KELURAHAN</h3>
+            <p>RT 01 RW 02 — Jl. Contoh No.1 Jakarta</p>
+          </div>
+          <div class="preview-title">Surat Pengantar</div>
+          <div class="preview-num" id="prev-nomor">Nomor: 001/RT.01/V/2026</div>
+          <div class="preview-body">
+            <p>Yang bertanda tangan di bawah ini, Ketua RT 01 RW 02 menerangkan bahwa:</p>
+            <p><strong>Nama:</strong> <span id="prev-nama">-</span></p>
+            <p><strong>NIK:</strong> <span id="prev-nik">-</span></p>
+            <p><strong>TTL:</strong> <span id="prev-ttl">-</span></p>
+            <p><strong>Alamat:</strong> <span id="prev-alamat">-</span></p>
+            <br>
+            <p>Adalah benar warga kami dan diperlukan untuk keperluan:</p>
+            <p><strong><span id="prev-tujuan">-</span></strong></p>
+            <br>
+            <p>Demikian surat pengantar ini dibuat untuk digunakan sebagaimana mestinya.</p>
+          </div>
+          <div class="preview-sign">
+            <div class="preview-sign-box">
+              <p id="prev-kota-tgl">Jakarta, 12 Mei 2026</p>
+              <p id="prev-jabatan">Ketua RT 01/RW 02</p>
+              <div class="preview-sign-line"></div>
+              <p id="prev-ketua">( ________________ )</p>
+            </div>
+          </div>
+        </div>
+        <div class="export-row">
+          <button class="export-btn docx" onclick="showToast('📄 Mengunduh file DOCX...')"><i class="ti ti-file-word"></i> DOCX</button>
+          <button class="export-btn pdf" onclick="showToast('📋 Mengunduh file PDF...')"><i class="ti ti-file-type-pdf"></i> PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Menu Utama</div>
+        <div class="sidebar-item active"><i class="ti ti-dashboard"></i> Dashboard</div>
+        <div class="sidebar-item" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Buat Dokumen</div>
+        <div class="sidebar-item" onclick="showPage('gallery')"><i class="ti ti-template"></i> Template Gallery</div>
+        <div class="sidebar-item"><i class="ti ti-history"></i> Riwayat Dokumen <span class="sidebar-badge">8</span></div>
+        <div class="sidebar-item"><i class="ti ti-cloud-download"></i> Unduhan</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Akun</div>
+        <div class="sidebar-item"><i class="ti ti-user-circle"></i> Profil Saya</div>
+        <div class="sidebar-item" onclick="showPage('pricing')"><i class="ti ti-crown"></i> Upgrade Pro</div>
+        <div class="sidebar-item" onclick="showAdminPanel()"><i class="ti ti-settings"></i> Admin Panel</div>
+        <div class="sidebar-item"><i class="ti ti-logout"></i> Keluar</div>
+      </div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-greeting">
+        <h2>Selamat datang, Jiku 👋</h2>
+        <p>Hari ini Selasa, 12 Mei 2026 — PT Uniktif Media Indonesia</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-files"></i> Total Dokumen</div>
+          <div class="stat-val">28</div>
+          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +4 minggu ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-download"></i> Diunduh</div>
+          <div class="stat-val">61</div>
+          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +12 bulan ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-template"></i> Template Aktif</div>
+          <div class="stat-val">42</div>
+          <div class="stat-change neutral">6 kategori tersedia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-crown"></i> Paket</div>
+          <div class="stat-val" style="font-size:18px">Free</div>
+          <div class="stat-change" style="color:var(--c-red);cursor:pointer" onclick="showPage('pricing')">Upgrade ke Pro →</div>
+        </div>
+      </div>
+
+      <div class="dash-row">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Dokumen Terbaru</div>
+            <div class="panel-action">Lihat Semua</div>
+          </div>
+          <div id="doc-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Aksi Cepat</div>
+          </div>
+          <div class="quick-action-grid">
+            <div class="quick-action" onclick="openGenerator('Surat Domisili')">
+              <i class="ti ti-home"></i>
+              <p>Surat Domisili</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Invoice')">
+              <i class="ti ti-receipt"></i>
+              <p>Invoice</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Surat Lamaran')">
+              <i class="ti ti-briefcase"></i>
+              <p>Surat Lamaran</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Kontrak Kerja')">
+              <i class="ti ti-file-certificate"></i>
+              <p>Kontrak Kerja</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('NDA')">
+              <i class="ti ti-lock"></i>
+              <p>NDA</p>
+            </div>
+            <div class="quick-action" onclick="openGenerator('Slip Gaji')">
+              <i class="ti ti-coin"></i>
+              <p>Slip Gaji</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div id="page-pricing" class="page">
+  <div class="section" style="text-align:center;padding-bottom:20px">
+    <div class="section-label">Harga</div>
+    <div class="section-title">Pilih Paket yang Tepat</div>
+    <div class="section-sub">Mulai gratis, upgrade kapan saja</div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">GRATIS</div>
+        <div class="pricing-price">Rp 0<span>/bulan</span></div>
+        <div class="pricing-desc">Cocok untuk personal & percobaan</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> 5 dokumen/bulan</li>
+          <li><i class="ti ti-check"></i> Export DOCX</li>
+          <li><i class="ti ti-check"></i> Template dasar (20+)</li>
+          <li><i class="ti ti-check"></i> Preview dokumen</li>
+          <li class="off"><i class="ti ti-x"></i> Upload logo</li>
+          <li class="off"><i class="ti ti-x"></i> Tanda tangan digital</li>
+          <li class="off"><i class="ti ti-x"></i> Export PDF</li>
+          <li class="off"><i class="ti ti-x"></i> Cloud storage</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%">Mulai Gratis</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Paling Populer</div>
+        <div class="pricing-name">PRO</div>
+        <div class="pricing-price">Rp 49K<span>/bulan</span></div>
+        <div class="pricing-desc">Untuk UMKM, freelancer & startup</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> Unlimited dokumen</li>
+          <li><i class="ti ti-check"></i> Export DOCX + PDF</li>
+          <li><i class="ti ti-check"></i> Semua template (42+)</li>
+          <li><i class="ti ti-check"></i> Upload logo & tanda tangan</li>
+          <li><i class="ti ti-check"></i> Cloud storage 1GB</li>
+          <li><i class="ti ti-check"></i> Tanpa watermark</li>
+          <li><i class="ti ti-check"></i> History dokumen</li>
+          <li class="off"><i class="ti ti-x"></i> Multi-user team</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%" onclick="showToast('🚀 Redirecting ke halaman pembayaran...')">Upgrade Pro</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">BISNIS</div>
+        <div class="pricing-price">Rp 149K<span>/bulan</span></div>
+        <div class="pricing-desc">Untuk perusahaan & tim HR</div>
+        <ul class="pricing-features">
+          <li><i class="ti ti-check"></i> Semua fitur Pro</li>
+          <li><i class="ti ti-check"></i> Multi-user (5 akun)</li>
+          <li><i class="ti ti-check"></i> Template kustom</li>
+          <li><i class="ti ti-check"></i> Cloud storage 10GB</li>
+          <li><i class="ti ti-check"></i> Admin panel</li>
+          <li><i class="ti ti-check"></i> Branding perusahaan</li>
+          <li><i class="ti ti-check"></i> Prioritas support</li>
+          <li><i class="ti ti-check"></i> API access</li>
+        </ul>
+        <button class="btn btn-blue" style="width:100%" onclick="showToast('📞 Tim kami akan menghubungi Anda...')">Hubungi Tim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JSON MODAL -->
+<div class="modal-overlay" id="json-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-code"></i> Structured JSON — Template Engine</div>
+      <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--c-gray-500);margin-bottom:14px">Data ini di-inject ke template DOCX via Docxtemplater. Format konsisten, stabil, dan scalable.</p>
+      <div class="json-box" id="json-output"></div>
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn btn-primary" onclick="closeModal();showToast('📄 DOCX berhasil digenerate!')"><i class="ti ti-file-word"></i> Generate DOCX</button>
+        <button class="btn btn-outline" onclick="closeModal();showToast('📋 PDF berhasil digenerate!')"><i class="ti ti-file-type-pdf"></i> Generate PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal" style="width:680px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-settings"></i> Admin Panel</div>
+      <button class="modal-close" onclick="closeAdminModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Total User</div>
+          <div class="stat-val" style="font-size:20px">12,481</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Pro User</div>
+          <div class="stat-val" style="font-size:20px">1,840</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">Dokumen/Hari</div>
+          <div class="stat-val" style="font-size:20px">347</div>
+        </div>
+        <div class="stat-card" style="padding:12px 14px">
+          <div class="stat-label" style="font-size:10px">MRR</div>
+          <div class="stat-val" style="font-size:20px">90M</div>
+        </div>
+      </div>
+      <div class="panel-title" style="margin-bottom:12px">User Terbaru</div>
+      <table class="admin-table">
+        <thead><tr><th>Nama</th><th>Email</th><th>Paket</th><th>Dokumen</th><th>Status</th></tr></thead>
+        <tbody id="admin-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════ DATA ═══════════════
-const CATS = {
-  warga:{label:'Surat Warga',color:'cp-red',icon:'ti-home'},
-  bisnis:{label:'Bisnis',color:'cp-blue',icon:'ti-building-store'},
-  hr:{label:'HR & SDM',color:'cp-gold',icon:'ti-users'},
-  legal:{label:'Legal',color:'cp-purple',icon:'ti-scale'},
-  karier:{label:'Karier',color:'cp-green',icon:'ti-briefcase'},
-  rtrw:{label:'RT/RW',color:'cp-red',icon:'ti-map-pin'},
-};
-
 const TEMPLATES = [
-  // SURAT WARGA
-  {id:'pengantar_rt',name:'Surat Pengantar RT/RW',cat:'warga',free:true},
-  {id:'domisili',name:'Surat Domisili',cat:'warga',free:true},
-  {id:'ket_usaha',name:'Surat Keterangan Usaha',cat:'warga',free:true},
-  {id:'ket_mampu',name:'Surat Keterangan Tidak Mampu',cat:'warga',free:true},
-  {id:'kehilangan',name:'Surat Keterangan Kehilangan',cat:'warga',free:false},
-  {id:'kuasa',name:'Surat Kuasa',cat:'warga',free:true},
-  {id:'pernyataan',name:'Surat Pernyataan',cat:'warga',free:true},
-  {id:'nikah',name:'Surat Pengantar Nikah',cat:'warga',free:false},
-  {id:'izin_tmasuk',name:'Surat Izin Tidak Masuk',cat:'warga',free:true},
-  {id:'pindah',name:'Surat Pindah Domisili',cat:'warga',free:false},
-  {id:'permohonan',name:'Surat Permohonan',cat:'warga',free:true},
-  {id:'ket_kerja',name:'Surat Keterangan Kerja',cat:'warga',free:false},
-  {id:'izin_acara',name:'Surat Izin Acara',cat:'warga',free:false},
-  // BISNIS
-  {id:'invoice',name:'Invoice',cat:'bisnis',free:true},
-  {id:'quotation',name:'Quotation / Penawaran Harga',cat:'bisnis',free:true},
-  {id:'po',name:'Purchase Order',cat:'bisnis',free:false},
-  {id:'kwitansi',name:'Kwitansi',cat:'bisnis',free:true},
-  {id:'surat_jalan',name:'Surat Jalan',cat:'bisnis',free:false},
-  // HR
-  {id:'kontrak',name:'Kontrak Kerja',cat:'hr',free:false},
-  {id:'offering',name:'Offering Letter',cat:'hr',free:false},
-  {id:'warning',name:'Warning Letter',cat:'hr',free:false},
-  {id:'nda_kar',name:'NDA Karyawan',cat:'hr',free:false},
-  {id:'slip_gaji',name:'Slip Gaji',cat:'hr',free:false},
-  {id:'form_cuti',name:'Form Cuti',cat:'hr',free:true},
-  // LEGAL
-  {id:'nda',name:'NDA Agreement',cat:'legal',free:false},
-  {id:'mou',name:'MOU',cat:'legal',free:false},
-  {id:'pks',name:'Perjanjian Kerja Sama',cat:'legal',free:false},
-  {id:'freelance',name:'Perjanjian Freelance',cat:'legal',free:false},
-  {id:'hutang',name:'Perjanjian Hutang Piutang',cat:'legal',free:false},
-  {id:'sewa',name:'Perjanjian Sewa Rumah',cat:'legal',free:false},
-  // KARIER
-  {id:'cv_ats',name:'CV ATS',cat:'karier',free:true},
-  {id:'lamaran',name:'Surat Lamaran Kerja',cat:'karier',free:true},
-  {id:'resign',name:'Surat Pengunduran Diri',cat:'karier',free:true},
-  {id:'cover_letter',name:'Cover Letter',cat:'karier',free:false},
-  // RT/RW
-  {id:'rtrw_izin',name:'Surat Izin Acara RT/RW',cat:'rtrw',free:true},
-  {id:'rtrw_warga',name:'Surat Pengantar Warga RT',cat:'rtrw',free:true},
-  {id:'rtrw_ba',name:'Berita Acara Rapat RT',cat:'rtrw',free:true},
-  {id:'rtrw_ket',name:'Surat Keterangan Warga RT',cat:'rtrw',free:true},
-  {id:'rtrw_rek',name:'Surat Rekomendasi Warga',cat:'rtrw',free:false},
-  {id:'rtrw_buku',name:'Buku Tamu RT',cat:'rtrw',free:false},
-  {id:'rtrw_keluar',name:'Surat Izin Keluar Wilayah',cat:'rtrw',free:false},
-  {id:'rtrw_notulen',name:'Notulen Rapat Warga',cat:'rtrw',free:false},
+  {name:'Surat Pengantar RT/RW',cat:'warga',free:true},
+  {name:'Surat Domisili',cat:'warga',free:true},
+  {name:'Surat Keterangan Usaha',cat:'warga',free:true},
+  {name:'Surat Keterangan Tidak Mampu',cat:'warga',free:true},
+  {name:'Surat Keterangan Kehilangan',cat:'warga',free:false},
+  {name:'Surat Kuasa',cat:'warga',free:true},
+  {name:'Surat Pernyataan',cat:'warga',free:true},
+  {name:'Surat Pengantar Nikah',cat:'warga',free:false},
+  {name:'Surat Izin Acara',cat:'rtrw',free:true},
+  {name:'Surat Pindah Domisili',cat:'warga',free:false},
+  {name:'Surat Izin Tidak Masuk',cat:'warga',free:true},
+  {name:'Surat Permohonan',cat:'warga',free:true},
+  {name:'Surat Keterangan Kerja',cat:'warga',free:false},
+  {name:'CV ATS',cat:'karier',free:true},
+  {name:'Surat Lamaran Kerja',cat:'karier',free:true},
+  {name:'Surat Pengunduran Diri',cat:'karier',free:true},
+  {name:'Cover Letter',cat:'karier',free:false},
+  {name:'Invoice',cat:'bisnis',free:true},
+  {name:'Quotation / Penawaran Harga',cat:'bisnis',free:true},
+  {name:'Purchase Order',cat:'bisnis',free:false},
+  {name:'Kwitansi',cat:'bisnis',free:true},
+  {name:'Surat Jalan',cat:'bisnis',free:false},
+  {name:'Kontrak Kerja',cat:'hr',free:false},
+  {name:'Offering Letter',cat:'hr',free:false},
+  {name:'Warning Letter',cat:'hr',free:false},
+  {name:'NDA Karyawan',cat:'hr',free:false},
+  {name:'Slip Gaji',cat:'hr',free:false},
+  {name:'Form Cuti',cat:'hr',free:true},
+  {name:'NDA Agreement',cat:'legal',free:false},
+  {name:'MOU',cat:'legal',free:false},
+  {name:'Perjanjian Kerja Sama',cat:'legal',free:false},
+  {name:'Perjanjian Freelance',cat:'legal',free:false},
+  {name:'Perjanjian Hutang Piutang',cat:'legal',free:false},
+  {name:'Perjanjian Sewa Rumah',cat:'legal',free:false},
+  {name:'Surat Izin RT/RW',cat:'rtrw',free:true},
+  {name:'Surat Pengantar Warga RT',cat:'rtrw',free:true},
+  {name:'Berita Acara Rapat RT',cat:'rtrw',free:true},
+  {name:'Surat Keterangan Warga',cat:'rtrw',free:true},
+  {name:'Surat Rekomendasi Warga',cat:'rtrw',free:false},
+  {name:'Buku Tamu RT',cat:'rtrw',free:false},
 ];
 
-// ═══════════════ FORM DEFINITIONS ═══════════════
-const FORMS = {
-  // ── SURAT PENGANTAR RT/RW ──
-  pengantar_rt: {
-    upload: true,
-    sections: [
-      {title:'Data Organisasi', fields:[
-        {id:'nomor',label:'Nomor Surat',type:'text',val:'001/RT.01/V/2026',hint:'Auto-generated'},
-        {id:'org',label:'Nama RT/RW',type:'text',ph:'RT 01 RW 02, Kel. Menteng'},
-        {id:'alamat_org',label:'Alamat RT/RW',type:'text',ph:'Jl. Melati No.1, Jakarta Pusat'},
-      ]},
-      {title:'Data Pemohon', fields:[
-        {id:'nama',label:'Nama Lengkap',type:'text',ph:'Budi Santoso',req:true},
-        {id:'nik',label:'NIK',type:'text',ph:'3174xxxxxx',maxlen:16},
-        [{id:'jk',label:'Jenis Kelamin',type:'select',opts:['Laki-laki','Perempuan']},{id:'agama',label:'Agama',type:'select',opts:['Islam','Kristen','Katolik','Hindu','Buddha','Konghucu']}],
-        [{id:'ttl1',label:'Tempat Lahir',type:'text',ph:'Jakarta'},{id:'ttl2',label:'Tanggal Lahir',type:'date'}],
-        {id:'pekerjaan',label:'Pekerjaan',type:'text',ph:'Wiraswasta'},
-        {id:'alamat',label:'Alamat',type:'textarea',ph:'Jl. Melati No.5, RT 01 RW 02...'},
-      ]},
-      {title:'Keperluan', fields:[
-        {id:'tujuan',label:'Keperluan Surat',type:'textarea',ph:'Pembuatan KTP / Daftar BPJS...'},
-        {id:'kepada',label:'Ditujukan Kepada',type:'text',ph:'Kepala Kelurahan Menteng'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal Surat',type:'date'}],
-        [{id:'ketua',label:'Nama Ketua RT',type:'text',ph:'Nama Ketua RT'},{id:'jabatan',label:'Jabatan',type:'text',ph:'Ketua RT 01/RW 02'}],
-      ]},
-    ]
-  },
+const RECENT_DOCS = [
+  {name:'Invoice PT Uniktif — April 2026',cat:'bisnis',date:'08 Mei 2026',icon:'red'},
+  {name:'Surat Pengantar — Karyawan Baru',cat:'warga',date:'05 Mei 2026',icon:'blue'},
+  {name:'NDA Karyawan — Dev Team',cat:'hr',date:'02 Mei 2026',icon:'gold'},
+  {name:'Surat Domisili — Koordinator',cat:'warga',date:'28 Apr 2026',icon:'blue'},
+  {name:'Kontrak Freelance — Barito Pacific',cat:'legal',date:'22 Apr 2026',icon:'red'},
+];
 
-  // ── DOMISILI ──
-  domisili: {
-    upload: true,
-    sections: [
-      {title:'Kop Surat', fields:[
-        {id:'nomor',label:'Nomor Surat',type:'text',val:'002/KEL/V/2026'},
-        {id:'org',label:'Nama Kelurahan/Desa',type:'text',ph:'Kelurahan Menteng'},
-        {id:'alamat_org',label:'Alamat Kantor',type:'text',ph:'Jl. Menteng No.1, Jakarta Pusat'},
-      ]},
-      {title:'Data Pemohon', fields:[
-        {id:'nama',label:'Nama Lengkap',type:'text',ph:'Siti Rahayu',req:true},
-        {id:'nik',label:'NIK',type:'text',ph:'3174xxxxxx',maxlen:16},
-        [{id:'jk',label:'Jenis Kelamin',type:'select',opts:['Laki-laki','Perempuan']},{id:'agama',label:'Agama',type:'select',opts:['Islam','Kristen','Katolik','Hindu','Buddha','Konghucu']}],
-        [{id:'ttl1',label:'Tempat Lahir',type:'text',ph:'Jakarta'},{id:'ttl2',label:'Tanggal Lahir',type:'date'}],
-        {id:'pekerjaan',label:'Pekerjaan',type:'text',ph:'Karyawan Swasta'},
-        {id:'alamat',label:'Alamat Domisili',type:'textarea',ph:'Jl. Kenanga No.3, RT 02 RW 05...'},
-        {id:'lama_tinggal',label:'Lama Berdomisili',type:'text',ph:'3 tahun'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal Surat',type:'date'}],
-        [{id:'ketua',label:'Nama Pejabat',type:'text',ph:'Nama Lurah'},{id:'jabatan',label:'Jabatan',type:'text',ph:'Lurah Menteng'}],
-        {id:'nip',label:'NIP',type:'text',ph:'198001012005011001'},
-      ]},
-    ]
-  },
+const ADMIN_USERS = [
+  {name:'Rina Wahyuni',email:'rina@gmail.com',plan:'Pro',docs:24,status:'Aktif'},
+  {name:'Budi Santoso',email:'budi.s@umkm.id',plan:'Gratis',docs:7,status:'Aktif'},
+  {name:'Siti Rahayu',email:'siti@company.co.id',plan:'Bisnis',docs:156,status:'Aktif'},
+  {name:'Ahmad Fauzi',email:'ahmad.f@mail.com',plan:'Gratis',docs:3,status:'Aktif'},
+  {name:'Dewi Kusuma',email:'dewi@startup.id',plan:'Pro',docs:41,status:'Aktif'},
+];
 
-  // ── INVOICE ──
-  invoice: {
-    upload: true,
-    invoiceMode: true,
-    sections: [
-      {title:'Data Perusahaan / Penjual', fields:[
-        {id:'from_company',label:'Nama Perusahaan / Nama',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'from_alamat',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta Selatan'},
-        [{id:'from_telp',label:'Telepon',type:'text',ph:'+62 21 xxx xxxx'},{id:'from_email',label:'Email',type:'text',ph:'billing@uniktif.co.id'}],
-        {id:'from_bank',label:'Info Rekening',type:'text',ph:'BCA 1234567890 a/n PT Uniktif Media'},
-      ]},
-      {title:'Data Invoice', fields:[
-        [{id:'inv_no',label:'Nomor Invoice',type:'text',val:'INV/2026/05/001'},{id:'inv_tanggal',label:'Tanggal Invoice',type:'date'}],
-        [{id:'inv_jatuh',label:'Jatuh Tempo',type:'date'},{id:'inv_mata',label:'Mata Uang',type:'select',opts:['IDR','USD','SGD']}],
-      ]},
-      {title:'Ditagihkan Kepada (Bill To)', fields:[
-        {id:'to_company',label:'Nama Perusahaan / Client',type:'text',ph:'PT Barito Pacific Tbk'},
-        {id:'to_alamat',label:'Alamat',type:'text',ph:'Jl. SCBD Lot 35, Jakarta'},
-        [{id:'to_cp',label:'Contact Person',type:'text',ph:'Bapak/Ibu...'},{id:'to_email',label:'Email',type:'text',ph:'finance@barito.co.id'}],
-      ]},
-      {title:'Catatan / Notes', fields:[
-        {id:'notes',label:'Catatan Tambahan',type:'textarea',ph:'Terima kasih atas kepercayaan Anda...'},
-        {id:'terms',label:'Terms & Conditions',type:'text',ph:'Pembayaran maks 14 hari setelah invoice'},
-      ]},
-    ]
-  },
-
-  // ── KONTRAK KERJA ──
-  kontrak: {
-    upload: true,
-    sections: [
-      {title:'Data Perusahaan (Pihak I)', fields:[
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'perusahaan_alamat',label:'Alamat Perusahaan',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-        [{id:'hrdir',label:'Diwakili Oleh',type:'text',ph:'Nama HRD / Direktur'},{id:'hrjabatan',label:'Jabatan',type:'text',ph:'HR Manager'}],
-      ]},
-      {title:'Data Karyawan (Pihak II)', fields:[
-        {id:'nama',label:'Nama Karyawan',type:'text',ph:'Budi Santoso',req:true},
-        {id:'nik',label:'NIK KTP',type:'text',ph:'3174xxxxxx',maxlen:16},
-        [{id:'ttl1',label:'Tempat Lahir',type:'text',ph:'Jakarta'},{id:'ttl2',label:'Tanggal Lahir',type:'date'}],
-        {id:'alamat',label:'Alamat',type:'textarea',ph:'Jl. Melati No.5, Jakarta'},
-      ]},
-      {title:'Detail Kontrak', fields:[
-        {id:'posisi',label:'Posisi / Jabatan',type:'text',ph:'Frontend Developer'},
-        {id:'departemen',label:'Departemen',type:'text',ph:'Engineering'},
-        [{id:'tgl_mulai',label:'Tanggal Mulai',type:'date'},{id:'tgl_selesai',label:'Tanggal Selesai',type:'date'}],
-        {id:'jenis',label:'Jenis Kontrak',type:'select',opts:['PKWT (Kontrak)','PKWTT (Tetap)','Magang','Part-time']},
-        {id:'gaji',label:'Gaji Pokok',type:'text',ph:'Rp 8.000.000'},
-        {id:'tunjangan',label:'Tunjangan',type:'text',ph:'Transport, Makan, BPJS'},
-        {id:'probasi',label:'Masa Probasi',type:'text',ph:'3 bulan'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal Kontrak',type:'date'}],
-      ]},
-    ]
-  },
-
-  // ── SLIP GAJI ──
-  slip_gaji: {
-    upload: true,
-    sections: [
-      {title:'Data Perusahaan', fields:[
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'alamat_company',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-      ]},
-      {title:'Data Karyawan', fields:[
-        {id:'nama',label:'Nama Karyawan',type:'text',ph:'Budi Santoso',req:true},
-        [{id:'nip',label:'ID Karyawan',type:'text',ph:'EMP-2024-001'},{id:'posisi',label:'Jabatan',type:'text',ph:'Frontend Developer'}],
-        [{id:'departemen',label:'Departemen',type:'text',ph:'Engineering'},{id:'periode',label:'Periode Gaji',type:'text',ph:'April 2026'}],
-      ]},
-      {title:'Komponen Gaji', fields:[
-        {id:'gaji_pokok',label:'Gaji Pokok',type:'text',ph:'8.000.000'},
-        {id:'tunj_transport',label:'Tunjangan Transport',type:'text',ph:'500.000'},
-        {id:'tunj_makan',label:'Tunjangan Makan',type:'text',ph:'500.000'},
-        {id:'tunj_lain',label:'Tunjangan Lainnya',type:'text',ph:'0'},
-        {id:'bonus',label:'Bonus / Insentif',type:'text',ph:'0'},
-      ]},
-      {title:'Potongan', fields:[
-        {id:'pot_bpjs_kes',label:'BPJS Kesehatan',type:'text',ph:'100.000'},
-        {id:'pot_bpjs_tk',label:'BPJS Ketenagakerjaan',type:'text',ph:'200.000'},
-        {id:'pot_pph21',label:'PPh 21',type:'text',ph:'0'},
-        {id:'pot_lain',label:'Potongan Lainnya',type:'text',ph:'0'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-        {id:'hrname',label:'Nama HRD',type:'text',ph:'Nama HR Manager'},
-      ]},
-    ]
-  },
-
-  // ── NDA AGREEMENT ──
-  nda: {
-    upload: true,
-    sections: [
-      {title:'Pihak Pertama (Perusahaan)', fields:[
-        {id:'p1_company',label:'Nama Perusahaan / Individu',type:'text',ph:'PT Uniktif Media Indonesia'},
-        [{id:'p1_diwakili',label:'Diwakili Oleh',type:'text',ph:'Nama Direktur'},{id:'p1_jabatan',label:'Jabatan',type:'text',ph:'Direktur Utama'}],
-        {id:'p1_alamat',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-      ]},
-      {title:'Pihak Kedua (Penerima Info)', fields:[
-        {id:'p2_company',label:'Nama Perusahaan / Individu',type:'text',ph:'PT Mitra Teknologi'},
-        [{id:'p2_diwakili',label:'Diwakili Oleh',type:'text',ph:'Nama Direktur'},{id:'p2_jabatan',label:'Jabatan',type:'text',ph:'CEO'}],
-        {id:'p2_alamat',label:'Alamat',type:'text',ph:'Jl. SCBD Lot 35, Jakarta'},
-      ]},
-      {title:'Detail Perjanjian NDA', fields:[
-        {id:'tujuan',label:'Tujuan Kerja Sama',type:'textarea',ph:'Diskusi kemitraan pengembangan platform digital...'},
-        {id:'durasi',label:'Masa Berlaku NDA',type:'text',ph:'2 tahun sejak tanggal penandatanganan'},
-        {id:'jenis_info',label:'Jenis Informasi Rahasia',type:'textarea',ph:'Data teknis, strategi bisnis, informasi keuangan, source code...'},
-        {id:'pengecualian',label:'Pengecualian (opsional)',type:'textarea',ph:'Informasi yang sudah menjadi domain publik...'},
-        {id:'hukum',label:'Hukum yang Berlaku',type:'text',val:'Hukum Negara Republik Indonesia'},
-        {id:'denda',label:'Sanksi Pelanggaran',type:'text',ph:'Rp 500.000.000 atau proses hukum perdata'},
-      ]},
-      {title:'Penandatanganan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-      ]},
-    ]
-  },
-
-  // ── SURAT LAMARAN KERJA ──
-  lamaran: {
-    upload: false,
-    sections: [
-      {title:'Data Pelamar', fields:[
-        {id:'nama',label:'Nama Lengkap',type:'text',ph:'Budi Santoso',req:true},
-        {id:'alamat',label:'Alamat',type:'textarea',ph:'Jl. Melati No.5, Jakarta Selatan'},
-        [{id:'telp',label:'Nomor HP',type:'text',ph:'+62 812 xxxx xxxx'},{id:'email',label:'Email',type:'text',ph:'budi@email.com'}],
-      ]},
-      {title:'Data Lamaran', fields:[
-        {id:'posisi',label:'Posisi yang Dilamar',type:'text',ph:'Frontend Developer'},
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Teknologi Maju'},
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-        {id:'sumber',label:'Sumber Informasi Lowongan',type:'text',ph:'LinkedIn / JobStreet / Referensi...'},
-      ]},
-      {title:'Isi Lamaran', fields:[
-        {id:'pendidikan',label:'Pendidikan Terakhir',type:'text',ph:'S1 Teknik Informatika, Universitas Indonesia'},
-        {id:'pengalaman',label:'Pengalaman Kerja',type:'textarea',ph:'3 tahun di bidang frontend development...'},
-        {id:'keahlian',label:'Keahlian',type:'textarea',ph:'React.js, TypeScript, TailwindCSS, Node.js...'},
-        {id:'motivasi',label:'Motivasi / Penutup',type:'textarea',ph:'Saya tertarik bergabung karena...'},
-      ]},
-    ]
-  },
-
-  // ── SLIP RESIGN ──
-  resign: {
-    upload: false,
-    sections: [
-      {title:'Data Pengirim', fields:[
-        {id:'nama',label:'Nama Lengkap',type:'text',ph:'Budi Santoso',req:true},
-        {id:'posisi',label:'Jabatan Saat Ini',type:'text',ph:'Frontend Developer'},
-        {id:'departemen',label:'Departemen',type:'text',ph:'Engineering'},
-        {id:'nip',label:'ID Karyawan',type:'text',ph:'EMP-2024-001'},
-      ]},
-      {title:'Data Surat', fields:[
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'kepada',label:'Kepada (Atasan)',type:'text',ph:'Bapak/Ibu HR Manager'},
-        [{id:'tgl_surat',label:'Tanggal Surat',type:'date'},{id:'tgl_efektif',label:'Tanggal Efektif Resign',type:'date'}],
-      ]},
-      {title:'Isi Surat', fields:[
-        {id:'alasan',label:'Alasan Pengunduran Diri',type:'textarea',ph:'Saya ingin mengembangkan karier di bidang lain...'},
-        {id:'ucapan',label:'Ucapan Terima Kasih (opsional)',type:'textarea',ph:'Saya sangat bersyukur atas kesempatan belajar selama ini...'},
-      ]},
-    ]
-  },
-
-  // ── KWITANSI ──
-  kwitansi: {
-    upload: true,
-    sections: [
-      {title:'Data Penerima Pembayaran', fields:[
-        {id:'from_name',label:'Nama Penerima',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'from_alamat',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-      ]},
-      {title:'Data Kwitansi', fields:[
-        {id:'nomor',label:'Nomor Kwitansi',type:'text',val:'KWT/2026/05/001'},
-        [{id:'tanggal',label:'Tanggal',type:'date'},{id:'jumlah',label:'Jumlah (Rp)',type:'text',ph:'5.000.000'}],
-        {id:'dari',label:'Diterima Dari',type:'text',ph:'PT Barito Pacific Tbk'},
-        {id:'untuk',label:'Untuk Pembayaran',type:'textarea',ph:'Jasa pembuatan website corporate Barito Pacific...'},
-        {id:'terbilang',label:'Terbilang',type:'text',ph:'Lima Juta Rupiah'},
-        {id:'metode',label:'Metode Pembayaran',type:'select',opts:['Transfer Bank','Tunai','QRIS','Cek/Giro']},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tgl_ttd',label:'Tanggal TTD',type:'date'}],
-        {id:'nama_ttd',label:'Nama Penandatangan',type:'text',ph:'Nama Penerima'},
-        {id:'jabatan_ttd',label:'Jabatan',type:'text',ph:'Finance Manager'},
-      ]},
-    ]
-  },
-
-  // ── OFFERING LETTER ──
-  offering: {
-    upload: true,
-    sections: [
-      {title:'Data Perusahaan', fields:[
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'alamat',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-      ]},
-      {title:'Data Kandidat', fields:[
-        {id:'nama',label:'Nama Kandidat',type:'text',ph:'Budi Santoso',req:true},
-        {id:'alamat_kandidat',label:'Alamat Kandidat',type:'text',ph:'Jl. Melati No.5, Jakarta'},
-        {id:'email',label:'Email Kandidat',type:'text',ph:'budi@email.com'},
-      ]},
-      {title:'Detail Penawaran', fields:[
-        {id:'posisi',label:'Posisi',type:'text',ph:'Frontend Developer'},
-        {id:'departemen',label:'Departemen',type:'text',ph:'Engineering'},
-        [{id:'tgl_mulai',label:'Tanggal Mulai',type:'date'},{id:'jenis',label:'Jenis',type:'select',opts:['Full-time','Part-time','Kontrak','Magang']}],
-        {id:'gaji',label:'Gaji Pokok',type:'text',ph:'Rp 8.000.000 / bulan'},
-        {id:'tunjangan',label:'Tunjangan & Benefit',type:'textarea',ph:'BPJS Kesehatan & Ketenagakerjaan, Transport, Makan...'},
-        {id:'probasi',label:'Masa Probasi',type:'text',ph:'3 bulan'},
-        {id:'deadline',label:'Deadline Konfirmasi',type:'date'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal Surat',type:'date'}],
-        [{id:'hrname',label:'Nama HR',type:'text',ph:'Nama HR Manager'},{id:'hrjabatan',label:'Jabatan',type:'text',ph:'HR Manager'}],
-      ]},
-    ]
-  },
-
-  // ── WARNING LETTER ──
-  warning: {
-    upload: true,
-    sections: [
-      {title:'Data Perusahaan', fields:[
-        {id:'company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        {id:'nomor',label:'Nomor Surat',type:'text',val:'SP-1/HR/V/2026'},
-      ]},
-      {title:'Data Karyawan', fields:[
-        {id:'nama',label:'Nama Karyawan',type:'text',ph:'Nama Karyawan',req:true},
-        {id:'nip',label:'ID Karyawan',type:'text',ph:'EMP-2024-001'},
-        {id:'posisi',label:'Jabatan',type:'text',ph:'Staff'},
-        {id:'departemen',label:'Departemen',type:'text',ph:'Departemen'},
-      ]},
-      {title:'Detail Peringatan', fields:[
-        {id:'jenis',label:'Jenis Surat Peringatan',type:'select',opts:['Surat Peringatan 1 (SP-1)','Surat Peringatan 2 (SP-2)','Surat Peringatan 3 (SP-3) — Final']},
-        {id:'pelanggaran',label:'Uraian Pelanggaran',type:'textarea',ph:'Terlambat masuk kerja lebih dari 3 kali dalam sebulan...'},
-        {id:'tgl_kejadian',label:'Tanggal Kejadian',type:'date'},
-        {id:'sanksi',label:'Sanksi / Konsekuensi',type:'textarea',ph:'Jika terulang, akan dikenakan tindakan lebih lanjut sesuai peraturan...'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-        [{id:'hrname',label:'Nama HR',type:'text',ph:'HR Manager'},{id:'hrjabatan',label:'Jabatan',type:'text',ph:'HR Manager'}],
-      ]},
-    ]
-  },
-
-  // ── MOU ──
-  mou: {
-    upload: true,
-    sections: [
-      {title:'Pihak Pertama', fields:[
-        {id:'p1_company',label:'Nama Perusahaan',type:'text',ph:'PT Uniktif Media Indonesia'},
-        [{id:'p1_diwakili',label:'Diwakili Oleh',type:'text',ph:'Nama Direktur'},{id:'p1_jabatan',label:'Jabatan',type:'text',ph:'Direktur'}],
-        {id:'p1_alamat',label:'Alamat',type:'text',ph:'Jl. Sudirman No.10, Jakarta'},
-      ]},
-      {title:'Pihak Kedua', fields:[
-        {id:'p2_company',label:'Nama Perusahaan',type:'text',ph:'PT Pertamina (Persero)'},
-        [{id:'p2_diwakili',label:'Diwakili Oleh',type:'text',ph:'Nama Direktur'},{id:'p2_jabatan',label:'Jabatan',type:'text',ph:'VP IT'}],
-        {id:'p2_alamat',label:'Alamat',type:'text',ph:'Jl. Medan Merdeka Timur No.1A, Jakarta'},
-      ]},
-      {title:'Detail MOU', fields:[
-        {id:'perihal',label:'Perihal Kerja Sama',type:'text',ph:'Pengembangan Sistem Informasi Digital'},
-        {id:'ruang_lingkup',label:'Ruang Lingkup',type:'textarea',ph:'Pengembangan dan implementasi platform digital...'},
-        {id:'masa_berlaku',label:'Masa Berlaku',type:'text',ph:'2 tahun sejak penandatanganan'},
-        {id:'nilai',label:'Estimasi Nilai Kerja Sama (opsional)',type:'text',ph:'Rp 2.000.000.000'},
-      ]},
-      {title:'Penandatanganan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-      ]},
-    ]
-  },
-
-  // ── FORM CUTI ──
-  form_cuti: {
-    upload: false,
-    sections: [
-      {title:'Data Karyawan', fields:[
-        {id:'nama',label:'Nama Karyawan',type:'text',ph:'Budi Santoso',req:true},
-        {id:'nip',label:'ID Karyawan',type:'text',ph:'EMP-2024-001'},
-        [{id:'posisi',label:'Jabatan',type:'text',ph:'Developer'},{id:'departemen',label:'Departemen',type:'text',ph:'Engineering'}],
-      ]},
-      {title:'Detail Cuti', fields:[
-        {id:'jenis_cuti',label:'Jenis Cuti',type:'select',opts:['Cuti Tahunan','Cuti Sakit','Cuti Melahirkan','Cuti Menikah','Cuti Duka','Cuti Besar','Cuti di Luar Tanggungan']},
-        [{id:'tgl_mulai',label:'Tanggal Mulai',type:'date'},{id:'tgl_selesai',label:'Tanggal Selesai',type:'date'}],
-        {id:'jumlah_hari',label:'Jumlah Hari Cuti',type:'text',ph:'3 hari'},
-        {id:'keterangan',label:'Keterangan / Alasan',type:'textarea',ph:'Mengurus keperluan keluarga...'},
-        {id:'atasan',label:'Nama Atasan Langsung',type:'text',ph:'Nama Manager'},
-      ]},
-    ]
-  },
-
-  // ── SURAT KUASA ──
-  kuasa: {
-    upload: true,
-    sections: [
-      {title:'Pemberi Kuasa', fields:[
-        {id:'pemberi_nama',label:'Nama Pemberi Kuasa',type:'text',ph:'Budi Santoso',req:true},
-        {id:'pemberi_nik',label:'NIK',type:'text',ph:'3174xxxxxx',maxlen:16},
-        {id:'pemberi_alamat',label:'Alamat',type:'text',ph:'Jl. Melati No.5, Jakarta'},
-        {id:'pemberi_telp',label:'No. HP',type:'text',ph:'+62 812 xxxx xxxx'},
-      ]},
-      {title:'Penerima Kuasa', fields:[
-        {id:'penerima_nama',label:'Nama Penerima Kuasa',type:'text',ph:'Siti Rahayu',req:true},
-        {id:'penerima_nik',label:'NIK',type:'text',ph:'3174xxxxxx',maxlen:16},
-        {id:'penerima_alamat',label:'Alamat',type:'text',ph:'Jl. Kenanga No.3, Jakarta'},
-        {id:'hubungan',label:'Hubungan',type:'text',ph:'Istri / Saudara / Karyawan...'},
-      ]},
-      {title:'Detail Kuasa', fields:[
-        {id:'keperluan',label:'Hal yang Dikuasakan',type:'textarea',ph:'Mengambil dokumen akta tanah di Kantor BPN...'},
-        {id:'batas',label:'Batas Waktu Kuasa',type:'text',ph:'14 hari sejak surat ini dibuat'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-      ]},
-    ]
-  },
-};
-
-// ── FALLBACK form untuk template yang belum punya definisi ──
-function getFallbackForm(tmpl) {
-  return {
-    upload: true,
-    sections: [
-      {title:'Kop Surat', fields:[
-        {id:'nomor',label:'Nomor Surat',type:'text',val:'001/DOC/V/2026'},
-        {id:'org',label:'Nama Institusi/Perusahaan',type:'text',ph:'Nama Perusahaan / RT / Kantor'},
-        {id:'alamat_org',label:'Alamat',type:'text',ph:'Alamat lengkap'},
-      ]},
-      {title:'Data Utama', fields:[
-        {id:'nama',label:'Nama',type:'text',ph:'Nama lengkap',req:true},
-        {id:'keterangan',label:'Keterangan / Isi Utama',type:'textarea',ph:'Isi dokumen...'},
-      ]},
-      {title:'Penandatangan', fields:[
-        [{id:'kota',label:'Kota',type:'text',ph:'Jakarta'},{id:'tanggal',label:'Tanggal',type:'date'}],
-        [{id:'ketua',label:'Nama Penandatangan',type:'text',ph:'Nama'},{id:'jabatan',label:'Jabatan',type:'text',ph:'Jabatan'}],
-      ]},
-    ]
-  };
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
 }
 
-// ═══════════════ STATE ═══════════════
-let currentTmpl = TEMPLATES[0];
-let invItems = [{desc:'',qty:1,harga:0}];
-let jsonOpen = false;
-let step3done = false;
-
-// ═══════════════ SIDEBAR RENDER ═══════════════
-function buildSidebar(search='') {
-  const cats = ['warga','bisnis','hr','legal','karier','rtrw'];
-  let html = '';
-  cats.forEach(cat => {
-    const items = TEMPLATES.filter(t => t.cat===cat && t.name.toLowerCase().includes(search.toLowerCase()));
-    if(!items.length) return;
-    html += `<div class="lsb-cat">${CATS[cat].label}</div>`;
-    items.forEach(t => {
-      html += `<div class="lsb-item ${t.id===currentTmpl.id?'on':''}" onclick="selectTemplate('${t.id}')">
-        <i class="ti ${CATS[t.cat].icon}"></i>
-        <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.name}</span>
-        <span class="badge-pill ${t.free?'bp-free':'bp-pro'}">${t.free?'Free':'Pro'}</span>
-      </div>`;
-    });
+function showGallery(cat){
+  filterCat(cat, null);
+  showPage('gallery');
+  document.querySelectorAll('.filter-pill').forEach(p=>{
+    p.classList.remove('active');
+    if(p.textContent.toLowerCase().includes(cat) || (cat==='warga' && p.textContent==='Surat Warga')) p.classList.add('active');
   });
-  document.getElementById('sidebar-list').innerHTML = html;
 }
 
-function filterSidebar(val) { buildSidebar(val); }
-
-// ═══════════════ FORM RENDER ═══════════════
-function selectTemplate(id) {
-  currentTmpl = TEMPLATES.find(t=>t.id===id)||TEMPLATES[0];
-  step3done=false;
-  const s3=document.getElementById('st3');s3.className='step';s3.querySelector('.step-dot').textContent='3';
-  const s2=document.getElementById('st2');s2.className='step active';s2.querySelector('.step-dot').textContent='2';
-  renderForm();
-  buildSidebar(document.getElementById('tmpl-search').value);
-  document.getElementById('gen-title').textContent=currentTmpl.name;
-  const cat=CATS[currentTmpl.cat];
-  const pill=document.getElementById('gen-cat');
-  pill.textContent=cat.label;pill.className='cpill '+cat.color;
-  updatePreview();
-}
-
-function renderForm() {
-  const def = FORMS[currentTmpl.id] || getFallbackForm(currentTmpl);
-  let html = '';
-
-  // Invoice mode: items table
-  if(def.invoiceMode) {
-    html += renderInvoiceExtras();
-  }
-
-  if(def.upload) {
-    html += `<div class="fsec">Identitas & Upload</div>
-    <div class="upload-row">
-      <div class="upload-z" onclick="toast('📤','Pilih file logo...')">
-        <i class="ti ti-photo"></i><p>Upload Logo</p><span>PNG/JPG maks 2MB</span>
+function renderTemplates(cat='semua'){
+  const grid = document.getElementById('tmpl-grid');
+  const filtered = cat==='semua' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===cat);
+  grid.innerHTML = filtered.map(t=>`
+    <div class="tmpl-card" onclick="openGenerator('${t.name}')">
+      <div class="tmpl-preview" style="background:${t.cat==='bisnis'?'#eaf3fb':t.cat==='legal'?'#f0eeff':t.cat==='hr'?'#fef9ec':t.cat==='karier'?'#d4edda':'#fef5f4'}">
+        <div class="tmpl-preview-doc">
+          <div class="tmpl-preview-line title"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line accent"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line short"></div>
+          <div class="tmpl-preview-line"></div>
+          <div class="tmpl-preview-line short"></div>
+        </div>
+        <span class="tmpl-preview-badge ${t.free?'free':'pro'}">${t.free?'Gratis':'Pro'}</span>
       </div>
-      <div class="upload-z" onclick="toast('✍️','Upload tanda tangan...')">
-        <i class="ti ti-writing"></i><p>Tanda Tangan</p><span>PNG transparan</span>
+      <div class="tmpl-info">
+        <div class="tmpl-name">${t.name}</div>
+        <div class="tmpl-cat">${{warga:'Surat Warga',bisnis:'Bisnis',hr:'HR & SDM',legal:'Legal',karier:'Karier',rtrw:'RT/RW'}[t.cat]}</div>
+        <div class="tmpl-footer">
+          <span class="badge ${t.free?'green':'gold'}">${t.free?'Free':'Pro'}</span>
+          <button class="tmpl-use-btn">Gunakan →</button>
+        </div>
       </div>
-    </div>`;
+    </div>
+  `).join('');
+}
+
+function filterCat(cat, el){
+  if(el){
+    document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+    el.classList.add('active');
   }
-
-  def.sections.forEach(sec => {
-    html += `<div class="fsec">${sec.title}</div>`;
-    sec.fields.forEach(field => {
-      if(Array.isArray(field)) {
-        html += `<div class="fr">`;
-        field.forEach(f => html += renderField(f));
-        html += `</div>`;
-      } else {
-        html += renderField(field);
-      }
-    });
-  });
-
-  // JSON box
-  html += `<div class="json-box ${jsonOpen?'open':''}" id="json-box"></div>`;
-  html += `<div style="display:flex;gap:9px;margin-top:20px;flex-wrap:wrap">
-    <button class="btn btn-ghost" onclick="toggleJSON()"><i class="ti ti-code"></i> JSON</button>
-    <button class="btn btn-red" style="flex:1" onclick="doGenerate()"><i class="ti ti-sparkles"></i> Generate Dokumen</button>
-  </div>`;
-
-  document.getElementById('form-col').innerHTML = html;
-  // Set default date
-  document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
-  document.querySelectorAll('.fi').forEach(el=>el.addEventListener('input',updatePreview));
-  document.querySelectorAll('select.fi').forEach(el=>el.addEventListener('change',updatePreview));
-  updatePreview();
+  renderTemplates(cat);
 }
 
-function renderField(f) {
-  const req = f.req ? '<span class="req"> *</span>':'';
-  const hint = f.hint ? `<div class="fhint"><i class="ti ti-info-circle" style="font-size:11px"></i>${f.hint}</div>`:'' ;
-  if(f.type==='textarea') return `<div class="fg"><label class="fl">${f.label}${req}</label><textarea class="fi" id="f-${f.id}" placeholder="${f.ph||''}" oninput="updatePreview()">${f.val||''}</textarea>${hint}</div>`;
-  if(f.type==='select') return `<div class="fg"><label class="fl">${f.label}${req}</label><select class="fi" id="f-${f.id}" onchange="updatePreview()">${(f.opts||[]).map(o=>`<option>${o}</option>`).join('')}</select>${hint}</div>`;
-  if(f.type==='date') return `<div class="fg"><label class="fl">${f.label}${req}</label><input type="date" class="fi" id="f-${f.id}" oninput="updatePreview()"></div>`;
-  return `<div class="fg"><label class="fl">${f.label}${req}</label><input type="text" class="fi" id="f-${f.id}" placeholder="${f.ph||''}" value="${f.val||''}" ${f.maxlen?'maxlength="'+f.maxlen+'"':''} oninput="updatePreview()">${hint}</div>`;
+function renderDocList(){
+  const list = document.getElementById('doc-list');
+  list.innerHTML = RECENT_DOCS.map(d=>`
+    <div class="doc-list-item">
+      <div class="doc-icon ${d.icon}"><i class="ti ti-file-text"></i></div>
+      <div class="doc-meta">
+        <div class="doc-name">${d.name}</div>
+        <div class="doc-date"><i class="ti ti-calendar" style="font-size:10px"></i> ${d.date}</div>
+      </div>
+      <div class="doc-actions">
+        <button title="Unduh DOCX" onclick="showToast('📄 Mengunduh DOCX...')"><i class="ti ti-file-word"></i></button>
+        <button title="Unduh PDF" onclick="showToast('📋 Mengunduh PDF...')"><i class="ti ti-file-type-pdf"></i></button>
+        <button title="Edit ulang" onclick="showPage('generator')"><i class="ti ti-edit"></i></button>
+      </div>
+    </div>
+  `).join('');
 }
 
-function renderInvoiceExtras() {
-  let rows = invItems.map((it,i)=>`
-    <tr>
-      <td><input placeholder="Deskripsi jasa/produk" value="${it.desc}" oninput="invItems[${i}].desc=this.value;updatePreview()"></td>
-      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value;updatePreview()" style="text-align:center"></td>
-      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value;updatePreview()"></td>
-      <td style="width:80px;text-align:right;font-weight:600">${fmt(it.qty*it.harga)}</td>
-      <td style="width:28px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r);font-size:13px"><i class="ti ti-trash"></i></button></td>
-    </tr>`).join('');
-  const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
-  const ppn = Math.round(sub*0.11);
-  const total = sub+ppn;
-  return `<div class="fsec">Item / Jasa</div>
-  <table class="inv-table">
-    <thead><tr><th>Deskripsi</th><th>Qty</th><th>Harga Satuan (Rp)</th><th>Subtotal</th><th></th></tr></thead>
-    <tbody id="inv-tbody">${rows}</tbody>
-    <tr class="inv-total-row"><td colspan="3" style="text-align:right;padding-right:10px">Subtotal</td><td>${fmt(sub)}</td><td></td></tr>
-    <tr class="inv-total-row"><td colspan="3" style="text-align:right;padding-right:10px">PPN 11%</td><td>${fmt(ppn)}</td><td></td></tr>
-    <tr class="inv-total-row" style="font-size:12px"><td colspan="3" style="text-align:right;padding-right:10px">TOTAL</td><td>${fmt(total)}</td><td></td></tr>
-  </table>
-  <button class="add-row-btn" onclick="addInvRow()"><i class="ti ti-plus"></i> Tambah Item</button>`;
+function openGenerator(name){
+  document.getElementById('gen-title').textContent = name;
+  showPage('generator');
 }
-
-function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm()}
-function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm()}}
-function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
-
-// ═══════════════ PREVIEW RENDER ═══════════════
-function g(id){const el=document.getElementById('f-'+id);return el?el.value:'';}
-function fmtDate(d){if(!d)return '12 Mei 2026';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
 
 function updatePreview(){
-  const prev = document.getElementById('doc-preview');
-  if(!prev) return;
-  const id = currentTmpl.id;
-
-  // Dispatch to appropriate preview builder
-  if(id==='invoice') prev.innerHTML = buildInvoicePreview();
-  else if(id==='slip_gaji') prev.innerHTML = buildSlipGajiPreview();
-  else if(id==='kontrak'||id==='nda'||id==='mou'||id==='pks'||id==='freelance'||id==='hutang'||id==='sewa') prev.innerHTML = buildContractPreview();
-  else if(id==='lamaran'||id==='resign'||id==='cover_letter') prev.innerHTML = buildSuratResmiPreview();
-  else if(id==='kwitansi') prev.innerHTML = buildKwitansiPreview();
-  else if(id==='offering') prev.innerHTML = buildOfferingPreview();
-  else if(id==='warning') prev.innerHTML = buildWarningPreview();
-  else if(id==='form_cuti') prev.innerHTML = buildCutiPreview();
-  else prev.innerHTML = buildSuratWargaPreview();
-
-  updateJSONBox();
+  const g = id => document.getElementById(id)?.value || '';
+  const el = id => document.getElementById(id);
+  if(el('prev-nama')) el('prev-nama').textContent = g('f-nama') || '-';
+  if(el('prev-nik')) el('prev-nik').textContent = g('f-nik') || '-';
+  if(el('prev-ttl')) el('prev-ttl').textContent = g('f-ttl') || '-';
+  if(el('prev-alamat')) el('prev-alamat').textContent = g('f-alamat') || '-';
+  if(el('prev-tujuan')) el('prev-tujuan').textContent = g('f-tujuan') || '-';
+  if(el('prev-nomor')) el('prev-nomor').textContent = 'Nomor: '+(g('f-nomor')||'001/RT.01/V/2026');
+  const kota = g('f-kota')||'Jakarta';
+  let tgl = g('f-tanggal');
+  if(tgl){const d=new Date(tgl);tgl=d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});}
+  else tgl='12 Mei 2026';
+  if(el('prev-kota-tgl')) el('prev-kota-tgl').textContent = kota+', '+tgl;
+  if(el('prev-ketua')) el('prev-ketua').textContent = '( '+(g('f-ketua')||'________________')+' )';
+  if(el('prev-jabatan')) el('prev-jabatan').textContent = g('f-jabatan')||'Ketua RT 01/RW 02';
 }
 
-function buildSuratWargaPreview(){
-  const nom = g('nomor')||'001/RT.01/V/2026';
-  const org = g('org')||'RT 01 RW 02';
-  const nama = g('nama')||'—';
-  const nik = g('nik')||'—';
-  const alamat = g('alamat')||'—';
-  const tujuan = g('tujuan')||g('keperluan')||g('keterangan')||'—';
-  const kota = g('kota')||'Jakarta';
-  const tgl = fmtDate(g('tanggal'));
-  const ketua = g('ketua')||g('jabatan_ttd')||'________________';
-  const jab = g('jabatan')||'Ketua RT 01/RW 02';
-  return `
-  <div class="dp-lh">
-    <div class="dp-logo-box"><i class="ti ti-home" style="font-size:20px;color:#ccc"></i></div>
-    <div><div class="dp-org-name">${org.toUpperCase()}</div><div class="dp-org-sub">${g('alamat_org')||'Kelurahan, Kecamatan, Kota'}</div></div>
-  </div>
-  <div class="dp-doc-title"><h2>${currentTmpl.name.toUpperCase()}</h2></div>
-  <div class="dp-doc-num">Nomor: ${nom}</div>
-  <div class="dp-body">
-    <p>Yang bertanda tangan di bawah ini, ${jab}, menerangkan bahwa:</p>
-    <table class="dp-tbl">
-      <tr><td>Nama</td><td>:</td><td><strong>${nama}</strong></td></tr>
-      <tr><td>NIK</td><td>:</td><td>${nik}</td></tr>
-      <tr><td>Jenis Kelamin</td><td>:</td><td>${g('jk')||'—'}</td></tr>
-      <tr><td>Tempat/Tgl Lahir</td><td>:</td><td>${[g('ttl1'),g('ttl2')?fmtDate(g('ttl2')):null].filter(Boolean).join(', ')||'—'}</td></tr>
-      <tr><td>Pekerjaan</td><td>:</td><td>${g('pekerjaan')||'—'}</td></tr>
-      <tr><td>Alamat</td><td>:</td><td>${alamat}</td></tr>
-    </table>
-    <p>Adalah benar warga kami dan memerlukan surat ini untuk keperluan:</p>
-    <p><strong>${tujuan}</strong></p>
-    <p style="margin-top:8px">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.</p>
-  </div>
-  <div class="dp-sign"><div class="dp-sign-box">
-    <p>${kota}, ${tgl}</p>
-    <p>${jab}</p>
-    <div class="dp-sign-line"></div>
-    <p><strong>( ${ketua} )</strong></p>
-  </div></div>`;
+function generateJSON(){
+  const g = id => document.getElementById(id)?.value || '';
+  const json = {
+    nomor_surat: g('f-nomor')||'001/RT.01/V/2026',
+    nama: g('f-nama'),
+    nik: g('f-nik'),
+    tempat_tanggal_lahir: g('f-ttl'),
+    alamat: g('f-alamat'),
+    keperluan: g('f-tujuan'),
+    kota: g('f-kota')||'Jakarta',
+    tanggal_surat: g('f-tanggal')||'2026-05-12',
+    ketua_rt: g('f-ketua'),
+    jabatan: g('f-jabatan')||'Ketua RT 01/RW 02',
+    template: 'surat_pengantar_rt_rw',
+    _meta: {generated_at: new Date().toISOString(), engine:'Docxtemplater+PizZip',version:'1.0'}
+  };
+  document.getElementById('json-output').textContent = JSON.stringify(json,null,2);
+  document.getElementById('json-modal').classList.add('open');
 }
 
-function buildInvoicePreview(){
-  const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
-  const ppn = Math.round(sub*0.11);
-  const total = sub+ppn;
-  const rows = invItems.map(it=>`<tr><td>${it.desc||'—'}</td><td class="num">${it.qty}</td><td class="num">${fmt(it.harga)}</td><td class="num">${fmt(it.qty*it.harga)}</td></tr>`).join('');
-  return `
-  <div class="inv-prev-header">
-    <div class="inv-prev-from">
-      <strong>${g('from_company')||'Nama Perusahaan'}</strong>
-      ${g('from_alamat')||'Alamat Perusahaan'}<br>
-      ${g('from_email')||'email@perusahaan.com'}
-    </div>
-    <div>
-      <div class="inv-badge">INVOICE</div>
-      <div style="font-size:8.5px;color:#555;font-family:Arial;margin-top:4px;text-align:right">
-        No: ${g('inv_no')||'INV/2026/05/001'}<br>
-        Tgl: ${fmtDate(g('inv_tanggal'))}<br>
-        Jatuh Tempo: ${fmtDate(g('inv_jatuh'))}
-      </div>
-    </div>
-  </div>
-  <div style="font-family:Arial;font-size:8.5px;color:#555;margin-bottom:10px">
-    <strong style="color:#111;font-size:9.5px">Ditagihkan kepada:</strong><br>
-    <strong style="color:#111">${g('to_company')||'Nama Client'}</strong><br>
-    ${g('to_alamat')||'Alamat Client'}
-  </div>
-  <table class="inv-prev-tbl">
-    <thead><tr><th>Deskripsi</th><th class="num">Qty</th><th class="num">Harga</th><th class="num">Subtotal</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>
-  <div class="inv-total-box">
-    <div class="inv-total-row-p"><span>Subtotal</span><span>${fmt(sub)}</span></div>
-    <div class="inv-total-row-p"><span>PPN 11%</span><span>${fmt(ppn)}</span></div>
-    <div class="inv-total-row-p grand"><span>TOTAL</span><span>${fmt(total)}</span></div>
-  </div>
-  ${g('notes')?`<div style="margin-top:10px;font-family:Arial;font-size:8.5px;color:#555;border-top:1px solid #eee;padding-top:8px">${g('notes')}</div>`:''}`;
+function closeModal(){document.getElementById('json-modal').classList.remove('open')}
+
+function markStep3(){
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step2').classList.add('done');
+  document.getElementById('step2').querySelector('.gen-step-num').innerHTML='<i class="ti ti-check" style="font-size:12px"></i>';
+  document.getElementById('step3').classList.add('active');
+  showToast('✅ Preview siap! Klik DOCX atau PDF untuk download.');
 }
 
-function buildSlipGajiPreview(){
-  const gp=+g('gaji_pokok').replace(/\D/g,'')||0;
-  const tt=+g('tunj_transport').replace(/\D/g,'')||0;
-  const tm=+g('tunj_makan').replace(/\D/g,'')||0;
-  const tl=+g('tunj_lain').replace(/\D/g,'')||0;
-  const bon=+g('bonus').replace(/\D/g,'')||0;
-  const pb=+g('pot_bpjs_kes').replace(/\D/g,'')||0;
-  const ptk=+g('pot_bpjs_tk').replace(/\D/g,'')||0;
-  const pp=+g('pot_pph21').replace(/\D/g,'')||0;
-  const pl=+g('pot_lain').replace(/\D/g,'')||0;
-  const gross=gp+tt+tm+tl+bon;
-  const pot=pb+ptk+pp+pl;
-  const net=gross-pot;
-  return `
-  <div class="slip-header">
-    <div><h3>${g('company')||'PT Nama Perusahaan'}</h3><p>SLIP GAJI — ${g('periode')||'Periode Mei 2026'}</p></div>
-  </div>
-  <div class="slip-body">
-    <div class="slip-section">Data Karyawan</div>
-    <div class="slip-row"><span>${g('nama')||'Nama Karyawan'}</span><span>${g('nip')||'EMP-001'}</span></div>
-    <div class="slip-row"><span>${g('posisi')||'Jabatan'}</span><span>${g('departemen')||'Departemen'}</span></div>
-    <div class="slip-section">Pendapatan</div>
-    <div class="slip-row slip-gaji-pokok"><span>Gaji Pokok</span><span>${fmt(gp)}</span></div>
-    ${tt?`<div class="slip-row"><span>Tunjangan Transport</span><span>${fmt(tt)}</span></div>`:''}
-    ${tm?`<div class="slip-row"><span>Tunjangan Makan</span><span>${fmt(tm)}</span></div>`:''}
-    ${tl?`<div class="slip-row"><span>Tunjangan Lain</span><span>${fmt(tl)}</span></div>`:''}
-    ${bon?`<div class="slip-row"><span>Bonus</span><span>${fmt(bon)}</span></div>`:''}
-    <div class="slip-row total"><span>Total Pendapatan</span><span>${fmt(gross)}</span></div>
-    <div class="slip-section">Potongan</div>
-    ${pb?`<div class="slip-row"><span>BPJS Kesehatan</span><span>(${fmt(pb)})</span></div>`:''}
-    ${ptk?`<div class="slip-row"><span>BPJS Ketenagakerjaan</span><span>(${fmt(ptk)})</span></div>`:''}
-    ${pp?`<div class="slip-row"><span>PPh 21</span><span>(${fmt(pp)})</span></div>`:''}
-    ${pl?`<div class="slip-row"><span>Potongan Lain</span><span>(${fmt(pl)})</span></div>`:''}
-    <div class="slip-row total"><span>Total Potongan</span><span>(${fmt(pot)})</span></div>
-    <div class="slip-row total" style="background:var(--rl,'#fff0ee');color:#c0392b;font-size:11px"><span>GAJI BERSIH (TAKE HOME PAY)</span><span>${fmt(net)}</span></div>
-  </div>
-  <div style="margin-top:14px;display:flex;justify-content:space-between;font-family:Arial;font-size:9px">
-    <div style="text-align:center;width:45%">
-      <p>Diterima oleh,</p>
-      <div style="height:30px;border-bottom:1px solid #111;margin:0 10px"></div>
-      <p>${g('nama')||'Karyawan'}</p>
-    </div>
-    <div style="text-align:center;width:45%">
-      <p>${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</p>
-      <div style="height:30px;border-bottom:1px solid #111;margin:0 10px"></div>
-      <p>${g('hrname')||'HR Manager'}</p>
-    </div>
-  </div>`;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-function buildContractPreview(){
-  const p1=g('p1_company')||g('company')||'PT Pertama';
-  const p2=g('p2_company')||g('nama')||'Pihak Kedua';
-  const kota=g('kota')||'Jakarta';
-  const tgl=fmtDate(g('tanggal'));
-  return `
-  <div class="dp-lh">
-    <div class="dp-logo-box"><i class="ti ti-scale" style="font-size:20px;color:#ccc"></i></div>
-    <div><div class="dp-org-name">${currentTmpl.name.toUpperCase()}</div><div class="dp-org-sub">Dokumen Hukum Resmi</div></div>
-  </div>
-  <div class="dp-doc-title"><h2>${currentTmpl.name.toUpperCase()}</h2></div>
-  <div class="dp-doc-num">Nomor: ${g('nomor')||'-'}</div>
-  <div class="dp-body">
-    <div class="contract-intro">Perjanjian ini dibuat dan ditandatangani pada hari ini, ${tgl}, di ${kota}, oleh dan antara:</div>
-    <div class="contract-pasal">Pihak Pertama:</div>
-    <div class="contract-point"><strong>${p1}</strong>, diwakili oleh ${g('p1_diwakili')||g('hrdir')||'—'} selaku ${g('p1_jabatan')||g('hrjabatan')||'—'}, beralamat di ${g('p1_alamat')||g('perusahaan_alamat')||'—'}.</div>
-    <div class="contract-pasal">Pihak Kedua:</div>
-    <div class="contract-point"><strong>${p2}</strong>, ${g('p2_diwakili')?`diwakili oleh ${g('p2_diwakili')} selaku ${g('p2_jabatan')||'—'},`:''} beralamat di ${g('p2_alamat')||g('alamat')||'—'}.</div>
-    ${g('perihal')||g('posisi')?`<div class="contract-pasal">Pasal 1 — Perihal / Jabatan</div><div class="contract-point">${g('perihal')||g('posisi')||'—'} ${g('departemen')?`| Departemen: ${g('departemen')]}`':''}</div>`:''}
-    ${g('ruang_lingkup')||g('tujuan')||g('keterangan')?`<div class="contract-pasal">Pasal 2 — Ruang Lingkup</div><div class="contract-point">${g('ruang_lingkup')||g('tujuan')||g('keterangan')||'—'}</div>`:''}
-    ${g('masa_berlaku')||g('durasi')?`<div class="contract-pasal">Pasal 3 — Masa Berlaku</div><div class="contract-point">${g('masa_berlaku')||g('durasi')||'—'}</div>`:''}
-    ${g('gaji')?`<div class="contract-pasal">Pasal 4 — Kompensasi</div><div class="contract-point">Gaji Pokok: ${g('gaji')} | Tunjangan: ${g('tunjangan')||'—'}</div>`:''}
-    ${g('denda')||g('sanksi')?`<div class="contract-pasal">Pasal 5 — Sanksi</div><div class="contract-point">${g('denda')||g('sanksi')||'—'}</div>`:''}
-    <div class="contract-pasal">Ketentuan Umum</div>
-    <div class="contract-point">Segala sengketa yang timbul dari perjanjian ini akan diselesaikan secara musyawarah. Apabila tidak tercapai mufakat, maka akan diselesaikan melalui jalur hukum yang berlaku di ${g('hukum')||'Negara Republik Indonesia'}.</div>
-  </div>
-  <div class="contract-sign-row">
-    <div class="contract-sign-col">
-      <p>Pihak Pertama,</p>
-      <div class="contract-sign-line"></div>
-      <p><strong>${g('p1_diwakili')||g('hrdir')||'________________'}</strong></p>
-      <p>${g('p1_jabatan')||g('hrjabatan')||'—'}</p>
-    </div>
-    <div class="contract-sign-col">
-      <p>Pihak Kedua,</p>
-      <div class="contract-sign-line"></div>
-      <p><strong>${g('p2_diwakili')||g('nama')||'________________'}</strong></p>
-      <p>${g('p2_jabatan')||g('posisi')||'—'}</p>
-    </div>
-  </div>`;
+function showAdminPanel(){
+  const tbody = document.getElementById('admin-table-body');
+  tbody.innerHTML = ADMIN_USERS.map(u=>`
+    <tr>
+      <td><strong>${u.name}</strong></td>
+      <td style="color:var(--c-gray-500)">${u.email}</td>
+      <td><span class="badge ${u.plan==='Pro'?'gold':u.plan==='Bisnis'?'blue':'green'}">${u.plan}</span></td>
+      <td>${u.docs}</td>
+      <td><span class="badge green">Aktif</span></td>
+    </tr>
+  `).join('');
+  document.getElementById('admin-modal').classList.add('open');
 }
 
-function buildSuratResmiPreview(){
-  const nama=g('nama')||'Nama Pemohon';
-  const kota=g('kota')||'Jakarta';
-  const tgl=fmtDate(g('tgl_surat')||g('tanggal'));
-  return `
-  <div class="dp-body">
-    <div style="text-align:right;font-family:Arial;font-size:9.5px;margin-bottom:16px">
-      <p>${kota}, ${tgl}</p>
-    </div>
-    <div style="font-family:Arial;font-size:9.5px;margin-bottom:16px">
-      <p>Kepada Yth.</p>
-      <p><strong>${g('kepada')||g('company')||'HRD ' + (g('company')||'PT Perusahaan')}</strong></p>
-      <p>${g('company')||'Nama Perusahaan'}</p>
-      <p>di Tempat</p>
-    </div>
-    <div class="dp-doc-title"><h2>${currentTmpl.name.toUpperCase()}</h2></div>
-    <div class="dp-body" style="margin-top:14px">
-      <p>Dengan hormat,</p>
-      <p>Saya yang bertanda tangan di bawah ini:</p>
-      <table class="dp-tbl">
-        <tr><td>Nama</td><td>:</td><td><strong>${nama}</strong></td></tr>
-        ${g('posisi')?`<tr><td>Jabatan</td><td>:</td><td>${g('posisi')}</td></tr>`:''}
-        ${g('departemen')?`<tr><td>Departemen</td><td>:</td><td>${g('departemen')}</td></tr>`:''}
-        ${g('email')?`<tr><td>Email</td><td>:</td><td>${g('email')}</td></tr>`:''}
-        ${g('telp')?`<tr><td>Telepon</td><td>:</td><td>${g('telp')}</td></tr>`:''}
-      </table>
-      <p style="margin-top:8px">${g('alasan')||g('motivasi')||g('keterangan')||'...'}</p>
-      ${g('pengalaman')?`<p style="margin-top:6px"><strong>Pengalaman:</strong> ${g('pengalaman')}</p>`:''}
-      ${g('keahlian')?`<p><strong>Keahlian:</strong> ${g('keahlian')}</p>`:''}
-      <p style="margin-top:10px">Demikian surat ini saya sampaikan. Atas perhatian Bapak/Ibu, saya ucapkan terima kasih.</p>
-    </div>
-    <div class="dp-sign"><div class="dp-sign-box">
-      <p>Hormat saya,</p>
-      <div class="dp-sign-line"></div>
-      <p><strong>${nama}</strong></p>
-    </div></div>
-  </div>`;
-}
+function closeAdminModal(){document.getElementById('admin-modal').classList.remove('open')}
 
-function buildKwitansiPreview(){
-  const jml = g('jumlah')||'0';
-  return `
-  <div style="border:2px solid #1a3a5c;border-radius:4px;font-family:Arial">
-    <div style="background:#1a3a5c;color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
-      <div><div style="font-size:12px;font-weight:700">KWITANSI</div><div style="font-size:8.5px;opacity:.7">${g('from_name')||'Nama Perusahaan'}</div></div>
-      <div style="text-align:right;font-size:8.5px;opacity:.7">No: ${g('nomor')||'KWT/001'}<br>${fmtDate(g('tanggal'))}</div>
-    </div>
-    <div style="padding:14px">
-      <table class="dp-tbl">
-        <tr><td>Diterima dari</td><td>:</td><td><strong>${g('dari')||'—'}</strong></td></tr>
-        <tr><td>Jumlah</td><td>:</td><td><strong style="color:#c0392b;font-size:11px">Rp ${jml.replace(/\D/g,'')?Number(jml.replace(/\D/g,'')).toLocaleString('id-ID'):jml}</strong></td></tr>
-        <tr><td>Terbilang</td><td>:</td><td><em>${g('terbilang')||'—'}</em></td></tr>
-        <tr><td>Untuk</td><td>:</td><td>${g('untuk')||'—'}</td></tr>
-        <tr><td>Metode</td><td>:</td><td>${g('metode')||'Transfer Bank'}</td></tr>
-      </table>
-      <div style="text-align:right;margin-top:16px">
-        <p style="font-size:9px">${g('kota')||'Jakarta'}, ${fmtDate(g('tgl_ttd'))}</p>
-        <div style="height:1px;background:#333;width:110px;margin:22px 0 5px auto"></div>
-        <p style="font-size:9px"><strong>${g('nama_ttd')||'________________'}</strong></p>
-        <p style="font-size:8.5px">${g('jabatan_ttd')||'Finance Manager'}</p>
-      </div>
-    </div>
-  </div>`;
-}
+// Set default date
+const today = new Date().toISOString().split('T')[0];
+const dateInput = document.getElementById('f-tanggal');
+if(dateInput) dateInput.value = today;
 
-function buildOfferingPreview(){
-  return `
-  <div class="dp-lh">
-    <div class="dp-logo-box"><i class="ti ti-building-store" style="font-size:20px;color:#ccc"></i></div>
-    <div><div class="dp-org-name">${(g('company')||'PT Perusahaan').toUpperCase()}</div><div class="dp-org-sub">${g('alamat')||'Alamat Perusahaan'}</div></div>
-  </div>
-  <div class="dp-doc-title"><h2>OFFERING LETTER</h2></div>
-  <div class="dp-body">
-    <p>Kepada Yth. <strong>${g('nama')||'Nama Kandidat'}</strong><br>${g('alamat_kandidat')||'Alamat Kandidat'}</p>
-    <p style="margin-top:10px">Dengan hormat,</p>
-    <p>Kami dengan bangga menawarkan posisi <strong>${g('posisi')||'—'}</strong> di departemen <strong>${g('departemen')||'—'}</strong> kepada Anda.</p>
-    <table class="dp-tbl" style="margin-top:10px">
-      <tr><td>Tanggal Mulai</td><td>:</td><td>${fmtDate(g('tgl_mulai'))}</td></tr>
-      <tr><td>Jenis Kerja</td><td>:</td><td>${g('jenis')||'Full-time'}</td></tr>
-      <tr><td>Gaji Pokok</td><td>:</td><td><strong>${g('gaji')||'—'}</strong></td></tr>
-      <tr><td>Tunjangan</td><td>:</td><td>${g('tunjangan')||'—'}</td></tr>
-      <tr><td>Masa Probasi</td><td>:</td><td>${g('probasi')||'3 bulan'}</td></tr>
-      <tr><td>Deadline Konfirmasi</td><td>:</td><td>${fmtDate(g('deadline'))}</td></tr>
-    </table>
-    <p style="margin-top:10px">Mohon konfirmasi penerimaan offering letter ini sebelum deadline.</p>
-  </div>
-  <div class="dp-sign"><div class="dp-sign-box">
-    <p>${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</p>
-    <p>${g('hrjabatan')||'HR Manager'}</p>
-    <div class="dp-sign-line"></div>
-    <p><strong>${g('hrname')||'________________'}</strong></p>
-  </div></div>`;
-}
-
-function buildWarningPreview(){
-  return `
-  <div class="dp-lh">
-    <div class="dp-logo-box"><i class="ti ti-alert-triangle" style="font-size:20px;color:#ccc"></i></div>
-    <div><div class="dp-org-name">${(g('company')||'PT Perusahaan').toUpperCase()}</div></div>
-  </div>
-  <div class="dp-doc-title"><h2>${(g('jenis')||'SURAT PERINGATAN 1').toUpperCase()}</h2></div>
-  <div class="dp-doc-num">Nomor: ${g('nomor')||'SP-1/HR/V/2026'}</div>
-  <div class="dp-body">
-    <p>Dengan hormat,</p>
-    <p>Yang bersangkutan di bawah ini:</p>
-    <table class="dp-tbl">
-      <tr><td>Nama</td><td>:</td><td><strong>${g('nama')||'—'}</strong></td></tr>
-      <tr><td>ID Karyawan</td><td>:</td><td>${g('nip')||'—'}</td></tr>
-      <tr><td>Jabatan</td><td>:</td><td>${g('posisi')||'—'}</td></tr>
-      <tr><td>Departemen</td><td>:</td><td>${g('departemen')||'—'}</td></tr>
-    </table>
-    <p style="margin-top:8px">Telah melakukan pelanggaran pada tanggal ${fmtDate(g('tgl_kejadian'))}:</p>
-    <p><strong>${g('pelanggaran')||'—'}</strong></p>
-    <p style="margin-top:8px">Sanksi: ${g('sanksi')||'—'}</p>
-    <p style="margin-top:8px">Surat peringatan ini diberikan sebagai teguran resmi. Kami berharap yang bersangkutan dapat memperbaiki sikap dan kinerja.</p>
-  </div>
-  <div class="contract-sign-row" style="margin-top:20px">
-    <div class="contract-sign-col"><p>Mengetahui,</p><div class="contract-sign-line"></div><p>${g('hrname')||'HR Manager'}</p></div>
-    <div class="contract-sign-col"><p>Yang menerima,</p><div class="contract-sign-line"></div><p>${g('nama')||'Karyawan'}</p></div>
-  </div>`;
-}
-
-function buildCutiPreview(){
-  return `
-  <div class="dp-doc-title" style="margin-bottom:10px"><h2>FORMULIR PERMOHONAN CUTI</h2></div>
-  <div class="dp-body">
-    <table class="dp-tbl" style="border:1px solid #ddd">
-      <tr style="background:#f0f0f0"><td colspan="3" style="font-weight:700;text-align:center;padding:5px">DATA KARYAWAN</td></tr>
-      <tr><td>Nama</td><td>:</td><td><strong>${g('nama')||'—'}</strong></td></tr>
-      <tr><td>ID Karyawan</td><td>:</td><td>${g('nip')||'—'}</td></tr>
-      <tr><td>Jabatan</td><td>:</td><td>${g('posisi')||'—'}</td></tr>
-      <tr><td>Departemen</td><td>:</td><td>${g('departemen')||'—'}</td></tr>
-      <tr style="background:#f0f0f0"><td colspan="3" style="font-weight:700;text-align:center;padding:5px">DETAIL CUTI</td></tr>
-      <tr><td>Jenis Cuti</td><td>:</td><td><strong>${g('jenis_cuti')||'Cuti Tahunan'}</strong></td></tr>
-      <tr><td>Tanggal Mulai</td><td>:</td><td>${fmtDate(g('tgl_mulai'))}</td></tr>
-      <tr><td>Tanggal Selesai</td><td>:</td><td>${fmtDate(g('tgl_selesai'))}</td></tr>
-      <tr><td>Jumlah Hari</td><td>:</td><td>${g('jumlah_hari')||'—'} hari</td></tr>
-      <tr><td>Keterangan</td><td>:</td><td>${g('keterangan')||'—'}</td></tr>
-    </table>
-    <div class="contract-sign-row" style="margin-top:18px">
-      <div class="contract-sign-col"><p>Pemohon,</p><div class="contract-sign-line"></div><p>${g('nama')||'Karyawan'}</p></div>
-      <div class="contract-sign-col"><p>Disetujui Atasan,</p><div class="contract-sign-line"></div><p>${g('atasan')||'Manager'}</p></div>
-    </div>
-  </div>`;
-}
-
-// ═══════════════ JSON BOX ═══════════════
-function updateJSONBox(){
-  const box=document.getElementById('json-box');
-  if(!box) return;
-  const def=FORMS[currentTmpl.id]||getFallbackForm(currentTmpl);
-  const data={template:currentTmpl.id,template_name:currentTmpl.name,category:currentTmpl.cat};
-  const inputs=document.querySelectorAll('.fi');
-  inputs.forEach(el=>{if(el.id&&el.id.startsWith('f-')){data[el.id.slice(2)]=el.value}});
-  if(currentTmpl.id==='invoice') data.items=invItems;
-  data._engine='Docxtemplater+PizZip';
-  data._generated=new Date().toISOString();
-  box.textContent=JSON.stringify(data,null,2);
-}
-
-function toggleJSON(){
-  jsonOpen=!jsonOpen;
-  const box=document.getElementById('json-box');
-  if(box) box.classList.toggle('open',jsonOpen);
-  updateJSONBox();
-}
-
-// ═══════════════ GENERATE & EXPORT ═══════════════
-function doGenerate(){
-  step3done=true;
-  const s2=document.getElementById('st2');
-  s2.className='step done';s2.querySelector('.step-dot').innerHTML='<i class="ti ti-check" style="font-size:11px"></i>';
-  const s3=document.getElementById('st3');
-  s3.className='step active';s3.querySelector('.step-dot').textContent='3';
-  toast('✅',`${currentTmpl.name} berhasil digenerate!`);
-}
-
-function exportDoc(fmt){
-  if(!step3done) doGenerate();
-  toast(fmt==='DOCX'?'📄':'📋',`Mengunduh ${currentTmpl.name} — ${fmt}...`);
-}
-
-function resetForm(){
-  document.querySelectorAll('.fi').forEach(el=>{
-    if(el.tagName==='SELECT'){el.selectedIndex=0}
-    else if(el.type==='date'){el.value=new Date().toISOString().split('T')[0]}
-    else if(!el.id||!el.id.match(/f-nomor|f-inv_no|f-hukum/)){el.value=''}
-  });
-  step3done=false;
-  const s2=document.getElementById('st2');s2.className='step active';s2.querySelector('.step-dot').textContent='2';
-  const s3=document.getElementById('st3');s3.className='step';s3.querySelector('.step-dot').textContent='3';
-  updatePreview();
-  toast('🔄','Form direset');
-}
-
-// ═══════════════ DARK MODE ═══════════════
-let dark=false;
-function toggleDark(){
-  dark=!dark;
-  document.documentElement.toggleAttribute('data-dark',dark);
-  document.getElementById('dk-btn').innerHTML=dark?'<i class="ti ti-sun"></i>':'<i class="ti ti-moon"></i>';
-  toast(dark?'🌙':'☀️',dark?'Dark mode aktif':'Light mode aktif');
-}
-
-// ═══════════════ TOAST ═══════════════
-function toast(icon,msg){
-  const wrap=document.getElementById('toast-wrap');
-  const t=document.createElement('div');
-  t.className='toast';t.innerHTML=`<span>${icon}</span><span>${msg}</span>`;
-  wrap.appendChild(t);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
-  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3000);
-}
-
-// ═══════════════ NAV ═══════════════
-function navTo(page){ toast('🔗',`Navigasi ke: ${page}`); }
-
-// ═══════════════ INIT ═══════════════
-buildSidebar();
-renderForm();
+// Init
+renderTemplates();
+renderDocList();
 </script>
 </body>
 </html>
