@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v13</title>
+<title>Smart Dokumen Indonesia — v14</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -262,7 +262,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span><i class="ti ti-bolt"></i> Tersedia Pengisian Otomatis</span>
+          <span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -326,6 +326,7 @@ const TEMPLATES = [
 let currentTmpl = TEMPLATES[0];
 let invItems = [{desc:'',qty:1,harga:0}];
 let step3done = false;
+let isPpnActive = false; // PPN Toggle State
 
 let uploadedLogo = '';
 let uploadedSign = '';
@@ -426,6 +427,7 @@ function filterSidebar(val) { buildSidebar(val); }
 function selectTemplate(id) {
   currentTmpl = TEMPLATES.find(t=>t.id===id)||TEMPLATES[0];
   step3done=false;
+  isPpnActive=false; // Reset PPN tiap pindah template
   
   uploadedLogo = '';
   uploadedSign = '';
@@ -533,18 +535,29 @@ function renderInvoiceExtras() {
       <td style="width:80px;text-align:right;font-weight:600">${fmt(it.qty*it.harga)}</td>
       <td style="width:30px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
     </tr>`).join('');
+    
   const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
-  const ppn = Math.round(sub*0.11);
-  return `<div class="fsec">Rincian Item</div>
+  const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
+  
+  return `<div class="fsec" style="justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>Rincian Item</span>
+    </div>
+    <label style="font-size:12px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer; color:var(--p); text-transform:none;">
+      <input type="checkbox" ${isPpnActive ? 'checked' : ''} onchange="isPpnActive=this.checked; renderForm(); updatePreview();" style="width:14px;height:14px;cursor:pointer;"> 
+      + PPN 11%
+    </label>
+  </div>
   <table class="inv-table">
     <thead><tr><th>Deskripsi</th><th>Qty</th><th>Harga Satuan</th><th>Subtotal</th><th></th></tr></thead>
     <tbody id="inv-tbody">${rows}</tbody>
     <tr class="inv-total-row"><td colspan="3" style="text-align:right">Subtotal</td><td>${fmt(sub)}</td><td></td></tr>
-    <tr class="inv-total-row"><td colspan="3" style="text-align:right">PPN 11%</td><td>${fmt(ppn)}</td><td></td></tr>
+    ${isPpnActive ? `<tr class="inv-total-row"><td colspan="3" style="text-align:right">PPN 11%</td><td>${fmt(ppn)}</td><td></td></tr>` : ''}
     <tr class="inv-total-row" style="font-size:13px"><td colspan="3" style="text-align:right">TOTAL</td><td>${fmt(sub+ppn)}</td><td></td></tr>
   </table>
   <button class="add-row-btn" onclick="addInvRow()"><i class="ti ti-plus"></i> Tambah Manual Baris</button>`;
 }
+
 function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm();updatePreview();}
 function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm();updatePreview();}}
 function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
@@ -634,7 +647,7 @@ function runSystemFinansial() {
   btn.classList.add('loading');
 
   setTimeout(() => {
-    // Hanya mengisi angka dan deskripsi saja. Identitas form (nama/perusahaan) tetap kosong.
+    // Hanya mengisi angka dan deskripsi saja.
     if(currentTmpl.id === 'invoice') {
       invItems = [
         {desc: 'Jasa Konsultasi & Pengembangan Sistem', qty: 1, harga: 5000000},
@@ -719,7 +732,7 @@ function buildUniversalAIPreview() {
     html += meta;
   }
 
-  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks input Anda. ]</i>';
+  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks profil Anda. ]</i>';
   html += `<div style="white-space:pre-wrap; text-align:justify; font-size:11px; line-height:1.8; color:#111; margin-bottom:24px;">${aiContent}</div>`;
 
   let signHtml = uploadedSign 
@@ -746,7 +759,7 @@ function buildUniversalAIPreview() {
 // KHUSUS PREVIEW FINANSIAL
 function buildInvoicePreview(){
   const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
-  const ppn = Math.round(sub*0.11);
+  const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
   const total = sub+ppn;
   const rows = invItems.map(it=>`<tr><td>${it.desc||'—'}</td><td class="num">${it.qty}</td><td class="num">${fmt(it.harga)}</td><td class="num">${fmt(it.qty*it.harga)}</td></tr>`).join('');
   
@@ -776,7 +789,7 @@ function buildInvoicePreview(){
   </table>
   <div style="display:flex;flex-direction:column;align-items:flex-end;margin-top:16px;font-family:Arial">
     <div style="display:flex;gap:24px;font-size:10.5px;color:#555;margin-bottom:4px"><span>Subtotal</span><span>${fmt(sub)}</span></div>
-    <div style="display:flex;gap:24px;font-size:10.5px;color:#555;margin-bottom:6px"><span>PPN 11%</span><span>${fmt(ppn)}</span></div>
+    ${isPpnActive ? `<div style="display:flex;gap:24px;font-size:10.5px;color:#555;margin-bottom:6px"><span>PPN 11%</span><span>${fmt(ppn)}</span></div>` : ''}
     <div style="display:flex;gap:24px;font-size:12.5px;font-weight:900;color:#111;border-top:1px solid #ddd;padding-top:6px"><span>TOTAL</span><span>${fmt(total)}</span></div>
   </div>`;
 }
@@ -872,6 +885,7 @@ function exportDoc(fmt){
 function resetForm(){
   document.querySelectorAll('.fi').forEach(el=> { if(el.tagName!=='SELECT' && el.type!=='date') el.value=''; });
   step3done=false;
+  isPpnActive=false; // Reset PPN ke False
   document.getElementById('st2').className='step active';
   document.getElementById('st3').className='step';
   document.getElementById('st3').querySelector('.step-dot').textContent='3';
@@ -889,6 +903,8 @@ function resetForm(){
   // Set kembali date form
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
   
+  // Render ulang untuk me-reset checklist PPN
+  renderForm();
   updatePreview();
   toast('🔄','Seluruh isian form telah direset');
 }
