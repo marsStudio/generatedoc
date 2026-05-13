@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v10</title>
+<title>Smart Dokumen Indonesia — v12</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -91,7 +91,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .cp-purple{background:var(--pl);color:var(--p)}
 
 /* BODY SPLIT */
-.gen-body{flex:1;display:grid;grid-template-columns:1fr 420px;overflow:hidden}
+.gen-body{flex:1;display:grid;grid-template-columns:1fr 440px;overflow:hidden}
 .form-col{overflow-y:auto;padding:24px 28px}
 .prev-col{border-left:1px solid var(--bd);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 .prev-head{padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
@@ -144,7 +144,7 @@ textarea.fi{resize:vertical;min-height:80px}
 .inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
 .inv-table th{background:var(--bg2);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--i3);border:1px solid var(--bd)}
 .inv-table td{padding:9px 12px;border:1px solid var(--bd)}
-.inv-table td input,.inv-table td select{width:100%;border:none;background:transparent;font-size:12px;font-weight:500;font-family:var(--fb);color:var(--i);outline:none;padding:2px 0}
+.inv-table td input,.inv-table td select{width:100%;border:none;background:transparent;font-size:12px;font-weight:500;font-family:var(--fb);color:var(--i);outline:none;padding:2px 0;min-width:60px}
 .inv-table tr:last-child td{border-bottom:1px solid var(--bd)}
 .add-row-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--bm);cursor:pointer;padding:10px 0;border:none;background:none;font-family:var(--fb)}
 .add-row-btn:hover{color:var(--p)}
@@ -152,7 +152,7 @@ textarea.fi{resize:vertical;min-height:80px}
 .inv-total-row td{font-weight:700;color:var(--i)}
 
 /* DOCUMENT PAPER (A4 Ratio) */
-.doc-paper{background:#fff;border-radius:8px;box-shadow:var(--sh2);padding:40px 36px;font-size:11px;line-height:1.85;color:#111;min-height:550px;font-family:'Times New Roman',serif}
+.doc-paper{background:#fff;border-radius:8px;box-shadow:var(--sh2);padding:40px 36px;font-size:11px;line-height:1.85;color:#111;min-height:550px;font-family:'Times New Roman',serif;overflow:hidden;}
 .doc-paper h3,.doc-paper h2,.doc-paper p,.doc-paper td,.doc-paper th{color:#111}
 .dp-lh{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:3px double #333}
 .dp-org-name{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#111;font-family:Arial,sans-serif;margin-bottom:2px}
@@ -190,16 +190,33 @@ textarea.fi{resize:vertical;min-height:80px}
 .step-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--i4);flex-shrink:0;background:var(--s)}
 .step.done .step-dot{background:var(--p);border-color:var(--p);color:#fff}
 .step.active .step-dot{background:var(--p);border-color:var(--p);color:#fff;box-shadow:0 0 0 3px var(--pl)}
-.step-label{font-size:12px;font-weight:700;color:var(--i4)}
+.step-label{font-size:12px;font-weight:700;color:var(--i4);white-space:nowrap}
 .step.active .step-label, .step.done .step-label{color:var(--p)}
 .step-line{flex:1;height:1px;background:var(--bd);margin:0 12px}
 
-@media(max-width:992px){
+@media(max-width:1024px){
   .gen-body{grid-template-columns:1fr; overflow-y:auto;}
-  .form-col{overflow-y:visible; padding:20px;}
-  .prev-col{border-left:none; border-top:2px solid var(--bd); min-height:500px;}
+  .form-col{overflow-y:visible; padding:24px;}
+  .prev-col{border-left:none; border-top:2px solid var(--bd); min-height:600px;}
 }
-@media(max-width:768px){.lsb{display:none}}
+@media(max-width:768px){
+  .lsb{display:none}
+  .fr { grid-template-columns: 1fr; gap:10px; }
+  .upload-row { grid-template-columns: 1fr !important; gap:10px; }
+  .inv-table { display:block; overflow-x:auto; white-space:nowrap; }
+  .doc-paper { padding: 24px 20px; font-size: 10px; }
+}
+@media(max-width:576px){
+  .nav { padding: 0 16px; gap: 8px; }
+  .logo-t { display: none; }
+  .nav-links { margin-left: 0; }
+  .gen-top { flex-direction: column; gap: 16px; padding: 16px 20px; }
+  .gen-top > div:last-child { width: 100%; display: flex; justify-content: stretch; }
+  .gen-top > div:last-child button { flex: 1; justify-content: center; }
+  .exp-row { flex-direction: column; }
+  .steps-bar { padding: 12px 20px; overflow-x: auto; scrollbar-width: none; }
+  .steps-bar::-webkit-scrollbar { display: none; }
+}
 </style>
 </head>
 <body>
@@ -215,8 +232,8 @@ textarea.fi{resize:vertical;min-height:80px}
   </div>
   <div class="nav-r">
     <button class="ibt" onclick="toggleDark()" id="dk-btn" title="Dark mode"><i class="ti ti-moon"></i></button>
-    <button class="btn btn-ghost btn-sm" onclick="exportDoc('DOCX')"><i class="ti ti-file-word"></i> DOCX</button>
-    <button class="btn btn-red btn-sm" style="background:var(--p)" onclick="exportDoc('PDF')"><i class="ti ti-file-type-pdf"></i> PDF</button>
+    <button class="btn btn-ghost btn-sm" onclick="exportDoc('DOCX')" title="Unduh Word"><i class="ti ti-file-word"></i> <span class="hide-mobile">DOCX</span></button>
+    <button class="btn btn-red btn-sm" style="background:var(--p)" onclick="exportDoc('PDF')" title="Unduh PDF"><i class="ti ti-file-type-pdf"></i> <span class="hide-mobile">PDF</span></button>
   </div>
 </nav>
 
@@ -245,7 +262,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span><i class="ti ti-bolt"></i> Tersedia Pengisian Otomatis</span>
+          <span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -333,7 +350,7 @@ function getFormDef(tmpl) {
     else if(tmpl.id === 'slip_gaji') fields = [
       {id:'company',label:'Perusahaan',type:'text'},
       {id:'nama',label:'Nama Karyawan',type:'text'},
-      [{id:'posisi',label:'Jabatan',type:'text'}, {id:'periode',label:'Periode',type:'text',val:'Mei 2026'}],
+      [{id:'posisi',label:'Jabatan',type:'text'}, {id:'periode',label:'Periode',type:'text'}],
       {id:'gaji_pokok',label:'Gaji Pokok (Rp)',type:'text'},
       {id:'tunj_transport',label:'Tunjangan Transport',type:'text'}
     ];
@@ -344,8 +361,7 @@ function getFormDef(tmpl) {
       {id:'untuk',label:'Untuk Pembayaran',type:'text'}
     ];
 
-    // Dihapus flag aiFin agar tidak ada fitur auto-generate untuk template finansial
-    return { hasLogo: hasLogo, hasSign: hasSign, sections: [{title: 'Data Dokumen', fields: fields}] };
+    return { hasLogo: hasLogo, hasSign: hasSign, aiFin: true, sections: [{title: 'Data Dokumen', fields: fields}] };
   }
 
   let headerFields = [];
@@ -353,21 +369,21 @@ function getFormDef(tmpl) {
 
   if(['warga', 'rtrw'].includes(tmpl.cat)) {
     headerFields = [
-      {id:'nomor',label:'Nomor Surat',type:'text',val:'001/DOC/V/2026'},
+      {id:'nomor',label:'Nomor Surat',type:'text'},
       {id:'org',label:hasLogo ? 'Nama Institusi / RT' : 'Judul / Perihal',type:'text'},
       [{id:'nama',label:'Nama Pemohon',type:'text'}, {id:'nik',label:'NIK / ID',type:'text'}]
     ];
     footerFields = [
-      [{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
-      [{id:'jabatan',label:'Jabatan Penandatangan',type:'text',val:hasLogo?'Ketua RT':''},{id:'ketua',label:'Nama Penandatangan',type:'text'}]
+      [{id:'kota',label:'Kota TTD',type:'text'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
+      [{id:'jabatan',label:'Jabatan Penandatangan',type:'text'},{id:'ketua',label:'Nama Penandatangan',type:'text'}]
     ];
   } else if(['karier', 'hr'].includes(tmpl.cat)) {
     headerFields = [
-      {id:'company',label:'Nama Perusahaan',type:'text'},
-      [{id:'nama',label:'Nama Subjek (Karyawan/Pelamar)',type:'text'}, {id:'posisi',label:'Jabatan Terkait',type:'text'}]
+      {id:'company',label:'Nama Perusahaan / Instansi Tujuan',type:'text'},
+      [{id:'nama',label:'Nama Subjek (Karyawan/Pelamar)',type:'text'}, {id:'posisi',label:'Posisi / Jabatan',type:'text'}]
     ];
     footerFields = [
-      [{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
+      [{id:'kota',label:'Kota TTD',type:'text'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
       {id:'ketua',label:'Nama Penandatangan',type:'text'}
     ];
   } else { 
@@ -375,7 +391,7 @@ function getFormDef(tmpl) {
       {id:'p1',label:'Pihak Pertama (1)',type:'text'},
       {id:'p2',label:'Pihak Kedua (2)',type:'text'}
     ];
-    footerFields = [[{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}]];
+    footerFields = [[{id:'kota',label:'Kota TTD',type:'text'},{id:'tanggal',label:'Tanggal TTD',type:'date'}]];
   }
 
   return {
@@ -457,6 +473,17 @@ function renderForm() {
     html += `</div>`;
   }
 
+  if(def.aiFin) {
+    html += `
+    <div class="ai-wrap" style="padding:20px; margin-top:0">
+      <div class="ai-head"><i class="ti ti-bolt"></i> 1-Click Document Filler</div>
+      <p class="ai-desc" style="margin-bottom:16px;">Sistem akan menghasilkan baris item/data finansial secara acak untuk keperluan demonstrasi.</p>
+      <button class="ai-btn" id="ai-btn-fin" style="margin:0" onclick="runSystemFinansial()">
+        <i class="ti ti-wand"></i> Auto-Generate Data Tabel Dummy
+      </button>
+    </div>`;
+  }
+
   def.sections.forEach(sec => {
     html += `<div class="fsec">${sec.title}</div>`;
     
@@ -464,7 +491,7 @@ function renderForm() {
       html += `
       <div class="ai-wrap">
         <div class="ai-head"><i class="ti ti-settings"></i> System Auto-Writer</div>
-        <p class="ai-desc">Sistem akan menyusun kerangka teks, pasal, atau paragraf secara instan dan profesional sesuai standar dokumen yang dipilih.</p>
+        <p class="ai-desc">Sistem akan membaca form di atas (Posisi, Perusahaan, dll) dan menyusun kerangka teks profesional secara instan.</p>
         <button class="ai-btn" id="ai-btn" onclick="runSystemSimulation()"><i class="ti ti-bolt"></i> Auto-Generate Isi Dokumen</button>
         <textarea class="fi" id="f-ai_content" style="margin-top:20px; min-height:160px; font-family:'Times New Roman',serif; font-size:14px; line-height:1.6; display:none;" oninput="updatePreview()" placeholder="Hasil generate..."></textarea>
       </div>`;
@@ -485,22 +512,25 @@ function renderForm() {
   if(currentTmpl.id === 'invoice') html += renderInvoiceExtras();
 
   document.getElementById('form-col').innerHTML = html;
+  
+  // Setel tanggal hari ini khusus untuk input type date yang kosong
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
+  
   document.querySelectorAll('.fi').forEach(el=>el.addEventListener('input',updatePreview));
 }
 
 function renderField(f) {
   if(f.type==='textarea') return `<div class="fg"><label class="fl">${f.label}</label><textarea class="fi" id="f-${f.id}" oninput="updatePreview()">${f.val||''}</textarea></div>`;
   if(f.type==='date') return `<div class="fg"><label class="fl">${f.label}</label><input type="date" class="fi" id="f-${f.id}" oninput="updatePreview()"></div>`;
-  return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" oninput="updatePreview()"></div>`;
+  return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" placeholder="Ketik di sini..." oninput="updatePreview()"></div>`;
 }
 
 function renderInvoiceExtras() {
   let rows = invItems.map((it,i)=>`
     <tr>
-      <td><input value="${it.desc}" oninput="invItems[${i}].desc=this.value;updatePreview()"></td>
+      <td><input value="${it.desc}" placeholder="Deskripsi jasa..." oninput="invItems[${i}].desc=this.value;updatePreview()"></td>
       <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value;updatePreview()" style="text-align:center"></td>
-      <td><input type="number" value="${it.harga}" oninput="invItems[${i}].harga=+this.value;updatePreview()"></td>
+      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value;updatePreview()"></td>
       <td style="width:80px;text-align:right;font-weight:600">${fmt(it.qty*it.harga)}</td>
       <td style="width:30px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
     </tr>`).join('');
@@ -549,34 +579,36 @@ function handleImageUpload(input, type) {
 function runSystemSimulation() {
   const btn = document.getElementById('ai-btn');
   const area = document.getElementById('f-ai_content');
-  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Memproses Data...';
+  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Merangkai Konteks...';
   btn.classList.add('loading');
   
   area.style.display = 'block';
 
-  const p1 = document.getElementById('f-nama'); if(p1 && !p1.value) p1.value = 'Setyadi Aprilianto';
-  const p2 = document.getElementById('f-kota'); if(p2 && !p2.value) p2.value = 'Jakarta';
-  const p3 = document.getElementById('f-posisi'); if(p3 && !p3.value) p3.value = 'Project Manager';
-  const c1 = document.getElementById('f-company'); if(c1 && !c1.value) c1.value = 'PT Uniktif Media Indonesia';
+  // LOGIKA DINAMIS: MEMBACA NILAI DARI FORM YANG DIISI USER
+  const nama = g('nama') || '[Nama Pemohon/Subjek]';
+  const posisi = g('posisi') || '[Posisi/Jabatan]';
+  const company = g('company') || '[Nama Perusahaan/Instansi]';
+  const p1 = g('p1') || '[Pihak Pertama]';
+  const p2 = g('p2') || '[Pihak Kedua]';
   
   let txt = "";
   const id = currentTmpl.id;
 
   setTimeout(() => {
     if(id === 'lamaran') {
-      txt = "Dengan hormat,\n\nSaya bermaksud menyampaikan ketertarikan saya untuk mengisi posisi Project Manager. Saya memiliki rekam jejak yang solid dalam memimpin siklus pengembangan perangkat lunak (SDLC), khususnya pada ekosistem teknologi berbasis .NET.\n\nSelain manajemen proyek, saya juga memiliki pengalaman teknis hands-on dalam mengimplementasikan pengujian otomatis (automated testing) menggunakan framework Playwright untuk flow sistem pembayaran e-commerce, serta terbiasa menyusun dokumen FSD dan TSD secara terstruktur.\n\nSebagai pendukung efisiensi operasional harian, saya telah terbiasa menggunakan ekosistem pengembangan perangkat macOS, seperti MacBook Pro M1, guna memastikan stabilitas proses kolaborasi dan testing.\n\nBesar harapan saya untuk mendiskusikan peluang kerja sama ini lebih lanjut secara langsung. Atas waktu dan perhatian Bapak/Ibu, saya ucapkan terima kasih.";
+      txt = `Dengan hormat,\n\nMelalui surat ini, saya bermaksud menyampaikan ketertarikan saya untuk melamar posisi ${posisi} di ${company}. Saya memiliki latar belakang pendidikan dan rekam jejak pengalaman yang relevan dengan kualifikasi yang dibutuhkan untuk posisi tersebut.\n\nSaya terbiasa bekerja dalam tim maupun secara mandiri, serta memiliki komitmen untuk terus belajar dan beradaptasi dengan lingkungan kerja yang dinamis. Saya yakin bahwa keterampilan yang saya miliki dapat memberikan kontribusi positif bagi pencapaian target ${company}.\n\nBesar harapan saya agar Bapak/Ibu bersedia memberikan kesempatan wawancara, sehingga saya dapat menjelaskan lebih detail mengenai kualifikasi dan potensi yang saya miliki.\n\nAtas waktu dan pertimbangan Bapak/Ibu, saya ucapkan terima kasih.`;
     } else if(id === 'form_cuti') {
-      txt = "Bersama formulir administrasi ini, saya mengajukan permohonan cuti selama 3 (tiga) hari kerja.\n\nAdapun cuti yang saya ajukan ini merupakan alokasi penggunaan hak Carry Over Leave dari sisa cuti tahunan periode sebelumnya yang belum sempat terpakai. Selama masa absen saya, tanggung jawab pemantauan dan koordinasi tim proyek .NET akan dialihkan sementara kepada rekan terkait agar operasional tetap berjalan sesuai SLA yang telah ditentukan.\n\nMohon peninjauan dan persetujuan dari Bapak/Ibu atas pengajuan ini.";
+      txt = `Bersama formulir administrasi ini, saya mengajukan permohonan cuti untuk keperluan pribadi/keluarga.\n\nSelama masa absen tersebut, saya telah memastikan bahwa seluruh tanggung jawab operasional terkait posisi saya sebagai ${posisi} akan didelegasikan dan dikomunikasikan dengan baik kepada rekan tim terkait. Hal ini bertujuan agar seluruh alur pekerjaan dan target departemen tetap berjalan sesuai dengan timeline yang telah ditentukan.\n\nMohon peninjauan dan persetujuan dari Bapak/Ibu atas pengajuan cuti ini.`;
     } else if(id === 'pks' || id === 'mou') {
-      txt = "PASAL 1 - RUANG LINGKUP\nKedua belah pihak sepakat bekerja sama secara institusional dalam pengembangan infrastruktur verifikasi digital. Pihak Pertama menangani platform inti yang memproses sistem registrasi vendor (mencakup 17 tahapan alur verifikasi dokumen beruntun yang disepakati).\n\nPASAL 2 - INTEGRASI\nPihak Kedua bertanggung jawab secara penuh untuk mengintegrasikan mesin verifikasi menggunakan environment server IAPAYS atau OGS, sebelum proses eksekusi pencatatan akhirnya diteruskan ke sistem SAP.\n\nPASAL 3 - KETENTUAN KHUSUS\nSistem yang diintegrasikan wajib mampu mengakomodir fungsionalitas perhitungan aksi korporasi pasar modal secara otomatis, seperti kemampuan kalkulasi akurat terhadap Harga Teoritis pada saat proses eksekusi Right Issue.";
+      txt = `PASAL 1 - RUANG LINGKUP KERJA SAMA\n${p1} dan ${p2} sepakat untuk menjalin kerja sama strategis dalam ruang lingkup yang telah disetujui bersama, dengan mengedepankan prinsip profesionalisme dan saling menguntungkan.\n\nPASAL 2 - HAK DAN KEWAJIBAN\nPara pihak wajib melaksanakan seluruh komitmen operasional maupun administratif sesuai dengan kesepakatan awal. Rincian teknis pelaksanaan akan diatur lebih lanjut dalam lampiran terpisah yang menjadi satu kesatuan dengan dokumen ini.\n\nPASAL 3 - PENYELESAIAN SENGKETA\nApabila terjadi perbedaan penafsiran atau perselisihan dalam pelaksanaan kerja sama ini, ${p1} dan ${p2} sepakat untuk menyelesaikannya secara musyawarah mufakat.`;
     } else if(id === 'kontrak') {
-      txt = "PASAL 1 - PENEMPATAN\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama sebagai Project Manager untuk mengawal pengembangan infrastruktur .NET.\n\nPASAL 2 - FASILITAS\nPihak Pertama akan meminjamkan alat kerja berupa 1 (satu) unit perangkat MacBook Pro M1 yang wajib dipelihara kondisinya dan dikembalikan saat periode kontrak dinyatakan berakhir.\n\nPASAL 3 - TUGAS KHUSUS\nPihak Kedua bertanggung jawab mengawasi implementasi dan standarisasi logika aplikasi internal (termasuk modul operasional booking ruangan), dengan validasi sistem mutlak yang melarang pembuatan transaksi backdate (tanggal mundur) serta memastikan visibilitas operasional berjalan stabil hingga pukul 20:00 setiap harinya.";
+      txt = `PASAL 1 - PENEMPATAN DAN TUGAS\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama dan akan menempati posisi sebagai ${posisi}. Pihak Kedua wajib melaksanakan tugas dan tanggung jawabnya sesuai dengan standar operasional (SOP) yang ditetapkan oleh ${company}.\n\nPASAL 2 - FASILITAS DAN KOMPENSASI\nAtas pelaksanaan pekerjaan tersebut, Pihak Pertama berkewajiban memberikan hak-hak Pihak Kedua berupa kompensasi finansial dan fasilitas penunjang kerja sesuai dengan peraturan perusahaan yang berlaku.\n\nPASAL 3 - KETENTUAN KEDISIPLINAN\nPihak Kedua wajib mematuhi seluruh peraturan kedisiplinan dan menjaga kerahasiaan data (confidentiality) milik perusahaan selama masa kontrak maupun setelah kontrak berakhir.`;
     } else if(id === 'resign') {
-      txt = "Melalui surat ini, saya bermaksud menyampaikan pengunduran diri saya secara administratif dari posisi Project Manager, efektif berlaku terhitung satu bulan sejak tanggal penyerahan dokumen ini.\n\nSaya sangat mengapresiasi arahan manajemen dan kerja sama tim selama ini. Saya berkomitmen penuh untuk menyusun dan menyelesaikan proses serah terima (handover) terkait seluruh tugas dokumentasi dan eksekusi proyek .NET yang sedang berjalan agar proses transisi dapat dilanjutkan dengan lancar tanpa hambatan prosedural.";
+      txt = `Melalui surat ini, saya bermaksud menyampaikan pengunduran diri saya secara resmi dari posisi ${posisi} di ${company}, efektif berlaku terhitung satu bulan sejak tanggal penyerahan dokumen ini sesuai dengan ketentuan yang berlaku.\n\nSaya sangat mengapresiasi arahan manajemen dan kesempatan berharga yang telah diberikan selama saya bergabung. Saya berkomitmen penuh untuk menyusun dan menyelesaikan proses serah terima (handover) seluruh tugas dan tanggung jawab saya kepada rekan yang ditunjuk, agar transisi operasional dapat berjalan dengan lancar tanpa hambatan.\n\nSaya berharap yang terbaik untuk kesuksesan dan kemajuan ${company} di masa mendatang.`;
     } else if(id === 'pengantar_rt' || id === 'domisili') {
-      txt = "Yang bertanda tangan di bawah ini menerangkan dengan sesungguhnya bahwa nama yang bersangkutan yang tercantum dalam dokumen ini adalah benar warga/penduduk yang berdomisili sah di wilayah administrasi kami.\n\nBerdasarkan catatan kependudukan yang kami miliki, yang bersangkutan berkelakuan baik, mematuhi tata tertib lingkungan, dan tidak pernah memiliki catatan riwayat masalah hukum apa pun.\n\nDemikian dokumen keterangan ini diterbitkan sebagai pemenuhan syarat kelengkapan administrasi yang bersangkutan. Agar pihak-pihak instansi terkait yang berkepentingan dapat memakluminya.";
+      txt = `Yang bertanda tangan di bawah ini menerangkan dengan sesungguhnya bahwa saudara/i ${nama} adalah benar warga/penduduk yang berdomisili sah di wilayah administrasi kami.\n\nBerdasarkan pengamatan dan catatan kependudukan yang kami miliki, yang bersangkutan senantiasa berkelakuan baik, mematuhi tata tertib lingkungan, dan tidak pernah memiliki catatan riwayat pelanggaran hukum atau norma masyarakat apa pun.\n\nDemikian surat keterangan ini diterbitkan untuk dipergunakan sebagai syarat kelengkapan administrasi. Agar instansi terkait yang berkepentingan dapat memakluminya dan memberikan pelayanan sebagaimana mestinya.`;
     } else {
-      txt = "Dokumen ini diterbitkan oleh sistem sebagai wujud perikatan atau permohonan yang resmi secara administratif.\n\nSubjek yang tercantum dalam dokumen ini menyatakan telah menyetujui seluruh ketentuan dan klausul yang tertuang di dalamnya. Segala bentuk perbedaan pendapat teknis atau sengketa prosedural yang mungkin timbul di masa mendatang disarankan untuk diselesaikan terlebih dahulu melalui proses musyawarah mufakat. Jika penyelesaian secara kekeluargaan tidak membuahkan hasil, tahapan penyelesaian akan merujuk pada standar ketentuan hukum yang berlaku umum.";
+      txt = `Dokumen ini diterbitkan oleh sistem sebagai wujud perikatan atau permohonan yang resmi secara administratif.\n\nSubjek yang tercantum dalam dokumen ini menyatakan telah menyetujui seluruh ketentuan dan klausul yang tertuang di dalamnya. Segala bentuk perbedaan pendapat teknis atau sengketa prosedural yang mungkin timbul di masa mendatang disarankan untuk diselesaikan terlebih dahulu melalui proses musyawarah mufakat. Jika penyelesaian secara kekeluargaan tidak membuahkan hasil, tahapan penyelesaian akan merujuk pada standar ketentuan hukum yang berlaku umum.`;
     }
 
     area.value = '';
@@ -586,20 +618,48 @@ function runSystemSimulation() {
         area.value += txt.charAt(i);
         i++;
         updatePreview();
-        setTimeout(typeIt, 10);
+        setTimeout(typeIt, 5);
       } else {
         btn.innerHTML = '<i class="ti ti-check"></i> Selesai Disusun';
         btn.classList.remove('loading');
-        setTimeout(() => { btn.innerHTML = '<i class="ti ti-bolt"></i> Generate Ulang Dokumen'; }, 2000);
+        setTimeout(() => { btn.innerHTML = '<i class="ti ti-bolt"></i> Auto-Generate Ulang'; }, 2000);
       }
     }
     typeIt();
   }, 500);
 }
 
+function runSystemFinansial() {
+  const btn = document.getElementById('ai-btn-fin');
+  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Menyiapkan Data Dummy...';
+  btn.classList.add('loading');
+
+  setTimeout(() => {
+    // Hanya mengisi angka dan deskripsi saja. Identitas form (nama/perusahaan) tetap kosong sesuai request.
+    if(currentTmpl.id === 'invoice') {
+      invItems = [
+        {desc: 'Jasa Konsultasi & Pengembangan Sistem', qty: 1, harga: 5000000},
+        {desc: 'Biaya Maintenance & Server (Bulan berjalan)', qty: 1, harga: 1500000}
+      ];
+    } else if(currentTmpl.id === 'slip_gaji') {
+      const f3 = document.getElementById('f-gaji_pokok'); if(f3 && !f3.value) f3.value = '5000000';
+      const f4 = document.getElementById('f-tunj_transport'); if(f4 && !f4.value) f4.value = '1000000';
+    } else if(currentTmpl.id === 'kwitansi') {
+      const f3 = document.getElementById('f-jumlah'); if(f3 && !f3.value) f3.value = '2500000';
+      const f4 = document.getElementById('f-untuk'); if(f4 && !f4.value) f4.value = 'Pembayaran Jasa Termin 1';
+    }
+
+    renderForm(); 
+    updatePreview();
+    btn.innerHTML = '<i class="ti ti-check"></i> Tabel Disusun';
+    btn.classList.remove('loading');
+    setTimeout(() => { btn.innerHTML = '<i class="ti ti-wand"></i> Generate Ulang Tabel'; }, 2000);
+  }, 600);
+}
+
 // ═══════════════ PREVIEW BUILDER ═══════════════
 function g(id){const el=document.getElementById('f-'+id);return el?el.value:'';}
-function fmtDate(d){if(!d)return '13 Mei 2026';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
+function fmtDate(d){if(!d)return '...';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
 
 function updatePreview(){
   const prev = document.getElementById('doc-preview');
@@ -630,8 +690,8 @@ function buildUniversalAIPreview() {
         ${logoHtml}
       </div>
       <div style="flex:1">
-        <div class="dp-org-name">${g('org') || g('company') || g('p1') || 'NAMA INSTITUSI / PERUSAHAAN'}</div>
-        <div class="dp-org-sub">Dokumen Dihasilkan secara Otomatis oleh Sistem</div>
+        <div class="dp-org-name">${g('org') || g('company') || g('p1') || '[ NAMA INSTITUSI / PERUSAHAAN KOP ]'}</div>
+        <div class="dp-org-sub">Dokumen Resmi</div>
       </div>
     </div>`;
   } else {
@@ -639,28 +699,28 @@ function buildUniversalAIPreview() {
   }
 
   if(isResmi) {
-    html += `<div style="text-align:right; font-size:11px; margin-bottom:18px">${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</div>
-             <div style="font-size:11px; margin-bottom:20px">Kepada Yth.<br><strong>HRD / Manajemen</strong><br>${g('company')||'Perusahaan Terkait'}<br>di Tempat</div>`;
+    html += `<div style="text-align:right; font-size:11px; margin-bottom:18px">${g('kota')||'[Kota]'}, ${g('tanggal')?fmtDate(g('tanggal')):'[Tanggal]'}</div>
+             <div style="font-size:11px; margin-bottom:20px">Kepada Yth.<br><strong>HRD / Manajemen</strong><br>${g('company')||'[Nama Perusahaan Tujuan]'}<br>di Tempat</div>`;
   }
 
   html += `<div class="dp-doc-title"><h2>${currentTmpl.name.toUpperCase()}</h2></div>`;
   if(g('nomor')) html += `<div class="dp-doc-num">Nomor: ${g('nomor')}</div>`;
 
   let meta = '';
-  if(g('nama') || g('p2')) {
+  if(g('nama') || g('p2') || g('nik') || g('posisi') || g('p1')) {
     meta = `<table class="dp-tbl" style="margin-bottom:16px; border:1px solid #eee; background:#fafafa;">`;
-    if(g('nama')) meta += `<tr><td style="padding:8px;width:30%">Nama Terkait</td><td style="padding:8px;width:5%">:</td><td style="padding:8px"><strong>${g('nama')}</strong></td></tr>`;
-    if(g('nik')) meta += `<tr><td style="padding:8px">NIK / ID</td><td style="padding:8px">:</td><td style="padding:8px">${g('nik')}</td></tr>`;
-    if(g('posisi')) meta += `<tr><td style="padding:8px">Jabatan / Posisi</td><td style="padding:8px">:</td><td style="padding:8px">${g('posisi')}</td></tr>`;
-    if(g('p1') && g('p2')) {
-      meta += `<tr><td style="padding:8px">Pihak Pertama</td><td style="padding:8px">:</td><td style="padding:8px"><strong>${g('p1')}</strong></td></tr>`;
-      meta += `<tr><td style="padding:8px">Pihak Kedua</td><td style="padding:8px">:</td><td style="padding:8px"><strong>${g('p2')}</strong></td></tr>`;
+    if(g('nama') || isResmi || currentTmpl.cat==='warga') meta += `<tr><td style="padding:8px;width:30%">Nama Terkait</td><td style="padding:8px;width:5%">:</td><td style="padding:8px"><strong>${g('nama')||'[Nama]'}</strong></td></tr>`;
+    if(g('nik') || currentTmpl.cat==='warga') meta += `<tr><td style="padding:8px">NIK / ID</td><td style="padding:8px">:</td><td style="padding:8px">${g('nik')||'[NIK]'}</td></tr>`;
+    if(g('posisi') || isResmi) meta += `<tr><td style="padding:8px">Jabatan / Posisi</td><td style="padding:8px">:</td><td style="padding:8px">${g('posisi')||'[Posisi]'}</td></tr>`;
+    if(isLegal) {
+      meta += `<tr><td style="padding:8px;width:30%">Pihak Pertama</td><td style="padding:8px;width:5%">:</td><td style="padding:8px"><strong>${g('p1')||'[Pihak 1]'}</strong></td></tr>`;
+      meta += `<tr><td style="padding:8px">Pihak Kedua</td><td style="padding:8px">:</td><td style="padding:8px"><strong>${g('p2')||'[Pihak 2]'}</strong></td></tr>`;
     }
     meta += `</table>`;
     html += meta;
   }
 
-  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan klik tombol "Auto-Generate Isi Dokumen" pada form di sebelah kiri untuk menghasilkan draf kalimat dokumen secara otomatis via sistem. ]</i>';
+  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan lengkapi form di sebelah kiri lalu klik tombol "Auto-Generate Isi Dokumen" untuk menghasilkan draf kalimat yang menyesuaikan dengan konteks profil Anda. ]</i>';
   html += `<div style="white-space:pre-wrap; text-align:justify; font-size:11px; line-height:1.8; color:#111; margin-bottom:24px;">${aiContent}</div>`;
 
   let signHtml = uploadedSign 
@@ -669,15 +729,15 @@ function buildUniversalAIPreview() {
 
   if(isLegal) {
     html += `<div style="display:flex; justify-content:space-between; text-align:center; margin-top:40px; font-size:11px">
-      <div style="width:45%"><p>Pihak Pertama</p><div style="height:70px;display:flex;align-items:center;justify-content:center">${uploadedSign?`<img src="${uploadedSign}" style="max-height:50px">`:''}</div><p><strong>( ${g('p1')||'_______________'} )</strong></p></div>
-      <div style="width:45%"><p>Pihak Kedua</p><div style="height:70px"></div><p><strong>( ${g('p2')||'_______________'} )</strong></p></div>
+      <div style="width:45%"><p>Pihak Pertama</p><div style="height:70px;display:flex;align-items:center;justify-content:center">${uploadedSign?`<img src="${uploadedSign}" style="max-height:50px">`:''}</div><p><strong>( ${g('p1')||'[Nama Pihak 1]'} )</strong></p></div>
+      <div style="width:45%"><p>Pihak Kedua</p><div style="height:70px"></div><p><strong>( ${g('p2')||'[Nama Pihak 2]'} )</strong></p></div>
     </div>`;
   } else {
     html += `<div class="dp-sign"><div class="dp-sign-box">
-      ${!isResmi ? `<p>${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</p>` : '<p>Hormat saya,</p>'}
+      ${!isResmi ? `<p>${g('kota')||'[Kota]'}, ${g('tanggal')?fmtDate(g('tanggal')):'[Tanggal]'}</p>` : '<p>Hormat saya,</p>'}
       <p>${g('jabatan')||''}</p>
       ${signHtml}
-      <p style="${uploadedSign ? '' : 'margin-top:-10px'}"><strong>( ${g('ketua') || g('nama') || '________________'} )</strong></p>
+      <p style="${uploadedSign ? '' : 'margin-top:-10px'}"><strong>( ${g('ketua') || g('nama') || '[Nama Terang]'} )</strong></p>
     </div></div>`;
   }
 
@@ -698,18 +758,18 @@ function buildInvoicePreview(){
     <div class="inv-prev-from">
       ${logoHtml}
       <div style="display:inline-block; vertical-align:middle">
-        <strong>${g('from_company')||'Pengirim'}</strong>Dokumen Tagihan Resmi
+        <strong>${g('from_company')||'[Nama Pengirim]'}</strong><br>Dokumen Tagihan Resmi
       </div>
     </div>
     <div>
       <div class="inv-badge">INVOICE</div>
       <div style="font-size:10.5px;color:#555;font-family:Arial;margin-top:6px;text-align:right">
-        No: ${g('inv_no')||'INV/001'}<br>Tgl: ${fmtDate(g('inv_tanggal'))}
+        No: ${g('inv_no')||'INV/001'}<br>Tgl: ${g('inv_tanggal')?fmtDate(g('inv_tanggal')):'[Tanggal]'}
       </div>
     </div>
   </div>
   <div style="font-family:Arial;font-size:10.5px;margin-bottom:12px">
-    <strong>Ditagihkan kepada:</strong><br><strong style="font-size:12px">${g('to_company')||'Klien'}</strong>
+    <strong>Ditagihkan kepada:</strong><br><strong style="font-size:12px">${g('to_company')||'[Nama Klien]'}</strong>
   </div>
   <table class="inv-prev-tbl">
     <thead><tr><th>Deskripsi Layanan</th><th class="num">Qty</th><th class="num">Harga</th><th class="num">Subtotal</th></tr></thead>
@@ -731,13 +791,13 @@ function buildSlipGajiPreview(){
   return `
   <div style="background:#333;color:#fff;padding:16px 20px;border-radius:4px 4px 0 0;font-family:Arial;display:flex;justify-content:space-between;align-items:center">
     <div>
-      <h3 style="font-size:14px;color:#fff;display:flex;align-items:center">${logoHtml} ${g('company')||'PT Perusahaan'}</h3>
-      <p style="font-size:10.5px;opacity:.8;color:#ddd;margin-top:4px">SLIP GAJI — ${g('periode')||'Mei 2026'}</p>
+      <h3 style="font-size:14px;color:#fff;display:flex;align-items:center">${logoHtml} ${g('company')||'[Nama Perusahaan]'}</h3>
+      <p style="font-size:10.5px;opacity:.8;color:#ddd;margin-top:4px">SLIP GAJI — ${g('periode')||'[Periode]'}</p>
     </div>
   </div>
   <div style="border:1px solid #ddd;border-top:none;font-family:Arial">
     <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">DATA KARYAWAN</div>
-    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>${g('nama')||'Nama Karyawan'}</span><span>${g('posisi')||'Jabatan'}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>${g('nama')||'[Nama Karyawan]'}</span><span>${g('posisi')||'[Jabatan]'}</span></div>
     <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">PENDAPATAN</div>
     <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Gaji Pokok</span><span>${fmt(gp)}</span></div>
     <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Tunjangan Transport</span><span>${fmt(tt)}</span></div>
@@ -753,14 +813,14 @@ function buildKwitansiPreview(){
   <div style="border:2px solid #333;border-radius:6px;font-family:Arial">
     <div style="background:#333;color:#fff;padding:14px 20px;display:flex;justify-content:space-between">
       <div><div style="font-size:16px;font-weight:900;display:flex;align-items:center">${logoHtml} KWITANSI</div></div>
-      <div style="text-align:right;font-size:10.5px;color:#ddd;display:flex;align-items:center">${fmtDate(g('tanggal'))}</div>
+      <div style="text-align:right;font-size:10.5px;color:#ddd;display:flex;align-items:center">${g('tanggal')?fmtDate(g('tanggal')):'[Tanggal]'}</div>
     </div>
     <div style="padding:20px">
       <table class="dp-tbl" style="font-size:11px">
-        <tr><td style="padding:4px 0">Diterima oleh</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('from_name')||'—'}</strong></td></tr>
-        <tr><td style="padding:4px 0">Diterima dari</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('dari')||'—'}</strong></td></tr>
+        <tr><td style="padding:4px 0">Diterima oleh</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('from_name')||'[Penerima]'}</strong></td></tr>
+        <tr><td style="padding:4px 0">Diterima dari</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('dari')||'[Pengirim]'}</strong></td></tr>
         <tr><td style="padding:4px 0">Nominal</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong style="color:#111;font-size:14px">Rp ${jml.replace(/\D/g,'')?Number(jml.replace(/\D/g,'')).toLocaleString('id-ID'):jml}</strong></td></tr>
-        <tr><td style="padding:4px 0;vertical-align:top">Keperluan</td><td style="padding:4px 0;vertical-align:top">:</td><td style="padding:4px 0;line-height:1.6">${g('untuk')||'—'}</td></tr>
+        <tr><td style="padding:4px 0;vertical-align:top">Keperluan</td><td style="padding:4px 0;vertical-align:top">:</td><td style="padding:4px 0;line-height:1.6">${g('untuk')||'[Keterangan Transaksi]'}</td></tr>
       </table>
     </div>
   </div>`;
@@ -826,6 +886,9 @@ function resetForm(){
   if(elLogo) elLogo.textContent = 'Klik untuk pilih (PNG/JPG)';
   const elSign = document.getElementById('name-sign');
   if(elSign) elSign.textContent = 'Klik untuk pilih (Transparan)';
+  
+  // Set kembali date form
+  document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
   
   updatePreview();
   toast('🔄','Seluruh isian form telah direset');
