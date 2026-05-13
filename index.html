@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v9 Dinamis</title>
+<title>Smart Dokumen Indonesia — v10</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -119,7 +119,6 @@ body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;
 .fi::placeholder{color:var(--i4)}
 textarea.fi{resize:vertical;min-height:80px}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fhint{font-size:11px;color:var(--i4);margin-top:4px;display:flex;align-items:center;gap:4px}
 
 /* UPLOAD ZONES */
 .upload-row{display:grid;gap:14px;margin-bottom:24px}
@@ -152,7 +151,7 @@ textarea.fi{resize:vertical;min-height:80px}
 .inv-total-row{background:var(--bg2)}
 .inv-total-row td{font-weight:700;color:var(--i)}
 
-/* DOCUMENT PAPER */
+/* DOCUMENT PAPER (A4 Ratio) */
 .doc-paper{background:#fff;border-radius:8px;box-shadow:var(--sh2);padding:40px 36px;font-size:11px;line-height:1.85;color:#111;min-height:550px;font-family:'Times New Roman',serif}
 .doc-paper h3,.doc-paper h2,.doc-paper p,.doc-paper td,.doc-paper th{color:#111}
 .dp-lh{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:3px double #333}
@@ -246,7 +245,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
+          <span><i class="ti ti-bolt"></i> Tersedia Pengisian Otomatis</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -311,7 +310,6 @@ let currentTmpl = TEMPLATES[0];
 let invItems = [{desc:'',qty:1,harga:0}];
 let step3done = false;
 
-// Variabel untuk menampung gambar
 let uploadedLogo = '';
 let uploadedSign = '';
 
@@ -320,7 +318,6 @@ function getFormDef(tmpl) {
   let hasLogo = true;
   let hasSign = true;
   
-  // LOGIKA DINAMIS: Template personal/individu otomatis TIDAK punya Kop Surat/Logo
   if(['kuasa', 'lamaran', 'resign', 'form_cuti'].includes(tmpl.id)) {
       hasLogo = false;
   }
@@ -347,7 +344,8 @@ function getFormDef(tmpl) {
       {id:'untuk',label:'Untuk Pembayaran',type:'text'}
     ];
 
-    return { hasLogo: hasLogo, hasSign: hasSign, aiFin: true, sections: [{title: 'Data Dokumen', fields: fields}] };
+    // Dihapus flag aiFin agar tidak ada fitur auto-generate untuk template finansial
+    return { hasLogo: hasLogo, hasSign: hasSign, sections: [{title: 'Data Dokumen', fields: fields}] };
   }
 
   let headerFields = [];
@@ -413,7 +411,6 @@ function selectTemplate(id) {
   currentTmpl = TEMPLATES.find(t=>t.id===id)||TEMPLATES[0];
   step3done=false;
   
-  // Reset gambar saat pindah template
   uploadedLogo = '';
   uploadedSign = '';
   
@@ -438,7 +435,6 @@ function renderForm() {
   const def = getFormDef(currentTmpl);
   let html = '';
 
-  // AREA UPLOAD FILE (DINAMIS SESUAI JENIS DOKUMEN)
   if(def.hasLogo || def.hasSign) {
     html += `<div class="fsec">Identitas & Lampiran</div>
     
@@ -461,21 +457,9 @@ function renderForm() {
     html += `</div>`;
   }
 
-  if(def.aiFin) {
-    html += `
-    <div class="ai-wrap" style="padding:20px; margin-top:0">
-      <div class="ai-head"><i class="ti ti-bolt"></i> 1-Click Document Filler</div>
-      <p class="ai-desc" style="margin-bottom:16px;">Sistem dapat memprediksi dan mengisi struktur tabel finansial secara otomatis.</p>
-      <button class="ai-btn" id="ai-btn-fin" style="margin:0" onclick="runSystemFinansial()">
-        <i class="ti ti-wand"></i> Auto-Generate Data Tabel
-      </button>
-    </div>`;
-  }
-
   def.sections.forEach(sec => {
     html += `<div class="fsec">${sec.title}</div>`;
     
-    // RENDER BLOK AUTO WRITER SISTEM
     if(sec.ai) {
       html += `
       <div class="ai-wrap">
@@ -498,7 +482,7 @@ function renderForm() {
     }
   });
 
-  if(def.aiFin && currentTmpl.id === 'invoice') html += renderInvoiceExtras();
+  if(currentTmpl.id === 'invoice') html += renderInvoiceExtras();
 
   document.getElementById('form-col').innerHTML = html;
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
@@ -562,7 +546,6 @@ function handleImageUpload(input, type) {
 }
 
 // ═══════════════ SYSTEM AUTO-WRITER LOGIC ═══════════════
-
 function runSystemSimulation() {
   const btn = document.getElementById('ai-btn');
   const area = document.getElementById('f-ai_content');
@@ -614,40 +597,6 @@ function runSystemSimulation() {
   }, 500);
 }
 
-function runSystemFinansial() {
-  const btn = document.getElementById('ai-btn-fin');
-  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Menarik Data...';
-  btn.classList.add('loading');
-
-  setTimeout(() => {
-    if(currentTmpl.id === 'invoice') {
-      const f1 = document.getElementById('f-from_company'); if(f1) f1.value = 'PT Uniktif Media Indonesia';
-      const f2 = document.getElementById('f-to_company'); if(f2) f2.value = 'PT Barito Pacific Tbk';
-      invItems = [
-        {desc: 'Pengembangan & Maintenance Website Corporate', qty: 1, harga: 15000000},
-        {desc: 'Integrasi Verifikasi Engine IAPAYS ke SAP', qty: 1, harga: 8500000}
-      ];
-    } else if(currentTmpl.id === 'slip_gaji') {
-      const f1 = document.getElementById('f-nama'); if(f1) f1.value = 'Setyadi Aprilianto';
-      const f2 = document.getElementById('f-posisi'); if(f2) f2.value = 'Project Manager';
-      const f3 = document.getElementById('f-gaji_pokok'); if(f3) f3.value = '18000000';
-      const f4 = document.getElementById('f-tunj_transport'); if(f4) f4.value = '15000000';
-      const c1 = document.getElementById('f-company'); if(c1) c1.value = 'PT Uniktif Media Indonesia';
-    } else if(currentTmpl.id === 'kwitansi') {
-      const f1 = document.getElementById('f-from_name'); if(f1) f1.value = 'Setyadi Aprilianto';
-      const f2 = document.getElementById('f-dari'); if(f2) f2.value = 'PT Mars Jawara Indonesia';
-      const f3 = document.getElementById('f-jumlah'); if(f3) f3.value = '5000000';
-      const f4 = document.getElementById('f-untuk'); if(f4) f4.value = 'Jasa maintenance dan pembaruan struktur data Wikipedia';
-    }
-
-    renderForm(); 
-    updatePreview();
-    btn.innerHTML = '<i class="ti ti-check"></i> Tabel Disusun';
-    btn.classList.remove('loading');
-    setTimeout(() => { btn.innerHTML = '<i class="ti ti-wand"></i> Auto-Generate Ulang Data'; }, 2000);
-  }, 700);
-}
-
 // ═══════════════ PREVIEW BUILDER ═══════════════
 function g(id){const el=document.getElementById('f-'+id);return el?el.value:'';}
 function fmtDate(d){if(!d)return '13 Mei 2026';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
@@ -670,7 +619,6 @@ function buildUniversalAIPreview() {
   const isLegal = currentTmpl.cat === 'legal';
   const def = getFormDef(currentTmpl);
 
-  // KOP SURAT (Dinamis: Ada yang punya kop, ada yang tidak)
   let html = '';
   if(def.hasLogo) {
     let logoHtml = uploadedLogo 
@@ -687,7 +635,6 @@ function buildUniversalAIPreview() {
       </div>
     </div>`;
   } else {
-    // Kalau tanpa kop, berikan margin tambahan di atas
     html += `<div style="margin-top:20px;"></div>`;
   }
 
