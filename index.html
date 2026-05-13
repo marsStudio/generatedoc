@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v14</title>
+<title>Smart Dokumen Indonesia — v15</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -331,6 +331,9 @@ let isPpnActive = false; // PPN Toggle State
 let uploadedLogo = '';
 let uploadedSign = '';
 
+// ═══════════════ FORMAT ANGKA RUPIAH UTILS ═══════════════
+function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
+
 // ═══════════════ DYNAMIC FORM GENERATOR ═══════════════
 function getFormDef(tmpl) {
   let hasLogo = true;
@@ -453,6 +456,7 @@ function renderForm() {
   const def = getFormDef(currentTmpl);
   let html = '';
 
+  // AREA UPLOAD FILE (DINAMIS SESUAI JENIS DOKUMEN)
   if(def.hasLogo || def.hasSign) {
     html += `<div class="fsec">Identitas & Lampiran</div>
     
@@ -489,6 +493,7 @@ function renderForm() {
   def.sections.forEach(sec => {
     html += `<div class="fsec">${sec.title}</div>`;
     
+    // RENDER BLOK AUTO WRITER SISTEM
     if(sec.ai) {
       html += `
       <div class="ai-wrap">
@@ -516,7 +521,6 @@ function renderForm() {
   document.getElementById('form-col').innerHTML = html;
   
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
-  
   document.querySelectorAll('.fi').forEach(el=>el.addEventListener('input',updatePreview));
 }
 
@@ -526,13 +530,31 @@ function renderField(f) {
   return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" placeholder="Ketik di sini..." oninput="updatePreview()"></div>`;
 }
 
+// FUNGSI UPDATE DOM LIVE TANPA RE-RENDER (AGAR TIDAK HILANG FOCUS KETIKA MENGETIK)
+function updateFormTotals() {
+  const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
+  const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
+  
+  invItems.forEach((it, i) => {
+     const el = document.getElementById('form-row-sub-' + i);
+     if(el) el.textContent = fmt(it.qty * it.harga);
+  });
+  
+  const elSub = document.getElementById('form-subtotal');
+  if(elSub) elSub.textContent = fmt(sub);
+  const elPpn = document.getElementById('form-ppn');
+  if(elPpn) elPpn.textContent = fmt(ppn);
+  const elTot = document.getElementById('form-total');
+  if(elTot) elTot.textContent = fmt(sub + ppn);
+}
+
 function renderInvoiceExtras() {
   let rows = invItems.map((it,i)=>`
     <tr>
-      <td><input value="${it.desc}" placeholder="Deskripsi jasa..." oninput="invItems[${i}].desc=this.value;updatePreview()"></td>
-      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value;updatePreview()" style="text-align:center"></td>
-      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value;updatePreview()"></td>
-      <td style="width:80px;text-align:right;font-weight:600">${fmt(it.qty*it.harga)}</td>
+      <td><input value="${it.desc}" placeholder="Deskripsi jasa..." oninput="invItems[${i}].desc=this.value; updatePreview()"></td>
+      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value; updateFormTotals(); updatePreview()" style="text-align:center"></td>
+      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value; updateFormTotals(); updatePreview()"></td>
+      <td style="width:80px;text-align:right;font-weight:600" id="form-row-sub-${i}">${fmt(it.qty*it.harga)}</td>
       <td style="width:30px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
     </tr>`).join('');
     
@@ -551,16 +573,15 @@ function renderInvoiceExtras() {
   <table class="inv-table">
     <thead><tr><th>Deskripsi</th><th>Qty</th><th>Harga Satuan</th><th>Subtotal</th><th></th></tr></thead>
     <tbody id="inv-tbody">${rows}</tbody>
-    <tr class="inv-total-row"><td colspan="3" style="text-align:right">Subtotal</td><td>${fmt(sub)}</td><td></td></tr>
-    ${isPpnActive ? `<tr class="inv-total-row"><td colspan="3" style="text-align:right">PPN 11%</td><td>${fmt(ppn)}</td><td></td></tr>` : ''}
-    <tr class="inv-total-row" style="font-size:13px"><td colspan="3" style="text-align:right">TOTAL</td><td>${fmt(sub+ppn)}</td><td></td></tr>
+    <tr class="inv-total-row"><td colspan="3" style="text-align:right">Subtotal</td><td id="form-subtotal">${fmt(sub)}</td><td></td></tr>
+    ${isPpnActive ? `<tr class="inv-total-row"><td colspan="3" style="text-align:right">PPN 11%</td><td id="form-ppn">${fmt(ppn)}</td><td></td></tr>` : ''}
+    <tr class="inv-total-row" style="font-size:13px"><td colspan="3" style="text-align:right">TOTAL</td><td id="form-total">${fmt(sub+ppn)}</td><td></td></tr>
   </table>
   <button class="add-row-btn" onclick="addInvRow()"><i class="ti ti-plus"></i> Tambah Manual Baris</button>`;
 }
 
 function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm();updatePreview();}
 function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm();updatePreview();}}
-function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
 
 // ═══════════════ UPLOAD LOGIC ═══════════════
 function handleImageUpload(input, type) {
@@ -647,7 +668,6 @@ function runSystemFinansial() {
   btn.classList.add('loading');
 
   setTimeout(() => {
-    // Hanya mengisi angka dan deskripsi saja.
     if(currentTmpl.id === 'invoice') {
       invItems = [
         {desc: 'Jasa Konsultasi & Pengembangan Sistem', qty: 1, harga: 5000000},
