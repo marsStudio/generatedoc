@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Dokumen Indonesia — v16</title>
+<title>Smart Dokumen Indonesia — v17</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -141,7 +141,7 @@ textarea.fi{resize:vertical;min-height:80px}
 @keyframes spin{100%{transform:rotate(360deg)}}
 .ti-spin{animation:spin 1s linear infinite}
 
-/* INVOICE ITEMS TABLE */
+/* INVOICE & SLIP TABLE */
 .inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
 .inv-table th{background:var(--bg2);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--i3);border:1px solid var(--bd)}
 .inv-table td{padding:9px 12px;border:1px solid var(--bd)}
@@ -170,7 +170,7 @@ textarea.fi{resize:vertical;min-height:80px}
 .dp-sign-box{text-align:center}
 .dp-sign-box p{font-size:10.5px;color:#111}
 
-/* INVOICE PREVIEW */
+/* INVOICE & SLIP PREVIEW (FINANSIAL PREVIEW) */
 .inv-prev-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #333}
 .inv-prev-from{font-family:Arial,sans-serif;font-size:10px;color:#555}
 .inv-prev-from strong{font-size:13px;color:#111;display:block;margin-bottom:3px}
@@ -233,7 +233,7 @@ textarea.fi{resize:vertical;min-height:80px}
   </div>
   <div class="nav-r">
     <button class="ibt" onclick="toggleDark()" id="dk-btn" title="Dark mode"><i class="ti ti-moon"></i></button>
-    </div>
+  </div>
 </nav>
 
 <div class="shell">
@@ -261,7 +261,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
         <div class="gen-meta">
           <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
-          <span><i class="ti ti-bolt"></i> Tersedia Pengisian Otomatis</span>
+          <span id="gen-mode"><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
         </div>
       </div>
       <div style="display:flex;gap:10px;align-items:center">
@@ -323,7 +323,12 @@ const TEMPLATES = [
 ];
 
 let currentTmpl = TEMPLATES[0];
-let invItems = [{desc:'',qty:1,harga:0}];
+
+// State untuk tabel Dinamis
+let invItems = [{desc:'',qty:1,harga:0}]; // Untuk Invoice
+let earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan',amount:0}]; // Untuk Slip Gaji (Pendapatan)
+let deductItems = [{desc:'BPJS',amount:0}]; // Untuk Slip Gaji (Potongan)
+
 let step3done = false;
 let isPpnActive = false;
 
@@ -354,8 +359,6 @@ function getFormDef(tmpl) {
       {id:'company',label:'Perusahaan',type:'text'},
       {id:'nama',label:'Nama Karyawan',type:'text'},
       [{id:'posisi',label:'Jabatan',type:'text'}, {id:'periode',label:'Periode',type:'text'}],
-      {id:'gaji_pokok',label:'Gaji Pokok (Rp)',type:'text'},
-      {id:'tunj_transport',label:'Tunjangan Transport',type:'text'}
     ];
     else fields = [
       {id:'from_name',label:'Penerima Uang',type:'text'},
@@ -438,7 +441,11 @@ function selectTemplate(id) {
   document.getElementById('st3').querySelector('.step-dot').textContent='3';
   document.getElementById('st2').className='step active';
   
+  // Reset array tabel dinamis
   invItems = [{desc:'',qty:1,harga:0}];
+  earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan Transport',amount:0}];
+  deductItems = [{desc:'Pajak / PPh 21',amount:0}];
+  
   renderForm();
   
   document.querySelectorAll('.lsb-item').forEach(el => el.classList.remove('on'));
@@ -447,6 +454,11 @@ function selectTemplate(id) {
   
   document.getElementById('gen-title').textContent=currentTmpl.name;
   document.getElementById('gen-cat').textContent=CATS[currentTmpl.cat].label;
+  
+  // Ubah badge tulisan di atas
+  document.getElementById('gen-mode').innerHTML = currentTmpl.isFin 
+    ? `<span><i class="ti ti-calculator"></i> Kalkulasi Finansial Otomatis</span>`
+    : `<span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>`;
   
   updatePreview();
 }
@@ -477,7 +489,7 @@ function renderForm() {
     html += `</div>`;
   }
 
-  if(def.aiFin) {
+  if(currentTmpl.isFin) {
     html += `
     <div class="ai-wrap" style="padding:20px; margin-top:0">
       <div class="ai-head"><i class="ti ti-bolt"></i> 1-Click Document Filler</div>
@@ -513,7 +525,9 @@ function renderForm() {
     }
   });
 
+  // Render Ekstra Komponen Finansial
   if(currentTmpl.id === 'invoice') html += renderInvoiceExtras();
+  else if(currentTmpl.id === 'slip_gaji') html += renderSlipGajiExtras();
 
   document.getElementById('form-col').innerHTML = html;
   
@@ -527,8 +541,8 @@ function renderField(f) {
   return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" placeholder="Ketik di sini..." oninput="updatePreview()"></div>`;
 }
 
-// FUNGSI UPDATE DOM LIVE TANPA RE-RENDER (AGAR TIDAK HILANG FOCUS KETIKA MENGETIK)
-function updateFormTotals() {
+// ═══════════════ LIVE DOM UPDATE (Kalkulator) ═══════════════
+function updateInvoiceTotals() {
   const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
   const ppn = isPpnActive ? Math.round(sub*0.11) : 0;
   
@@ -545,12 +559,23 @@ function updateFormTotals() {
   if(elTot) elTot.textContent = fmt(sub + ppn);
 }
 
+function updateSlipGajiTotals() {
+  const totalEarn = earnItems.reduce((a,it)=>a+it.amount,0);
+  const totalDeduct = deductItems.reduce((a,it)=>a+it.amount,0);
+  
+  const elEarn = document.getElementById('form-earn-total');
+  if(elEarn) elEarn.textContent = fmt(totalEarn);
+  const elDeduct = document.getElementById('form-deduct-total');
+  if(elDeduct) elDeduct.textContent = fmt(totalDeduct);
+}
+
+// ═══════════════ INVOICE EXTRAS ═══════════════
 function renderInvoiceExtras() {
   let rows = invItems.map((it,i)=>`
     <tr>
       <td><input value="${it.desc}" placeholder="Deskripsi jasa..." oninput="invItems[${i}].desc=this.value; updatePreview()"></td>
-      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value; updateFormTotals(); updatePreview()" style="text-align:center"></td>
-      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value; updateFormTotals(); updatePreview()"></td>
+      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value; updateInvoiceTotals(); updatePreview()" style="text-align:center"></td>
+      <td><input type="number" value="${it.harga}" placeholder="0" oninput="invItems[${i}].harga=+this.value; updateInvoiceTotals(); updatePreview()"></td>
       <td style="width:80px;text-align:right;font-weight:600" id="form-row-sub-${i}">${fmt(it.qty*it.harga)}</td>
       <td style="width:30px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
     </tr>`).join('');
@@ -579,6 +604,49 @@ function renderInvoiceExtras() {
 
 function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm();updatePreview();}
 function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm();updatePreview();}}
+
+// ═══════════════ SLIP GAJI EXTRAS (DYNAMIC) ═══════════════
+function renderSlipGajiExtras() {
+  let earnRows = earnItems.map((it,i)=>`
+    <tr>
+      <td><input value="${it.desc}" placeholder="Deskripsi Pendapatan..." oninput="earnItems[${i}].desc=this.value; updatePreview()"></td>
+      <td><input type="number" value="${it.amount}" placeholder="0" oninput="earnItems[${i}].amount=+this.value; updateSlipGajiTotals(); updatePreview()"></td>
+      <td style="width:30px;text-align:center"><button onclick="removeEarnRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
+    </tr>`).join('');
+    
+  let deductRows = deductItems.map((it,i)=>`
+    <tr>
+      <td><input value="${it.desc}" placeholder="Deskripsi Potongan..." oninput="deductItems[${i}].desc=this.value; updatePreview()"></td>
+      <td><input type="number" value="${it.amount}" placeholder="0" oninput="deductItems[${i}].amount=+this.value; updateSlipGajiTotals(); updatePreview()"></td>
+      <td style="width:30px;text-align:center"><button onclick="removeDeductRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
+    </tr>`).join('');
+
+  const totalEarn = earnItems.reduce((a,it)=>a+it.amount,0);
+  const totalDeduct = deductItems.reduce((a,it)=>a+it.amount,0);
+
+  return `
+  <div class="fsec">Rincian Pendapatan</div>
+  <table class="inv-table">
+    <thead><tr><th>Deskripsi Pendapatan</th><th>Nominal (Rp)</th><th></th></tr></thead>
+    <tbody>${earnRows}</tbody>
+    <tr class="inv-total-row"><td style="text-align:right">Total Pendapatan</td><td id="form-earn-total" style="color:var(--gnm)">${fmt(totalEarn)}</td><td></td></tr>
+  </table>
+  <button class="add-row-btn" onclick="addEarnRow()"><i class="ti ti-plus"></i> Tambah Pendapatan</button>
+
+  <div class="fsec" style="margin-top:24px">Rincian Potongan</div>
+  <table class="inv-table">
+    <thead><tr><th>Deskripsi Potongan</th><th>Nominal (Rp)</th><th></th></tr></thead>
+    <tbody>${deductRows}</tbody>
+    <tr class="inv-total-row"><td style="text-align:right">Total Potongan</td><td id="form-deduct-total" style="color:var(--r)">${fmt(totalDeduct)}</td><td></td></tr>
+  </table>
+  <button class="add-row-btn" onclick="addDeductRow()"><i class="ti ti-plus"></i> Tambah Potongan</button>
+  `;
+}
+
+function addEarnRow(){earnItems.push({desc:'',amount:0});renderForm();updatePreview();}
+function removeEarnRow(i){earnItems.splice(i,1);renderForm();updatePreview();}
+function addDeductRow(){deductItems.push({desc:'',amount:0});renderForm();updatePreview();}
+function removeDeductRow(i){deductItems.splice(i,1);renderForm();updatePreview();}
 
 // ═══════════════ UPLOAD LOGIC ═══════════════
 function handleImageUpload(input, type) {
@@ -614,7 +682,6 @@ function runSystemSimulation() {
   
   area.style.display = 'block';
 
-  // LOGIKA DINAMIS: MEMBACA NILAI DARI FORM YANG DIISI USER
   const nama = g('nama') || '[Nama Pemohon/Subjek]';
   const posisi = g('posisi') || '[Posisi/Jabatan]';
   const company = g('company') || '[Nama Perusahaan/Instansi]';
@@ -671,8 +738,16 @@ function runSystemFinansial() {
         {desc: 'Biaya Maintenance & Server (Bulan berjalan)', qty: 1, harga: 1500000}
       ];
     } else if(currentTmpl.id === 'slip_gaji') {
-      const f3 = document.getElementById('f-gaji_pokok'); if(f3 && !f3.value) f3.value = '5000000';
-      const f4 = document.getElementById('f-tunj_transport'); if(f4 && !f4.value) f4.value = '1000000';
+      earnItems = [
+        {desc: 'Gaji Pokok', amount: 15000000},
+        {desc: 'Tunjangan Transport', amount: 2000000},
+        {desc: 'Tunjangan Komunikasi', amount: 500000}
+      ];
+      deductItems = [
+        {desc: 'BPJS Kesehatan', amount: 150000},
+        {desc: 'BPJS Ketenagakerjaan', amount: 300000},
+        {desc: 'Pajak PPh 21', amount: 500000}
+      ];
     } else if(currentTmpl.id === 'kwitansi') {
       const f3 = document.getElementById('f-jumlah'); if(f3 && !f3.value) f3.value = '2500000';
       const f4 = document.getElementById('f-untuk'); if(f4 && !f4.value) f4.value = 'Pembayaran Jasa Termin 1';
@@ -811,10 +886,20 @@ function buildInvoicePreview(){
   </div>`;
 }
 
+// FORMAT SLIP GAJI DINAMIS BARU
 function buildSlipGajiPreview(){
-  const gp=+g('gaji_pokok').replace(/\D/g,'')||0;
-  const tt=+g('tunj_transport').replace(/\D/g,'')||0;
-  
+  const totalEarn = earnItems.reduce((a,it)=>a+it.amount,0);
+  const totalDeduct = deductItems.reduce((a,it)=>a+it.amount,0);
+  const thp = totalEarn - totalDeduct;
+
+  const earnHtml = earnItems.map(it => `
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>${it.desc||'—'}</span><span>${fmt(it.amount)}</span></div>
+  `).join('');
+
+  const deductHtml = deductItems.map(it => `
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px;color:#c0392b"><span>${it.desc||'—'}</span><span>- ${fmt(it.amount)}</span></div>
+  `).join('');
+
   let logoHtml = uploadedLogo ? `<img src="${uploadedLogo}" style="max-height:30px; margin-right:10px; vertical-align:middle; border-radius:3px">` : '';
 
   return `
@@ -827,10 +912,18 @@ function buildSlipGajiPreview(){
   <div style="border:1px solid #ddd;border-top:none;font-family:Arial">
     <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">DATA KARYAWAN</div>
     <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>${g('nama')||'[Nama Karyawan]'}</span><span>${g('posisi')||'[Jabatan]'}</span></div>
+    
     <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">PENDAPATAN</div>
-    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Gaji Pokok</span><span>${fmt(gp)}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Tunjangan Transport</span><span>${fmt(tt)}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:12px 20px;background:#fdfdfd;font-weight:900;font-size:13px;color:#111"><span>TOTAL TAKE HOME PAY</span><span>${fmt(gp+tt)}</span></div>
+    ${earnHtml}
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px;font-weight:700;background:#fafafa"><span>Total Pendapatan</span><span>${fmt(totalEarn)}</span></div>
+
+    ${deductItems.length > 0 ? `
+    <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700;border-top:1px solid #ddd">POTONGAN</div>
+    ${deductHtml}
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px;font-weight:700;background:#fafafa"><span>Total Potongan</span><span style="color:#c0392b">- ${fmt(totalDeduct)}</span></div>
+    ` : ''}
+
+    <div style="display:flex;justify-content:space-between;padding:14px 20px;background:#fdfdfd;font-weight:900;font-size:13px;color:#111;border-top:2px solid #ddd"><span>TOTAL TAKE HOME PAY</span><span>${fmt(thp)}</span></div>
   </div>`;
 }
 
@@ -902,7 +995,7 @@ function exportDoc(fmt){
 function resetForm(){
   document.querySelectorAll('.fi').forEach(el=> { if(el.tagName!=='SELECT' && el.type!=='date') el.value=''; });
   step3done=false;
-  isPpnActive=false; // Reset PPN ke False
+  isPpnActive=false; 
   document.getElementById('st2').className='step active';
   document.getElementById('st3').className='step';
   document.getElementById('st3').querySelector('.step-dot').textContent='3';
@@ -917,10 +1010,13 @@ function resetForm(){
   const elSign = document.getElementById('name-sign');
   if(elSign) elSign.textContent = 'Klik untuk pilih (Transparan)';
   
-  // Set kembali date form
   document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
   
-  // Render ulang untuk me-reset checklist PPN
+  // Reset array tabel
+  invItems = [{desc:'',qty:1,harga:0}];
+  earnItems = [{desc:'Gaji Pokok',amount:0}, {desc:'Tunjangan Transport',amount:0}];
+  deductItems = [{desc:'Pajak / PPh 21',amount:0}];
+
   renderForm();
   updatePreview();
   toast('🔄','Seluruh isian form telah direset');
