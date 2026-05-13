@@ -3,664 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Dokumen Indonesia</title>
+<title>Smart Dokumen Indonesia — v9 Dinamis</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--r:#c0392b;--rd:#a93226;--rl:#fff0ee;--rm:#e74c3c;
+--b:#1a3a5c;--bm:#2471a3;--bl:#eaf3fb;
+--g:#d4a017;--gl:#fffaeb;
+--gn:#155a32;--gnm:#1e8449;--gnl:#e9f7ef;
+--p:#7e22ce;--pl:#faf5ff; --pm:#9333ea;
+--i:#111827;--i2:#374151;--i3:#6b7280;--i4:#9ca3af;
+--s:#fff;--bg:#f5f6f8;--bg2:#edf0f3;
+--bd:#e5e7eb;--bd2:#d1d5db;
+--fb:'Plus Jakarta Sans',sans-serif;
+--sh1:0 1px 3px rgba(0,0,0,.06);--sh2:0 4px 16px rgba(0,0,0,.08);--sh3:0 8px 32px rgba(0,0,0,.14);
+}
+[data-dark]{
+--r:#e05c4d;--rd:#c0392b;--rl:#2d1a18;--rm:#e74c3c;
+--b:#4a9fdb;--bm:#5dade2;--bl:#0f1f2d;
+--g:#f0b429;--gl:#2a1f00;
+--gn:#2ecc71;--gnm:#27ae60;--gnl:#0a1f0f;
+--p:#a855f7;--pl:#2d1b4e; --pm:#c084fc;
+--i:#f3f4f6;--i2:#d1d5db;--i3:#9ca3af;--i4:#6b7280;
+--s:#1e2024;--bg:#16181c;--bg2:#252830;
+--bd:#2d3139;--bd2:#3d4350;
+}
+body{font-family:var(--fb);background:var(--bg);color:var(--i);min-height:100vh;font-size:14px;line-height:1.6;transition:background .25s,color .25s}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
 
-  *{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --c-red:#c0392b;--c-red-light:#fef5f4;--c-red-mid:#e74c3c;
-    --c-blue:#1e3a5f;--c-blue-mid:#2980b9;--c-blue-light:#eaf3fb;
-    --c-gold:#d4a017;--c-gold-light:#fef9ec;
-    --c-green:#155724;--c-green-light:#d4edda;--c-green-mid:#28a745;
-    --c-gray-50:#f8f9fa;--c-gray-100:#f0f2f5;--c-gray-200:#e8ecf0;
-    --c-gray-300:#d1d9e0;--c-gray-500:#6c757d;--c-gray-700:#343a40;--c-gray-900:#1a1d20;
-    --c-white:#ffffff;
-    --font-display:'Bricolage Grotesque',sans-serif;
-    --font-body:'Plus Jakarta Sans',sans-serif;
-    --radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:20px;
-    --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md:0 4px 16px rgba(0,0,0,0.10);
-    --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
-  }
-  body{font-family:var(--font-body);background:var(--c-gray-50);color:var(--c-gray-900);min-height:100vh;font-size:14px}
+/* NAV */
+.nav{height:60px;background:var(--s);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 24px;gap:16px;position:sticky;top:0;z-index:300}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-m{width:32px;height:32px;background:linear-gradient(135deg,var(--p),var(--b));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--fb);font-weight:800;font-size:14px}
+.logo-t{font-family:var(--fb);font-weight:800;font-size:16px;color:var(--i);letter-spacing:-0.02em}
+.logo-t em{background:linear-gradient(135deg,var(--p),var(--b));-webkit-background-clip:text;color:transparent;font-style:normal}
+.nav-links{display:flex;gap:4px;margin-left:12px}
+.nl{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--i3);cursor:pointer;border:none;background:none;font-family:var(--fb);transition:all .15s}
+.nl:hover{color:var(--i);background:var(--bg2)}
+.nl.on{color:var(--p);background:var(--pl);font-weight:700}
+.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;border:none;font-family:var(--fb);transition:all .18s;line-height:1}
+.btn i{font-size:15px}
+.btn-ghost{background:transparent;color:var(--i3);border:1px solid var(--bd)}
+.btn-ghost:hover{color:var(--i);border-color:var(--bd2);background:var(--bg2)}
+.btn-red{background:var(--r);color:#fff}
+.btn-red:hover{background:var(--rd);transform:translateY(-1px);box-shadow:0 4px 12px rgba(192,57,43,.3)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.ibt{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--i3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s}
+.ibt:hover{color:var(--i);background:var(--bg2)}
 
-  /* NAV */
-  .nav{background:var(--c-white);border-bottom:1px solid var(--c-gray-200);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
-  .nav-logo-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--c-red),#e74c3c);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:800;font-family:var(--font-display)}
-  .nav-logo-text{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--c-gray-900)}
-  .nav-logo-text span{color:var(--c-red)}
-  .nav-links{display:flex;align-items:center;gap:4px}
-  .nav-link{padding:6px 12px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--c-gray-700);cursor:pointer;transition:all .15s;border:none;background:none}
-  .nav-link:hover{background:var(--c-gray-100)}
-  .nav-link.active{background:var(--c-red-light);color:var(--c-red)}
-  .nav-right{display:flex;align-items:center;gap:8px}
-  .btn{padding:7px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;border:none;font-family:var(--font-body)}
-  .btn-outline{background:transparent;border:1px solid var(--c-gray-300);color:var(--c-gray-700)}
-  .btn-outline:hover{border-color:var(--c-red);color:var(--c-red)}
-  .btn-primary{background:var(--c-red);color:white}
-  .btn-primary:hover{background:var(--c-red-mid);transform:translateY(-1px)}
-  .btn-blue{background:var(--c-blue);color:white}
-  .btn-blue:hover{background:var(--c-blue-mid)}
-  .btn-green{background:var(--c-green-mid);color:white}
-  .btn-green:hover{opacity:.9}
-  .btn-lg{padding:11px 24px;font-size:14px;border-radius:var(--radius-md)}
-  .btn-sm{padding:5px 12px;font-size:12px}
+/* LAYOUT */
+.shell{display:flex;height:calc(100vh - 60px);overflow:hidden}
 
-  /* PAGES */
-  .page{display:none;animation:fadeIn .25s ease}
-  .page.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* LEFT SIDEBAR */
+.lsb{width:260px;flex-shrink:0;background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column;overflow:hidden}
+.lsb-search{padding:16px;border-bottom:1px solid var(--bd)}
+.lsb-search-input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--bd2);border-radius:8px;font-size:13px;font-family:var(--fb);color:var(--i);background:var(--bg);outline:none;transition:border-color .15s}
+.lsb-search-input:focus{border-color:var(--p)}
+.lsb-search-input::placeholder{color:var(--i4)}
+.lsb-search-wrap{position:relative}
+.lsb-search-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--i4);font-size:16px}
+.lsb-scroll{flex:1;overflow-y:auto;padding:12px 0}
+.lsb-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--i4);padding:12px 16px 6px}
+.lsb-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--i3);transition:all .15s;border-right:3px solid transparent}
+.lsb-item:hover{background:var(--bg2);color:var(--i)}
+.lsb-item.on{background:var(--pl);color:var(--p);border-right-color:var(--p);font-weight:700}
+.lsb-item i{font-size:16px;flex-shrink:0}
 
-  /* LANDING */
-  .hero{background:var(--c-white);padding:72px 32px 80px;text-align:center;border-bottom:1px solid var(--c-gray-200)}
-  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--c-red-light);color:var(--c-red);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px}
-  .hero h1{font-family:var(--font-display);font-size:42px;font-weight:800;line-height:1.15;color:var(--c-gray-900);max-width:640px;margin:0 auto 16px}
-  .hero h1 span{color:var(--c-red)}
-  .hero p{font-size:16px;color:var(--c-gray-500);max-width:500px;margin:0 auto 32px;line-height:1.65}
-  .hero-cta{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
-  .hero-stats{display:flex;justify-content:center;gap:40px;margin-top:52px;padding-top:36px;border-top:1px solid var(--c-gray-200)}
-  .hero-stat{text-align:center}
-  .hero-stat-num{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--c-gray-900)}
-  .hero-stat-label{font-size:12px;color:var(--c-gray-500);margin-top:2px}
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 
-  /* CATEGORIES SECTION */
-  .section{padding:56px 32px;max-width:1080px;margin:0 auto}
-  .section-header{margin-bottom:32px}
-  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-red);margin-bottom:8px}
-  .section-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--c-gray-900)}
-  .section-sub{font-size:14px;color:var(--c-gray-500);margin-top:6px}
+/* GEN TOPBAR */
+.gen-top{padding:20px 28px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+.gen-title{font-family:var(--fb);font-size:24px;font-weight:800;color:var(--i);line-height:1.2;margin-bottom:6px;letter-spacing:-0.02em}
+.gen-meta{font-size:12.5px;font-weight:500;color:var(--i4);display:flex;align-items:center;gap:12px}
+.cpill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em}
+.cp-red{background:var(--rl);color:var(--r)}
+.cp-blue{background:var(--bl);color:var(--bm)}
+.cp-gold{background:var(--gl);color:var(--g)}
+.cp-green{background:var(--gnl);color:var(--gnm)}
+.cp-purple{background:var(--pl);color:var(--p)}
 
-  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-  .cat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 16px;cursor:pointer;transition:all .18s;text-align:center}
-  .cat-card:hover{border-color:var(--c-red);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-  .cat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px}
-  .cat-icon.red{background:var(--c-red-light);color:var(--c-red)}
-  .cat-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
-  .cat-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
-  .cat-icon.green{background:var(--c-green-light);color:var(--c-green-mid)}
-  .cat-icon.purple{background:#f0eeff;color:#7c3aed}
-  .cat-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
-  .cat-count{font-size:11px;color:var(--c-gray-500);margin-top:3px}
+/* BODY SPLIT */
+.gen-body{flex:1;display:grid;grid-template-columns:1fr 420px;overflow:hidden}
+.form-col{overflow-y:auto;padding:24px 28px}
+.prev-col{border-left:1px solid var(--bd);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.prev-head{padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.prev-head span{font-size:13px;font-weight:700;color:var(--i)}
+.live-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--gnm);background:var(--gnl);padding:4px 10px;border-radius:20px}
+.live-dot{width:6px;height:6px;background:var(--gnm);border-radius:50%;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.prev-scroll{flex:1;overflow-y:auto;padding:20px}
+.prev-actions{padding:16px 20px;border-top:1px solid var(--bd);background:var(--s);flex-shrink:0}
+.exp-row{display:flex;gap:10px}
+.exp-btn{flex:1;padding:10px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--fb);border:none;transition:all .18s}
+.exp-docx{background:var(--bl);color:var(--bm);border:1px solid rgba(36,113,163,.2)}
+.exp-docx:hover{background:#c5dff8}
+.exp-pdf{background:var(--pl);color:var(--p);border:1px solid #e9d5ff}
+.exp-pdf:hover{background:#f3e8ff}
 
-  /* TEMPLATE GRID */
-  .tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-  .tmpl-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .18s}
-  .tmpl-card:hover{border-color:var(--c-blue-mid);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-  .tmpl-preview{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-  .tmpl-preview-doc{width:70px;background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:8px 6px;box-shadow:var(--shadow-sm)}
-  .tmpl-preview-line{height:3px;background:var(--c-gray-200);border-radius:2px;margin-bottom:5px}
-  .tmpl-preview-line.title{height:4px;background:var(--c-gray-300);width:60%}
-  .tmpl-preview-line.short{width:50%}
-  .tmpl-preview-line.accent{background:var(--c-red);width:40%}
-  .tmpl-preview-badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
-  .tmpl-preview-badge.free{background:var(--c-green-light);color:var(--c-green)}
-  .tmpl-preview-badge.pro{background:var(--c-gold-light);color:var(--c-gold)}
-  .tmpl-info{padding:12px 14px}
-  .tmpl-name{font-size:13px;font-weight:600;color:var(--c-gray-900);margin-bottom:3px}
-  .tmpl-cat{font-size:11px;color:var(--c-gray-500)}
-  .tmpl-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-  .tmpl-use-btn{font-size:11px;font-weight:600;color:var(--c-red);cursor:pointer;padding:4px 10px;border:1px solid var(--c-red);border-radius:var(--radius-sm);background:none;font-family:var(--font-body)}
-  .tmpl-use-btn:hover{background:var(--c-red-light)}
+/* FORM ELEMENTS */
+.fsec{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--i3);margin:24px 0 14px;display:flex;align-items:center;gap:10px}
+.fsec::after{content:'';flex:1;height:1px;background:var(--bd)}
+.fg{margin-bottom:16px}
+.fl{font-size:12px;font-weight:700;color:var(--i2);margin-bottom:6px;display:flex;align-items:center;gap:4px;text-transform:uppercase;letter-spacing:.03em}
+.fl .req{color:var(--r)}
+.fi{width:100%;padding:10px 14px;border:1px solid var(--bd2);border-radius:8px;font-size:13.5px;font-family:var(--fb);font-weight:500;color:var(--i);background:var(--s);transition:all .15s;outline:none}
+.fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(168,85,247,.15)}
+.fi::placeholder{color:var(--i4)}
+textarea.fi{resize:vertical;min-height:80px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fhint{font-size:11px;color:var(--i4);margin-top:4px;display:flex;align-items:center;gap:4px}
 
-  /* FILTER PILLS */
-  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-  .filter-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-gray-300);background:var(--c-white);color:var(--c-gray-700);transition:all .15s}
-  .filter-pill:hover{border-color:var(--c-red);color:var(--c-red)}
-  .filter-pill.active{background:var(--c-red);border-color:var(--c-red);color:white}
+/* UPLOAD ZONES */
+.upload-row{display:grid;gap:14px;margin-bottom:24px}
+.upload-z{border:1.5px dashed var(--bd2);border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .18s;background:var(--bg)}
+.upload-z:hover{border-color:var(--p);background:var(--pl)}
+.upload-z i{font-size:24px;color:var(--i4);display:block;margin-bottom:6px;transition:color .18s}
+.upload-z:hover i{color:var(--p)}
+.upload-z p{font-size:13px;font-weight:700;color:var(--i3)}
+.upload-z span{font-size:11px;color:var(--i4);font-weight:500; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 
-  /* DASHBOARD */
-  .dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 58px)}
-  .dash-sidebar{background:var(--c-white);border-right:1px solid var(--c-gray-200);padding:20px 0}
-  .sidebar-section{margin-bottom:24px}
-  .sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-gray-500);padding:0 20px;margin-bottom:6px}
-  .sidebar-item{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;font-size:13px;font-weight:500;color:var(--c-gray-700);transition:all .15s}
-  .sidebar-item:hover{background:var(--c-gray-100)}
-  .sidebar-item.active{background:var(--c-red-light);color:var(--c-red);font-weight:600}
-  .sidebar-item i{font-size:16px}
-  .sidebar-badge{margin-left:auto;background:var(--c-red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+/* SYSTEM BOX STYLES */
+.ai-wrap{background:var(--bg);border:1px solid var(--bd2);border-radius:12px;padding:24px;margin:24px 0}
+[data-dark] .ai-wrap{background:#1a1c23;border-color:var(--bd2)}
+.ai-head{font-size:15px;font-weight:800;color:var(--i);display:flex;align-items:center;gap:8px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em}
+.ai-desc{font-size:13px;font-weight:500;color:var(--i3);margin-bottom:20px;line-height:1.5}
+.ai-btn{width:100%;padding:14px;border-radius:8px;background:var(--p);color:#fff;font-weight:700;font-size:14px;font-family:var(--fb);border:none;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:8px;transition:all 0.2s}
+.ai-btn:hover{background:var(--pm);transform:translateY(-1px);box-shadow:0 4px 12px rgba(168,85,247,0.25)}
+.ai-btn.loading{opacity:0.8;pointer-events:none}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.ti-spin{animation:spin 1s linear infinite}
 
-  .dash-main{padding:28px 32px;overflow-y:auto}
-  .dash-greeting{margin-bottom:28px}
-  .dash-greeting h2{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
-  .dash-greeting p{font-size:13px;color:var(--c-gray-500)}
+/* INVOICE ITEMS TABLE */
+.inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+.inv-table th{background:var(--bg2);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--i3);border:1px solid var(--bd)}
+.inv-table td{padding:9px 12px;border:1px solid var(--bd)}
+.inv-table td input,.inv-table td select{width:100%;border:none;background:transparent;font-size:12px;font-weight:500;font-family:var(--fb);color:var(--i);outline:none;padding:2px 0}
+.inv-table tr:last-child td{border-bottom:1px solid var(--bd)}
+.add-row-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--bm);cursor:pointer;padding:10px 0;border:none;background:none;font-family:var(--fb)}
+.add-row-btn:hover{color:var(--p)}
+.inv-total-row{background:var(--bg2)}
+.inv-total-row td{font-weight:700;color:var(--i)}
 
-  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
-  .stat-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 18px}
-  .stat-label{font-size:11px;font-weight:600;color:var(--c-gray-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-  .stat-label i{font-size:14px}
-  .stat-val{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--c-gray-900)}
-  .stat-change{font-size:11px;margin-top:4px}
-  .stat-change.up{color:var(--c-green-mid)}
-  .stat-change.neutral{color:var(--c-gray-500)}
+/* DOCUMENT PAPER */
+.doc-paper{background:#fff;border-radius:8px;box-shadow:var(--sh2);padding:40px 36px;font-size:11px;line-height:1.85;color:#111;min-height:550px;font-family:'Times New Roman',serif}
+.doc-paper h3,.doc-paper h2,.doc-paper p,.doc-paper td,.doc-paper th{color:#111}
+.dp-lh{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:3px double #333}
+.dp-org-name{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#111;font-family:Arial,sans-serif;margin-bottom:2px}
+.dp-org-sub{font-size:10px;color:#555;font-family:Arial,sans-serif}
+.dp-doc-title{text-align:center;font-family:Arial,sans-serif;margin:16px 0 6px}
+.dp-doc-title h2{font-size:13.5px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;text-decoration:underline;color:#111}
+.dp-doc-num{text-align:center;font-size:10.5px;color:#555;font-family:Arial,sans-serif;margin-bottom:16px}
+.dp-body{font-family:Arial,sans-serif}
+.dp-body p{font-size:11px;margin-bottom:6px;color:#111}
+.dp-tbl{width:100%;font-family:Arial,sans-serif;border-collapse:collapse;font-size:10.5px;margin:12px 0}
+.dp-tbl td:first-child{width:36%;color:#555;vertical-align:top}
+.dp-tbl td:nth-child(2){width:5%;vertical-align:top}
+.dp-sign{margin-top:32px;display:flex;justify-content:flex-end;font-family:Arial,sans-serif}
+.dp-sign-box{text-align:center}
+.dp-sign-box p{font-size:10.5px;color:#111}
 
-  .dash-row{display:grid;grid-template-columns:1fr 280px;gap:16px;margin-bottom:20px}
-  .panel{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px 20px}
-  .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-  .panel-title{font-size:14px;font-weight:700;color:var(--c-gray-900)}
-  .panel-action{font-size:12px;color:var(--c-red);cursor:pointer;font-weight:600}
+/* INVOICE PREVIEW */
+.inv-prev-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #333}
+.inv-prev-from{font-family:Arial,sans-serif;font-size:10px;color:#555}
+.inv-prev-from strong{font-size:13px;color:#111;display:block;margin-bottom:3px}
+.inv-badge{background:#333;color:#fff;font-size:14px;font-weight:900;font-family:Arial,sans-serif;padding:6px 14px;border-radius:3px}
+.inv-prev-tbl{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:10px;margin:14px 0}
+.inv-prev-tbl th{background:#f5f5f5;padding:8px 10px;text-align:left;font-weight:700;color:#333;border-bottom:1px solid #ddd}
+.inv-prev-tbl td{padding:8px 10px;border-bottom:1px solid #eee;color:#333}
+.inv-prev-tbl .num{text-align:right}
 
-  .doc-list-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--c-gray-100)}
-  .doc-list-item:last-child{border-bottom:none}
-  .doc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-  .doc-icon.red{background:var(--c-red-light);color:var(--c-red)}
-  .doc-icon.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
-  .doc-icon.gold{background:var(--c-gold-light);color:var(--c-gold)}
-  .doc-meta{flex:1}
-  .doc-name{font-size:13px;font-weight:600;color:var(--c-gray-900)}
-  .doc-date{font-size:11px;color:var(--c-gray-500);margin-top:2px}
-  .doc-actions{display:flex;gap:6px}
-  .doc-actions button{background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:var(--radius-sm);color:var(--c-gray-500);font-size:15px;transition:all .15s}
-  .doc-actions button:hover{background:var(--c-gray-100);color:var(--c-gray-900)}
+/* TOAST */
+.toast-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--i);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:var(--sh3);transform:translateX(110%);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.toast.show{transform:none}
 
-  .quick-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .quick-action{background:var(--c-gray-50);border:1px solid var(--c-gray-200);border-radius:var(--radius-md);padding:12px;cursor:pointer;transition:all .15s;text-align:center}
-  .quick-action:hover{border-color:var(--c-red);background:var(--c-red-light)}
-  .quick-action i{font-size:20px;color:var(--c-red);margin-bottom:5px}
-  .quick-action p{font-size:11px;font-weight:600;color:var(--c-gray-700)}
+/* STEPS */
+.steps-bar{display:flex;align-items:center;gap:0;padding:14px 28px;border-bottom:1px solid var(--bd);background:var(--bg);flex-shrink:0}
+.step{display:flex;align-items:center;gap:10px}
+.step-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--i4);flex-shrink:0;background:var(--s)}
+.step.done .step-dot{background:var(--p);border-color:var(--p);color:#fff}
+.step.active .step-dot{background:var(--p);border-color:var(--p);color:#fff;box-shadow:0 0 0 3px var(--pl)}
+.step-label{font-size:12px;font-weight:700;color:var(--i4)}
+.step.active .step-label, .step.done .step-label{color:var(--p)}
+.step-line{flex:1;height:1px;background:var(--bd);margin:0 12px}
 
-  /* GENERATOR */
-  .gen-layout{max-width:900px;margin:0 auto;padding:28px 32px}
-  .gen-header{margin-bottom:28px}
-  .gen-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
-  .gen-sub{font-size:13px;color:var(--c-gray-500)}
-
-  .gen-steps{display:flex;align-items:center;gap:0;margin-bottom:32px;background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:16px 20px}
-  .gen-step{display:flex;align-items:center;gap:10px;flex:1}
-  .gen-step-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-gray-300);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--c-gray-500);flex-shrink:0}
-  .gen-step.active .gen-step-num{background:var(--c-red);border-color:var(--c-red);color:white}
-  .gen-step.done .gen-step-num{background:var(--c-green-mid);border-color:var(--c-green-mid);color:white}
-  .gen-step-info p{font-size:12px;font-weight:600;color:var(--c-gray-700)}
-  .gen-step-info span{font-size:11px;color:var(--c-gray-500)}
-  .gen-step-sep{width:32px;height:1px;background:var(--c-gray-200);flex-shrink:0}
-
-  .gen-body{display:grid;grid-template-columns:1fr 300px;gap:16px}
-  .gen-form{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:22px}
-  .gen-preview{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-lg);padding:18px;position:sticky;top:74px}
-
-  .form-group{margin-bottom:16px}
-  .form-label{font-size:12px;font-weight:600;color:var(--c-gray-700);margin-bottom:6px;display:block}
-  .form-input{width:100%;padding:8px 12px;border:1px solid var(--c-gray-200);border-radius:var(--radius-sm);font-size:13px;font-family:var(--font-body);color:var(--c-gray-900);background:var(--c-white);transition:all .15s;outline:none}
-  .form-input:focus{border-color:var(--c-red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
-  .form-input::placeholder{color:var(--c-gray-300)}
-  textarea.form-input{resize:vertical;min-height:80px}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .form-hint{font-size:11px;color:var(--c-gray-500);margin-top:4px}
-  .form-divider{border:none;border-top:1px solid var(--c-gray-100);margin:20px 0}
-
-  .preview-doc{background:white;border:1px solid var(--c-gray-200);border-radius:4px;padding:16px 14px;font-size:10.5px;line-height:1.7;color:var(--c-gray-900);min-height:300px}
-  .preview-header{text-align:center;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--c-red)}
-  .preview-header .logo-placeholder{width:48px;height:48px;background:var(--c-gray-100);border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--c-gray-400)}
-  .preview-header h3{font-size:11px;font-weight:700;color:var(--c-gray-900)}
-  .preview-header p{font-size:9px;color:var(--c-gray-500)}
-  .preview-title{text-align:center;font-weight:700;font-size:11px;margin:10px 0;text-decoration:underline;text-transform:uppercase}
-  .preview-num{text-align:center;font-size:9px;color:var(--c-gray-500);margin-bottom:10px}
-  .preview-body p{margin-bottom:5px;font-size:9.5px}
-  .preview-sign{margin-top:20px;display:flex;justify-content:flex-end}
-  .preview-sign-box{text-align:center;width:100px}
-  .preview-sign-box p{font-size:9px}
-  .preview-sign-line{width:80px;height:1px;background:var(--c-gray-900);margin:24px auto 4px}
-
-  .preview-label{font-size:11px;font-weight:600;color:var(--c-gray-700);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-  .preview-badge{font-size:10px;background:var(--c-green-light);color:var(--c-green);padding:2px 8px;border-radius:20px;font-weight:600}
-
-  .export-row{display:flex;gap:8px;margin-top:14px}
-  .export-btn{flex:1;padding:9px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;font-family:var(--font-body)}
-  .export-btn.docx{background:var(--c-blue-light);color:var(--c-blue);border:1px solid #b5d4f4}
-  .export-btn.docx:hover{background:#c5dff8}
-  .export-btn.pdf{background:var(--c-red-light);color:var(--c-red);border:1px solid #f5c0bb}
-  .export-btn.pdf:hover{background:#fde0dd}
-
-  /* UPLOAD AREA */
-  .upload-area{border:2px dashed var(--c-gray-300);border-radius:var(--radius-md);padding:16px;text-align:center;cursor:pointer;transition:all .15s}
-  .upload-area:hover{border-color:var(--c-red);background:var(--c-red-light)}
-  .upload-area i{font-size:24px;color:var(--c-gray-400);margin-bottom:6px}
-  .upload-area p{font-size:12px;color:var(--c-gray-500)}
-
-  /* PRICING */
-  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto}
-  .pricing-card{background:var(--c-white);border:1px solid var(--c-gray-200);border-radius:var(--radius-xl);padding:28px 24px}
-  .pricing-card.featured{border:2px solid var(--c-red);position:relative}
-  .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--c-red);color:white;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
-  .pricing-name{font-size:13px;font-weight:700;color:var(--c-gray-500);margin-bottom:12px}
-  .pricing-price{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--c-gray-900);margin-bottom:4px}
-  .pricing-price span{font-size:14px;font-weight:500;color:var(--c-gray-500)}
-  .pricing-desc{font-size:12px;color:var(--c-gray-500);margin-bottom:20px}
-  .pricing-features{list-style:none;margin-bottom:24px}
-  .pricing-features li{font-size:13px;color:var(--c-gray-700);padding:5px 0;display:flex;align-items:center;gap:8px}
-  .pricing-features li i{color:var(--c-green-mid);font-size:15px}
-  .pricing-features li.off i{color:var(--c-gray-300)}
-  .pricing-features li.off{color:var(--c-gray-400)}
-
-  /* BADGE */
-  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
-  .badge.red{background:var(--c-red-light);color:var(--c-red)}
-  .badge.blue{background:var(--c-blue-light);color:var(--c-blue-mid)}
-  .badge.green{background:var(--c-green-light);color:var(--c-green)}
-  .badge.gold{background:var(--c-gold-light);color:var(--c-gold)}
-
-  /* TOAST */
-  .toast{position:fixed;bottom:24px;right:24px;background:var(--c-gray-900);color:white;padding:12px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:8px}
-  .toast.show{transform:translateY(0);opacity:1}
-
-  /* ADMIN */
-  .admin-table{width:100%;border-collapse:collapse}
-  .admin-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-gray-500);padding:8px 12px;border-bottom:1px solid var(--c-gray-200)}
-  .admin-table td{padding:10px 12px;border-bottom:1px solid var(--c-gray-100);font-size:13px;color:var(--c-gray-700)}
-  .admin-table tr:hover td{background:var(--c-gray-50)}
-
-  /* MODAL OVERLAY */
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
-  .modal-overlay.open{display:flex}
-  .modal{background:var(--c-white);border-radius:var(--radius-xl);width:560px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
-  .modal-header{padding:20px 24px;border-bottom:1px solid var(--c-gray-200);display:flex;align-items:center;justify-content:space-between}
-  .modal-title{font-size:16px;font-weight:700;font-family:var(--font-display)}
-  .modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-gray-500);padding:4px}
-  .modal-close:hover{color:var(--c-gray-900)}
-  .modal-body{padding:24px}
-
-  /* JSON PREVIEW */
-  .json-box{background:var(--c-gray-900);color:#a8d5a2;border-radius:var(--radius-md);padding:14px;font-family:monospace;font-size:11px;line-height:1.7;overflow-x:auto;white-space:pre}
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar{width:4px;height:4px}
-  ::-webkit-scrollbar-track{background:transparent}
-  ::-webkit-scrollbar-thumb{background:var(--c-gray-300);border-radius:4px}
-
-  /* RESPONSIVE */
-  @media(max-width:700px){
-    .hero h1{font-size:28px}
-    .hero-stats{gap:20px}
-    .dash-layout{grid-template-columns:1fr}
-    .dash-sidebar{display:none}
-    .gen-body{grid-template-columns:1fr}
-    .pricing-grid{grid-template-columns:1fr}
-    .stats-row{grid-template-columns:repeat(2,1fr)}
-    .dash-row{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-  }
+@media(max-width:992px){
+  .gen-body{grid-template-columns:1fr; overflow-y:auto;}
+  .form-col{overflow-y:visible; padding:20px;}
+  .prev-col{border-left:none; border-top:2px solid var(--bd); min-height:500px;}
+}
+@media(max-width:768px){.lsb{display:none}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo" onclick="showPage('landing')">
-    <div class="nav-logo-badge">AI</div>
-    <div class="nav-logo-text">Dokumen<span>Indonesia</span></div>
+  <div class="logo" onclick="navTo('home')">
+    <div class="logo-m"><i class="ti ti-file-description"></i></div>
+    <div class="logo-t">Smart Dokumen<em> Indonesia</em></div>
   </div>
   <div class="nav-links">
-    <button class="nav-link" onclick="showPage('landing')">Beranda</button>
-    <button class="nav-link" onclick="showPage('gallery')">Template</button>
-    <button class="nav-link" onclick="showPage('pricing')">Harga</button>
-    <button class="nav-link" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="nl" onclick="navTo('home')">Beranda</button>
+    <button class="nl on">Auto Generator</button>
   </div>
-  <div class="nav-right">
-    <button class="btn btn-outline" onclick="showPage('dashboard')">Masuk</button>
-    <button class="btn btn-primary" onclick="showPage('generator')">Buat Dokumen</button>
+  <div class="nav-r">
+    <button class="ibt" onclick="toggleDark()" id="dk-btn" title="Dark mode"><i class="ti ti-moon"></i></button>
+    <button class="btn btn-ghost btn-sm" onclick="exportDoc('DOCX')"><i class="ti ti-file-word"></i> DOCX</button>
+    <button class="btn btn-red btn-sm" style="background:var(--p)" onclick="exportDoc('PDF')"><i class="ti ti-file-type-pdf"></i> PDF</button>
   </div>
 </nav>
 
-<!-- LANDING PAGE -->
-<div id="page-landing" class="page active">
-  <div class="hero">
-    <div class="hero-badge"><i class="ti ti-bolt"></i> Platform Dokumen #1 Indonesia</div>
-    <h1>Buat Dokumen Resmi Indonesia dalam <span>Hitungan Detik</span></h1>
-    <p>Generate surat, invoice, kontrak, dan dokumen lainnya secara otomatis dalam format DOCX/PDF siap pakai. Tanpa repot, tanpa error format.</p>
-    <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Mulai Gratis</button>
-      <button class="btn btn-outline btn-lg" onclick="showPage('gallery')"><i class="ti ti-template"></i> Lihat Template</button>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">42+</div>
-        <div class="hero-stat-label">Template Dokumen</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">12K+</div>
-        <div class="hero-stat-label">Pengguna Aktif</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">98K+</div>
-        <div class="hero-stat-label">Dokumen Dibuat</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">6</div>
-        <div class="hero-stat-label">Kategori Dokumen</div>
+<div class="shell">
+  <div class="lsb">
+    <div class="lsb-search">
+      <div class="lsb-search-wrap">
+        <i class="ti ti-search"></i>
+        <input class="lsb-search-input" id="tmpl-search" placeholder="Cari template dokumen..." oninput="filterSidebar(this.value)">
       </div>
     </div>
+    <div class="lsb-scroll" id="sidebar-list"></div>
   </div>
 
-  <!-- CATEGORIES -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-label">Kategori</div>
-      <div class="section-title">Semua Jenis Dokumen</div>
-      <div class="section-sub">Pilih kategori sesuai kebutuhan Anda</div>
+  <div class="main" id="main-area">
+    <div class="steps-bar">
+      <div class="step done" id="st1"><div class="step-dot"><i class="ti ti-check" style="font-size:11px"></i></div><div class="step-label">Pilih Dokumen</div></div>
+      <div class="step-line"></div>
+      <div class="step active" id="st2"><div class="step-dot">2</div><div class="step-label">Lengkapi Form</div></div>
+      <div class="step-line"></div>
+      <div class="step" id="st3"><div class="step-dot">3</div><div class="step-label">Export</div></div>
     </div>
-    <div class="cat-grid">
-      <div class="cat-card" onclick="showGallery('warga')">
-        <div class="cat-icon red"><i class="ti ti-home"></i></div>
-        <div class="cat-name">Surat Warga</div>
-        <div class="cat-count">13 template</div>
-      </div>
-      <div class="cat-card" onclick="showGallery('bisnis')">
-        <div class="cat-icon blue"><i class="ti ti-building-store"></i></div>
-        <div class="cat-name">Bisnis</div>
-        <div class="cat-count">5 template</div>
-      </div>
-      <div class="cat-card" onclick="showGallery('hr')">
-        <div class="cat-icon gold"><i class="ti ti-users"></i></div>
-        <div class="cat-name">HR & SDM</div>
-        <div class="cat-count">6 template</div>
-      </div>
-      <div class="cat-card" onclick="showGallery('legal')">
-        <div class="cat-icon purple"><i class="ti ti-scale"></i></div>
-        <div class="cat-name">Legal</div>
-        <div class="cat-count">6 template</div>
-      </div>
-      <div class="cat-card" onclick="showGallery('karier')">
-        <div class="cat-icon green"><i class="ti ti-briefcase"></i></div>
-        <div class="cat-name">Karier</div>
-        <div class="cat-count">4 template</div>
-      </div>
-      <div class="cat-card" onclick="showGallery('rtrw')">
-        <div class="cat-icon red"><i class="ti ti-map-pin"></i></div>
-        <div class="cat-name">RT/RW</div>
-        <div class="cat-count">8 template</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- HOW IT WORKS -->
-  <div style="background:var(--c-white);border-top:1px solid var(--c-gray-200);border-bottom:1px solid var(--c-gray-200)">
-    <div class="section">
-      <div class="section-header">
-        <div class="section-label">Cara Kerja</div>
-        <div class="section-title">Mudah dalam 3 Langkah</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-        <div style="text-align:center;padding:20px">
-          <div style="width:56px;height:56px;background:var(--c-red-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-red)"><i class="ti ti-template"></i></div>
-          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-red);margin-bottom:4px">01</div>
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Pilih Template</div>
-          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Pilih dari 42+ template dokumen resmi Indonesia yang tersedia</div>
-        </div>
-        <div style="text-align:center;padding:20px">
-          <div style="width:56px;height:56px;background:var(--c-blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-blue-mid)"><i class="ti ti-forms"></i></div>
-          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-blue-mid);margin-bottom:4px">02</div>
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Isi Formulir</div>
-          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Isi data melalui form sederhana. Preview dokumen tampil real-time</div>
-        </div>
-        <div style="text-align:center;padding:20px">
-          <div style="width:56px;height:56px;background:var(--c-green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--c-green-mid)"><i class="ti ti-download"></i></div>
-          <div style="font-size:22px;font-weight:800;font-family:var(--font-display);color:var(--c-green-mid);margin-bottom:4px">03</div>
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Download</div>
-          <div style="font-size:12px;color:var(--c-gray-500);line-height:1.6">Export ke DOCX atau PDF langsung. Simpan ke history untuk akses ulang</div>
+    <div class="gen-top">
+      <div>
+        <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
+        <div class="gen-meta">
+          <span class="cpill cp-purple" id="gen-cat">Surat Warga</span>
+          <span><i class="ti ti-bolt"></i> Dihasilkan oleh Sistem</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PRICING TEASER -->
-  <div class="section" style="text-align:center">
-    <div class="section-label" style="text-align:center">Harga</div>
-    <div class="section-title">Gratis untuk Mulai</div>
-    <div class="section-sub">Upgrade ke Pro untuk fitur premium tanpa batas</div>
-    <div style="margin-top:20px">
-      <button class="btn btn-primary btn-lg" onclick="showPage('pricing')">Lihat Paket Harga</button>
-    </div>
-  </div>
-</div>
-
-<!-- TEMPLATE GALLERY -->
-<div id="page-gallery" class="page">
-  <div class="section">
-    <div class="section-header">
-      <div class="section-label">Template Gallery</div>
-      <div class="section-title">Pilih Template Dokumen</div>
-    </div>
-    <div class="filter-row" id="filter-row">
-      <div class="filter-pill active" onclick="filterCat('semua',this)">Semua</div>
-      <div class="filter-pill" onclick="filterCat('warga',this)">Surat Warga</div>
-      <div class="filter-pill" onclick="filterCat('bisnis',this)">Bisnis</div>
-      <div class="filter-pill" onclick="filterCat('hr',this)">HR & SDM</div>
-      <div class="filter-pill" onclick="filterCat('legal',this)">Legal</div>
-      <div class="filter-pill" onclick="filterCat('karier',this)">Karier</div>
-      <div class="filter-pill" onclick="filterCat('rtrw',this)">RT/RW</div>
-    </div>
-    <div class="tmpl-grid" id="tmpl-grid"></div>
-  </div>
-</div>
-
-<!-- GENERATOR -->
-<div id="page-generator" class="page">
-  <div class="gen-layout">
-    <div class="gen-header">
-      <div class="gen-title" id="gen-title">Surat Pengantar RT/RW</div>
-      <div class="gen-sub">Isi data di bawah untuk generate dokumen otomatis</div>
-    </div>
-    <div class="gen-steps">
-      <div class="gen-step done" id="step1">
-        <div class="gen-step-num"><i class="ti ti-check" style="font-size:12px"></i></div>
-        <div class="gen-step-info"><p>Pilih Template</p><span>Selesai</span></div>
-      </div>
-      <div class="gen-step-sep"></div>
-      <div class="gen-step active" id="step2">
-        <div class="gen-step-num">2</div>
-        <div class="gen-step-info"><p>Isi Data</p><span>Sedang berjalan</span></div>
-      </div>
-      <div class="gen-step-sep"></div>
-      <div class="gen-step" id="step3">
-        <div class="gen-step-num">3</div>
-        <div class="gen-step-info"><p>Preview & Export</p><span>Menunggu</span></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn btn-ghost btn-sm" onclick="resetForm()"><i class="ti ti-refresh"></i> Reset</button>
+        <button class="btn btn-red btn-sm" style="background:var(--p)" onclick="doGenerate()"><i class="ti ti-download"></i> Simpan File</button>
       </div>
     </div>
+
     <div class="gen-body">
-      <div class="gen-form" id="gen-form-container">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
-          <div style="font-size:14px;font-weight:700">Data Dokumen</div>
-          <span class="badge green"><i class="ti ti-shield-check"></i> Format Resmi</span>
-        </div>
+      <div class="form-col" id="form-col"></div>
 
-        <div style="display:flex;gap:12px;margin-bottom:20px">
-          <div class="upload-area" style="flex:1">
-            <i class="ti ti-photo"></i>
-            <p>Upload Logo</p>
-          </div>
-          <div class="upload-area" style="flex:1">
-            <i class="ti ti-writing"></i>
-            <p>Tanda Tangan</p>
-          </div>
+      <div class="prev-col">
+        <div class="prev-head">
+          <span><i class="ti ti-file-text" style="font-size:15px;vertical-align:-2px;margin-right:6px"></i>Live Preview Dokumen</span>
+          <div class="live-pill"><div class="live-dot"></div>Live</div>
         </div>
-
-        <hr class="form-divider">
-
-        <div class="form-group">
-          <label class="form-label">Nomor Surat</label>
-          <input class="form-input" id="f-nomor" value="001/RT.01/V/2026" oninput="updatePreview()">
-          <div class="form-hint"><i class="ti ti-info-circle" style="font-size:12px"></i> Auto-generated. Bisa diubah manual.</div>
+        <div class="prev-scroll">
+          <div class="doc-paper" id="doc-preview"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Nama Pemohon</label>
-          <input class="form-input" id="f-nama" placeholder="cth: Budi Santoso" oninput="updatePreview()">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">NIK</label>
-            <input class="form-input" id="f-nik" placeholder="16 digit NIK" maxlength="16" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Tempat, Tgl Lahir</label>
-            <input class="form-input" id="f-ttl" placeholder="Jakarta, 01 Januari 1990" oninput="updatePreview()">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Alamat Lengkap</label>
-          <input class="form-input" id="f-alamat" placeholder="Jl. Melati No.5, RT 01 RW 02, Kelurahan..." oninput="updatePreview()">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Keperluan / Tujuan Surat</label>
-          <textarea class="form-input" id="f-tujuan" placeholder="cth: Keperluan pembuatan KTP / Daftar BPJS..." oninput="updatePreview()"></textarea>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Kota</label>
-            <input class="form-input" id="f-kota" placeholder="Jakarta" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Tanggal Surat</label>
-            <input class="form-input" type="date" id="f-tanggal" oninput="updatePreview()">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nama Ketua RT</label>
-            <input class="form-input" id="f-ketua" placeholder="Nama Ketua RT" oninput="updatePreview()">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Jabatan</label>
-            <input class="form-input" id="f-jabatan" placeholder="Ketua RT 01/RW 02" oninput="updatePreview()">
-          </div>
-        </div>
-
-        <hr class="form-divider">
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-blue" onclick="generateJSON()"><i class="ti ti-code"></i> Lihat JSON</button>
-          <button class="btn btn-primary btn-lg" style="flex:1" onclick="markStep3()"><i class="ti ti-eye"></i> Preview & Export</button>
-        </div>
-      </div>
-
-      <!-- LIVE PREVIEW -->
-      <div class="gen-preview">
-        <div class="preview-label"><i class="ti ti-file-text"></i> Preview Live <span class="preview-badge">Real-time</span></div>
-        <div class="preview-doc" id="preview-doc">
-          <div class="preview-header">
-            <div class="logo-placeholder"><i class="ti ti-home"></i></div>
-            <h3>PEMERINTAH DESA / KELURAHAN</h3>
-            <p>RT 01 RW 02 — Jl. Contoh No.1 Jakarta</p>
-          </div>
-          <div class="preview-title">Surat Pengantar</div>
-          <div class="preview-num" id="prev-nomor">Nomor: 001/RT.01/V/2026</div>
-          <div class="preview-body">
-            <p>Yang bertanda tangan di bawah ini, Ketua RT 01 RW 02 menerangkan bahwa:</p>
-            <p><strong>Nama:</strong> <span id="prev-nama">-</span></p>
-            <p><strong>NIK:</strong> <span id="prev-nik">-</span></p>
-            <p><strong>TTL:</strong> <span id="prev-ttl">-</span></p>
-            <p><strong>Alamat:</strong> <span id="prev-alamat">-</span></p>
-            <br>
-            <p>Adalah benar warga kami dan diperlukan untuk keperluan:</p>
-            <p><strong><span id="prev-tujuan">-</span></strong></p>
-            <br>
-            <p>Demikian surat pengantar ini dibuat untuk digunakan sebagaimana mestinya.</p>
-          </div>
-          <div class="preview-sign">
-            <div class="preview-sign-box">
-              <p id="prev-kota-tgl">Jakarta, 12 Mei 2026</p>
-              <p id="prev-jabatan">Ketua RT 01/RW 02</p>
-              <div class="preview-sign-line"></div>
-              <p id="prev-ketua">( ________________ )</p>
-            </div>
-          </div>
-        </div>
-        <div class="export-row">
-          <button class="export-btn docx" onclick="showToast('📄 Mengunduh file DOCX...')"><i class="ti ti-file-word"></i> DOCX</button>
-          <button class="export-btn pdf" onclick="showToast('📋 Mengunduh file PDF...')"><i class="ti ti-file-type-pdf"></i> PDF</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="page-dashboard" class="page">
-  <div class="dash-layout">
-    <div class="dash-sidebar">
-      <div class="sidebar-section">
-        <div class="sidebar-label">Menu Utama</div>
-        <div class="sidebar-item active"><i class="ti ti-dashboard"></i> Dashboard</div>
-        <div class="sidebar-item" onclick="showPage('generator')"><i class="ti ti-file-plus"></i> Buat Dokumen</div>
-        <div class="sidebar-item" onclick="showPage('gallery')"><i class="ti ti-template"></i> Template Gallery</div>
-        <div class="sidebar-item"><i class="ti ti-history"></i> Riwayat Dokumen <span class="sidebar-badge">8</span></div>
-        <div class="sidebar-item"><i class="ti ti-cloud-download"></i> Unduhan</div>
-      </div>
-      <div class="sidebar-section">
-        <div class="sidebar-label">Akun</div>
-        <div class="sidebar-item"><i class="ti ti-user-circle"></i> Profil Saya</div>
-        <div class="sidebar-item" onclick="showPage('pricing')"><i class="ti ti-crown"></i> Upgrade Pro</div>
-        <div class="sidebar-item" onclick="showAdminPanel()"><i class="ti ti-settings"></i> Admin Panel</div>
-        <div class="sidebar-item"><i class="ti ti-logout"></i> Keluar</div>
-      </div>
-    </div>
-    <div class="dash-main">
-      <div class="dash-greeting">
-        <h2>Selamat datang, Jiku 👋</h2>
-        <p>Hari ini Selasa, 12 Mei 2026 — PT Uniktif Media Indonesia</p>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-files"></i> Total Dokumen</div>
-          <div class="stat-val">28</div>
-          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +4 minggu ini</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-download"></i> Diunduh</div>
-          <div class="stat-val">61</div>
-          <div class="stat-change up"><i class="ti ti-trending-up" style="font-size:11px"></i> +12 bulan ini</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-template"></i> Template Aktif</div>
-          <div class="stat-val">42</div>
-          <div class="stat-change neutral">6 kategori tersedia</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-crown"></i> Paket</div>
-          <div class="stat-val" style="font-size:18px">Free</div>
-          <div class="stat-change" style="color:var(--c-red);cursor:pointer" onclick="showPage('pricing')">Upgrade ke Pro →</div>
-        </div>
-      </div>
-
-      <div class="dash-row">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Dokumen Terbaru</div>
-            <div class="panel-action">Lihat Semua</div>
-          </div>
-          <div id="doc-list"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Aksi Cepat</div>
-          </div>
-          <div class="quick-action-grid">
-            <div class="quick-action" onclick="openGenerator('Surat Domisili')">
-              <i class="ti ti-home"></i>
-              <p>Surat Domisili</p>
-            </div>
-            <div class="quick-action" onclick="openGenerator('Invoice')">
-              <i class="ti ti-receipt"></i>
-              <p>Invoice</p>
-            </div>
-            <div class="quick-action" onclick="openGenerator('Surat Lamaran')">
-              <i class="ti ti-briefcase"></i>
-              <p>Surat Lamaran</p>
-            </div>
-            <div class="quick-action" onclick="openGenerator('Kontrak Kerja')">
-              <i class="ti ti-file-certificate"></i>
-              <p>Kontrak Kerja</p>
-            </div>
-            <div class="quick-action" onclick="openGenerator('NDA')">
-              <i class="ti ti-lock"></i>
-              <p>NDA</p>
-            </div>
-            <div class="quick-action" onclick="openGenerator('Slip Gaji')">
-              <i class="ti ti-coin"></i>
-              <p>Slip Gaji</p>
-            </div>
+        <div class="prev-actions">
+          <div style="font-size:11.5px;font-weight:700;color:var(--i4);text-align:center;margin-bottom:10px">Export hasil dokumen asli</div>
+          <div class="exp-row">
+            <button class="exp-btn exp-docx" onclick="exportDoc('DOCX')"><i class="ti ti-file-word"></i> Unduh DOCX</button>
+            <button class="exp-btn exp-pdf" onclick="exportDoc('PDF')"><i class="ti ti-file-type-pdf"></i> Unduh PDF</button>
           </div>
         </div>
       </div>
@@ -668,338 +278,632 @@
   </div>
 </div>
 
-<!-- PRICING -->
-<div id="page-pricing" class="page">
-  <div class="section" style="text-align:center;padding-bottom:20px">
-    <div class="section-label">Harga</div>
-    <div class="section-title">Pilih Paket yang Tepat</div>
-    <div class="section-sub">Mulai gratis, upgrade kapan saja</div>
-  </div>
-  <div class="section" style="padding-top:0">
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-name">GRATIS</div>
-        <div class="pricing-price">Rp 0<span>/bulan</span></div>
-        <div class="pricing-desc">Cocok untuk personal & percobaan</div>
-        <ul class="pricing-features">
-          <li><i class="ti ti-check"></i> 5 dokumen/bulan</li>
-          <li><i class="ti ti-check"></i> Export DOCX</li>
-          <li><i class="ti ti-check"></i> Template dasar (20+)</li>
-          <li><i class="ti ti-check"></i> Preview dokumen</li>
-          <li class="off"><i class="ti ti-x"></i> Upload logo</li>
-          <li class="off"><i class="ti ti-x"></i> Tanda tangan digital</li>
-          <li class="off"><i class="ti ti-x"></i> Export PDF</li>
-          <li class="off"><i class="ti ti-x"></i> Cloud storage</li>
-        </ul>
-        <button class="btn btn-outline" style="width:100%">Mulai Gratis</button>
-      </div>
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Paling Populer</div>
-        <div class="pricing-name">PRO</div>
-        <div class="pricing-price">Rp 49K<span>/bulan</span></div>
-        <div class="pricing-desc">Untuk UMKM, freelancer & startup</div>
-        <ul class="pricing-features">
-          <li><i class="ti ti-check"></i> Unlimited dokumen</li>
-          <li><i class="ti ti-check"></i> Export DOCX + PDF</li>
-          <li><i class="ti ti-check"></i> Semua template (42+)</li>
-          <li><i class="ti ti-check"></i> Upload logo & tanda tangan</li>
-          <li><i class="ti ti-check"></i> Cloud storage 1GB</li>
-          <li><i class="ti ti-check"></i> Tanpa watermark</li>
-          <li><i class="ti ti-check"></i> History dokumen</li>
-          <li class="off"><i class="ti ti-x"></i> Multi-user team</li>
-        </ul>
-        <button class="btn btn-primary" style="width:100%" onclick="showToast('🚀 Redirecting ke halaman pembayaran...')">Upgrade Pro</button>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-name">BISNIS</div>
-        <div class="pricing-price">Rp 149K<span>/bulan</span></div>
-        <div class="pricing-desc">Untuk perusahaan & tim HR</div>
-        <ul class="pricing-features">
-          <li><i class="ti ti-check"></i> Semua fitur Pro</li>
-          <li><i class="ti ti-check"></i> Multi-user (5 akun)</li>
-          <li><i class="ti ti-check"></i> Template kustom</li>
-          <li><i class="ti ti-check"></i> Cloud storage 10GB</li>
-          <li><i class="ti ti-check"></i> Admin panel</li>
-          <li><i class="ti ti-check"></i> Branding perusahaan</li>
-          <li><i class="ti ti-check"></i> Prioritas support</li>
-          <li><i class="ti ti-check"></i> API access</li>
-        </ul>
-        <button class="btn btn-blue" style="width:100%" onclick="showToast('📞 Tim kami akan menghubungi Anda...')">Hubungi Tim</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- JSON MODAL -->
-<div class="modal-overlay" id="json-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><i class="ti ti-code"></i> Structured JSON — Template Engine</div>
-      <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="modal-body">
-      <p style="font-size:13px;color:var(--c-gray-500);margin-bottom:14px">Data ini di-inject ke template DOCX via Docxtemplater. Format konsisten, stabil, dan scalable.</p>
-      <div class="json-box" id="json-output"></div>
-      <div style="margin-top:16px;display:flex;gap:8px">
-        <button class="btn btn-primary" onclick="closeModal();showToast('📄 DOCX berhasil digenerate!')"><i class="ti ti-file-word"></i> Generate DOCX</button>
-        <button class="btn btn-outline" onclick="closeModal();showToast('📋 PDF berhasil digenerate!')"><i class="ti ti-file-type-pdf"></i> Generate PDF</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN MODAL -->
-<div class="modal-overlay" id="admin-modal">
-  <div class="modal" style="width:680px">
-    <div class="modal-header">
-      <div class="modal-title"><i class="ti ti-settings"></i> Admin Panel</div>
-      <button class="modal-close" onclick="closeAdminModal()"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="modal-body">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
-        <div class="stat-card" style="padding:12px 14px">
-          <div class="stat-label" style="font-size:10px">Total User</div>
-          <div class="stat-val" style="font-size:20px">12,481</div>
-        </div>
-        <div class="stat-card" style="padding:12px 14px">
-          <div class="stat-label" style="font-size:10px">Pro User</div>
-          <div class="stat-val" style="font-size:20px">1,840</div>
-        </div>
-        <div class="stat-card" style="padding:12px 14px">
-          <div class="stat-label" style="font-size:10px">Dokumen/Hari</div>
-          <div class="stat-val" style="font-size:20px">347</div>
-        </div>
-        <div class="stat-card" style="padding:12px 14px">
-          <div class="stat-label" style="font-size:10px">MRR</div>
-          <div class="stat-val" style="font-size:20px">90M</div>
-        </div>
-      </div>
-      <div class="panel-title" style="margin-bottom:12px">User Terbaru</div>
-      <table class="admin-table">
-        <thead><tr><th>Nama</th><th>Email</th><th>Paket</th><th>Dokumen</th><th>Status</th></tr></thead>
-        <tbody id="admin-table-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="toast-wrap" id="toast-wrap"></div>
 
 <script>
+// ═══════════════ DATA ═══════════════
+const CATS = {
+  warga:{label:'Surat Warga',color:'cp-purple',icon:'ti-home'},
+  bisnis:{label:'Bisnis',color:'cp-blue',icon:'ti-building-store'},
+  hr:{label:'HR & SDM',color:'cp-gold',icon:'ti-users'},
+  legal:{label:'Hukum / Legal',color:'cp-purple',icon:'ti-scale'},
+  karier:{label:'Karier',color:'cp-green',icon:'ti-briefcase'},
+  rtrw:{label:'RT/RW',color:'cp-red',icon:'ti-map-pin'},
+};
+
 const TEMPLATES = [
-  {name:'Surat Pengantar RT/RW',cat:'warga',free:true},
-  {name:'Surat Domisili',cat:'warga',free:true},
-  {name:'Surat Keterangan Usaha',cat:'warga',free:true},
-  {name:'Surat Keterangan Tidak Mampu',cat:'warga',free:true},
-  {name:'Surat Keterangan Kehilangan',cat:'warga',free:false},
-  {name:'Surat Kuasa',cat:'warga',free:true},
-  {name:'Surat Pernyataan',cat:'warga',free:true},
-  {name:'Surat Pengantar Nikah',cat:'warga',free:false},
-  {name:'Surat Izin Acara',cat:'rtrw',free:true},
-  {name:'Surat Pindah Domisili',cat:'warga',free:false},
-  {name:'Surat Izin Tidak Masuk',cat:'warga',free:true},
-  {name:'Surat Permohonan',cat:'warga',free:true},
-  {name:'Surat Keterangan Kerja',cat:'warga',free:false},
-  {name:'CV ATS',cat:'karier',free:true},
-  {name:'Surat Lamaran Kerja',cat:'karier',free:true},
-  {name:'Surat Pengunduran Diri',cat:'karier',free:true},
-  {name:'Cover Letter',cat:'karier',free:false},
-  {name:'Invoice',cat:'bisnis',free:true},
-  {name:'Quotation / Penawaran Harga',cat:'bisnis',free:true},
-  {name:'Purchase Order',cat:'bisnis',free:false},
-  {name:'Kwitansi',cat:'bisnis',free:true},
-  {name:'Surat Jalan',cat:'bisnis',free:false},
-  {name:'Kontrak Kerja',cat:'hr',free:false},
-  {name:'Offering Letter',cat:'hr',free:false},
-  {name:'Warning Letter',cat:'hr',free:false},
-  {name:'NDA Karyawan',cat:'hr',free:false},
-  {name:'Slip Gaji',cat:'hr',free:false},
-  {name:'Form Cuti',cat:'hr',free:true},
-  {name:'NDA Agreement',cat:'legal',free:false},
-  {name:'MOU',cat:'legal',free:false},
-  {name:'Perjanjian Kerja Sama',cat:'legal',free:false},
-  {name:'Perjanjian Freelance',cat:'legal',free:false},
-  {name:'Perjanjian Hutang Piutang',cat:'legal',free:false},
-  {name:'Perjanjian Sewa Rumah',cat:'legal',free:false},
-  {name:'Surat Izin RT/RW',cat:'rtrw',free:true},
-  {name:'Surat Pengantar Warga RT',cat:'rtrw',free:true},
-  {name:'Berita Acara Rapat RT',cat:'rtrw',free:true},
-  {name:'Surat Keterangan Warga',cat:'rtrw',free:true},
-  {name:'Surat Rekomendasi Warga',cat:'rtrw',free:false},
-  {name:'Buku Tamu RT',cat:'rtrw',free:false},
+  {id:'pengantar_rt',name:'Surat Pengantar RT/RW',cat:'warga'},
+  {id:'domisili',name:'Surat Domisili',cat:'warga'},
+  {id:'kuasa',name:'Surat Kuasa',cat:'warga'},
+  {id:'lamaran',name:'Surat Lamaran Kerja',cat:'karier'},
+  {id:'resign',name:'Surat Pengunduran Diri',cat:'karier'},
+  {id:'kontrak',name:'Kontrak Kerja (PKWT/Tetap)',cat:'hr'},
+  {id:'form_cuti',name:'Form Pengajuan Cuti',cat:'hr'},
+  {id:'warning',name:'Surat Peringatan (SP)',cat:'hr'},
+  {id:'mou',name:'Memorandum of Understanding',cat:'legal'},
+  {id:'pks',name:'Perjanjian Kerja Sama',cat:'legal'},
+  {id:'invoice',name:'Invoice Tagihan',cat:'bisnis', isFin:true},
+  {id:'slip_gaji',name:'Slip Gaji Karyawan',cat:'hr', isFin:true},
+  {id:'kwitansi',name:'Kwitansi Pembayaran',cat:'bisnis', isFin:true},
 ];
 
-const RECENT_DOCS = [
-  {name:'Invoice PT Uniktif — April 2026',cat:'bisnis',date:'08 Mei 2026',icon:'red'},
-  {name:'Surat Pengantar — Karyawan Baru',cat:'warga',date:'05 Mei 2026',icon:'blue'},
-  {name:'NDA Karyawan — Dev Team',cat:'hr',date:'02 Mei 2026',icon:'gold'},
-  {name:'Surat Domisili — Koordinator',cat:'warga',date:'28 Apr 2026',icon:'blue'},
-  {name:'Kontrak Freelance — Barito Pacific',cat:'legal',date:'22 Apr 2026',icon:'red'},
-];
+let currentTmpl = TEMPLATES[0];
+let invItems = [{desc:'',qty:1,harga:0}];
+let step3done = false;
 
-const ADMIN_USERS = [
-  {name:'Rina Wahyuni',email:'rina@gmail.com',plan:'Pro',docs:24,status:'Aktif'},
-  {name:'Budi Santoso',email:'budi.s@umkm.id',plan:'Gratis',docs:7,status:'Aktif'},
-  {name:'Siti Rahayu',email:'siti@company.co.id',plan:'Bisnis',docs:156,status:'Aktif'},
-  {name:'Ahmad Fauzi',email:'ahmad.f@mail.com',plan:'Gratis',docs:3,status:'Aktif'},
-  {name:'Dewi Kusuma',email:'dewi@startup.id',plan:'Pro',docs:41,status:'Aktif'},
-];
+// Variabel untuk menampung gambar
+let uploadedLogo = '';
+let uploadedSign = '';
 
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-}
-
-function showGallery(cat){
-  filterCat(cat, null);
-  showPage('gallery');
-  document.querySelectorAll('.filter-pill').forEach(p=>{
-    p.classList.remove('active');
-    if(p.textContent.toLowerCase().includes(cat) || (cat==='warga' && p.textContent==='Surat Warga')) p.classList.add('active');
-  });
-}
-
-function renderTemplates(cat='semua'){
-  const grid = document.getElementById('tmpl-grid');
-  const filtered = cat==='semua' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===cat);
-  grid.innerHTML = filtered.map(t=>`
-    <div class="tmpl-card" onclick="openGenerator('${t.name}')">
-      <div class="tmpl-preview" style="background:${t.cat==='bisnis'?'#eaf3fb':t.cat==='legal'?'#f0eeff':t.cat==='hr'?'#fef9ec':t.cat==='karier'?'#d4edda':'#fef5f4'}">
-        <div class="tmpl-preview-doc">
-          <div class="tmpl-preview-line title"></div>
-          <div class="tmpl-preview-line"></div>
-          <div class="tmpl-preview-line accent"></div>
-          <div class="tmpl-preview-line"></div>
-          <div class="tmpl-preview-line short"></div>
-          <div class="tmpl-preview-line"></div>
-          <div class="tmpl-preview-line short"></div>
-        </div>
-        <span class="tmpl-preview-badge ${t.free?'free':'pro'}">${t.free?'Gratis':'Pro'}</span>
-      </div>
-      <div class="tmpl-info">
-        <div class="tmpl-name">${t.name}</div>
-        <div class="tmpl-cat">${{warga:'Surat Warga',bisnis:'Bisnis',hr:'HR & SDM',legal:'Legal',karier:'Karier',rtrw:'RT/RW'}[t.cat]}</div>
-        <div class="tmpl-footer">
-          <span class="badge ${t.free?'green':'gold'}">${t.free?'Free':'Pro'}</span>
-          <button class="tmpl-use-btn">Gunakan →</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function filterCat(cat, el){
-  if(el){
-    document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
-    el.classList.add('active');
+// ═══════════════ DYNAMIC FORM GENERATOR ═══════════════
+function getFormDef(tmpl) {
+  let hasLogo = true;
+  let hasSign = true;
+  
+  // LOGIKA DINAMIS: Template personal/individu otomatis TIDAK punya Kop Surat/Logo
+  if(['kuasa', 'lamaran', 'resign', 'form_cuti'].includes(tmpl.id)) {
+      hasLogo = false;
   }
-  renderTemplates(cat);
+
+  if(tmpl.isFin) {
+    let fields = [];
+    if(tmpl.id === 'invoice') fields = [
+      {id:'from_company',label:'Pengirim / Perusahaan',type:'text'},
+      {id:'to_company',label:'Klien / Ditagihkan Ke',type:'text'},
+      {id:'inv_no',label:'Nomor Invoice',type:'text',val:'INV/2026/05/001'},
+      {id:'inv_tanggal',label:'Tanggal Invoice',type:'date'}
+    ];
+    else if(tmpl.id === 'slip_gaji') fields = [
+      {id:'company',label:'Perusahaan',type:'text'},
+      {id:'nama',label:'Nama Karyawan',type:'text'},
+      [{id:'posisi',label:'Jabatan',type:'text'}, {id:'periode',label:'Periode',type:'text',val:'Mei 2026'}],
+      {id:'gaji_pokok',label:'Gaji Pokok (Rp)',type:'text'},
+      {id:'tunj_transport',label:'Tunjangan Transport',type:'text'}
+    ];
+    else fields = [
+      {id:'from_name',label:'Penerima Uang',type:'text'},
+      {id:'dari',label:'Diterima Dari',type:'text'},
+      [{id:'jumlah',label:'Nominal (Rp)',type:'text'},{id:'tanggal',label:'Tanggal',type:'date'}],
+      {id:'untuk',label:'Untuk Pembayaran',type:'text'}
+    ];
+
+    return { hasLogo: hasLogo, hasSign: hasSign, aiFin: true, sections: [{title: 'Data Dokumen', fields: fields}] };
+  }
+
+  let headerFields = [];
+  let footerFields = [];
+
+  if(['warga', 'rtrw'].includes(tmpl.cat)) {
+    headerFields = [
+      {id:'nomor',label:'Nomor Surat',type:'text',val:'001/DOC/V/2026'},
+      {id:'org',label:hasLogo ? 'Nama Institusi / RT' : 'Judul / Perihal',type:'text'},
+      [{id:'nama',label:'Nama Pemohon',type:'text'}, {id:'nik',label:'NIK / ID',type:'text'}]
+    ];
+    footerFields = [
+      [{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
+      [{id:'jabatan',label:'Jabatan Penandatangan',type:'text',val:hasLogo?'Ketua RT':''},{id:'ketua',label:'Nama Penandatangan',type:'text'}]
+    ];
+  } else if(['karier', 'hr'].includes(tmpl.cat)) {
+    headerFields = [
+      {id:'company',label:'Nama Perusahaan',type:'text'},
+      [{id:'nama',label:'Nama Subjek (Karyawan/Pelamar)',type:'text'}, {id:'posisi',label:'Jabatan Terkait',type:'text'}]
+    ];
+    footerFields = [
+      [{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}],
+      {id:'ketua',label:'Nama Penandatangan',type:'text'}
+    ];
+  } else { 
+    headerFields = [
+      {id:'p1',label:'Pihak Pertama (1)',type:'text'},
+      {id:'p2',label:'Pihak Kedua (2)',type:'text'}
+    ];
+    footerFields = [[{id:'kota',label:'Kota TTD',type:'text',val:'Jakarta'},{id:'tanggal',label:'Tanggal TTD',type:'date'}]];
+  }
+
+  return {
+    hasLogo: hasLogo,
+    hasSign: hasSign,
+    sections: [
+      {title: '1. Kop & Metadata', fields: headerFields},
+      {title: '⚙️ 2. Konfigurasi Sistem', ai: true},
+      {title: '3. Penandatanganan', fields: footerFields}
+    ]
+  };
 }
 
-function renderDocList(){
-  const list = document.getElementById('doc-list');
-  list.innerHTML = RECENT_DOCS.map(d=>`
-    <div class="doc-list-item">
-      <div class="doc-icon ${d.icon}"><i class="ti ti-file-text"></i></div>
-      <div class="doc-meta">
-        <div class="doc-name">${d.name}</div>
-        <div class="doc-date"><i class="ti ti-calendar" style="font-size:10px"></i> ${d.date}</div>
-      </div>
-      <div class="doc-actions">
-        <button title="Unduh DOCX" onclick="showToast('📄 Mengunduh DOCX...')"><i class="ti ti-file-word"></i></button>
-        <button title="Unduh PDF" onclick="showToast('📋 Mengunduh PDF...')"><i class="ti ti-file-type-pdf"></i></button>
-        <button title="Edit ulang" onclick="showPage('generator')"><i class="ti ti-edit"></i></button>
-      </div>
-    </div>
-  `).join('');
+// ═══════════════ SIDEBAR & RENDER ═══════════════
+function buildSidebar(search='') {
+  let html = '';
+  Object.keys(CATS).forEach(cat => {
+    const items = TEMPLATES.filter(t => t.cat===cat && t.name.toLowerCase().includes(search.toLowerCase()));
+    if(!items.length) return;
+    html += `<div class="lsb-cat">${CATS[cat].label}</div>`;
+    items.forEach(t => {
+      html += `<div class="lsb-item ${t.id===currentTmpl.id?'on':''}" onclick="selectTemplate('${t.id}')">
+        <i class="ti ${CATS[t.cat].icon}"></i>
+        <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.name}</span>
+      </div>`;
+    });
+  });
+  document.getElementById('sidebar-list').innerHTML = html;
+}
+function filterSidebar(val) { buildSidebar(val); }
+
+function selectTemplate(id) {
+  currentTmpl = TEMPLATES.find(t=>t.id===id)||TEMPLATES[0];
+  step3done=false;
+  
+  // Reset gambar saat pindah template
+  uploadedLogo = '';
+  uploadedSign = '';
+  
+  document.getElementById('st3').className='step'; 
+  document.getElementById('st3').querySelector('.step-dot').textContent='3';
+  document.getElementById('st2').className='step active';
+  
+  invItems = [{desc:'',qty:1,harga:0}];
+  renderForm();
+  
+  document.querySelectorAll('.lsb-item').forEach(el => el.classList.remove('on'));
+  const activeEl = document.querySelector(`.lsb-item[onclick="selectTemplate('${id}')"]`);
+  if(activeEl) activeEl.classList.add('on');
+  
+  document.getElementById('gen-title').textContent=currentTmpl.name;
+  document.getElementById('gen-cat').textContent=CATS[currentTmpl.cat].label;
+  
+  updatePreview();
 }
 
-function openGenerator(name){
-  document.getElementById('gen-title').textContent = name;
-  showPage('generator');
+function renderForm() {
+  const def = getFormDef(currentTmpl);
+  let html = '';
+
+  // AREA UPLOAD FILE (DINAMIS SESUAI JENIS DOKUMEN)
+  if(def.hasLogo || def.hasSign) {
+    html += `<div class="fsec">Identitas & Lampiran</div>
+    
+    <input type="file" id="file-logo" accept="image/*" style="display:none" onchange="handleImageUpload(this, 'logo')">
+    <input type="file" id="file-sign" accept="image/*" style="display:none" onchange="handleImageUpload(this, 'sign')">
+
+    <div class="upload-row" style="grid-template-columns: ${(def.hasLogo && def.hasSign) ? '1fr 1fr' : '1fr'};">`;
+
+    if(def.hasLogo) {
+      html += `<div class="upload-z" onclick="document.getElementById('file-logo').click()">
+        <i class="ti ti-photo"></i><p>Kop / Logo Instansi</p><span id="name-logo">Klik untuk pilih (PNG/JPG)</span>
+      </div>`;
+    }
+    
+    if(def.hasSign) {
+      html += `<div class="upload-z" onclick="document.getElementById('file-sign').click()">
+        <i class="ti ti-writing"></i><p>Tanda Tangan</p><span id="name-sign">Klik untuk pilih (Transparan)</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  if(def.aiFin) {
+    html += `
+    <div class="ai-wrap" style="padding:20px; margin-top:0">
+      <div class="ai-head"><i class="ti ti-bolt"></i> 1-Click Document Filler</div>
+      <p class="ai-desc" style="margin-bottom:16px;">Sistem dapat memprediksi dan mengisi struktur tabel finansial secara otomatis.</p>
+      <button class="ai-btn" id="ai-btn-fin" style="margin:0" onclick="runSystemFinansial()">
+        <i class="ti ti-wand"></i> Auto-Generate Data Tabel
+      </button>
+    </div>`;
+  }
+
+  def.sections.forEach(sec => {
+    html += `<div class="fsec">${sec.title}</div>`;
+    
+    // RENDER BLOK AUTO WRITER SISTEM
+    if(sec.ai) {
+      html += `
+      <div class="ai-wrap">
+        <div class="ai-head"><i class="ti ti-settings"></i> System Auto-Writer</div>
+        <p class="ai-desc">Sistem akan menyusun kerangka teks, pasal, atau paragraf secara instan dan profesional sesuai standar dokumen yang dipilih.</p>
+        <button class="ai-btn" id="ai-btn" onclick="runSystemSimulation()"><i class="ti ti-bolt"></i> Auto-Generate Isi Dokumen</button>
+        <textarea class="fi" id="f-ai_content" style="margin-top:20px; min-height:160px; font-family:'Times New Roman',serif; font-size:14px; line-height:1.6; display:none;" oninput="updatePreview()" placeholder="Hasil generate..."></textarea>
+      </div>`;
+    } 
+    else if(sec.fields) {
+      sec.fields.forEach(field => {
+        if(Array.isArray(field)) {
+          html += `<div class="fr">`;
+          field.forEach(f => html += renderField(f));
+          html += `</div>`;
+        } else {
+          html += renderField(field);
+        }
+      });
+    }
+  });
+
+  if(def.aiFin && currentTmpl.id === 'invoice') html += renderInvoiceExtras();
+
+  document.getElementById('form-col').innerHTML = html;
+  document.querySelectorAll('input[type="date"]').forEach(d=>{if(!d.value)d.value=new Date().toISOString().split('T')[0]});
+  document.querySelectorAll('.fi').forEach(el=>el.addEventListener('input',updatePreview));
 }
+
+function renderField(f) {
+  if(f.type==='textarea') return `<div class="fg"><label class="fl">${f.label}</label><textarea class="fi" id="f-${f.id}" oninput="updatePreview()">${f.val||''}</textarea></div>`;
+  if(f.type==='date') return `<div class="fg"><label class="fl">${f.label}</label><input type="date" class="fi" id="f-${f.id}" oninput="updatePreview()"></div>`;
+  return `<div class="fg"><label class="fl">${f.label}</label><input type="text" class="fi" id="f-${f.id}" value="${f.val||''}" oninput="updatePreview()"></div>`;
+}
+
+function renderInvoiceExtras() {
+  let rows = invItems.map((it,i)=>`
+    <tr>
+      <td><input value="${it.desc}" oninput="invItems[${i}].desc=this.value;updatePreview()"></td>
+      <td style="width:50px"><input type="number" value="${it.qty}" min="1" oninput="invItems[${i}].qty=+this.value;updatePreview()" style="text-align:center"></td>
+      <td><input type="number" value="${it.harga}" oninput="invItems[${i}].harga=+this.value;updatePreview()"></td>
+      <td style="width:80px;text-align:right;font-weight:600">${fmt(it.qty*it.harga)}</td>
+      <td style="width:30px;text-align:center"><button onclick="removeInvRow(${i})" style="background:none;border:none;cursor:pointer;color:var(--r)"><i class="ti ti-trash"></i></button></td>
+    </tr>`).join('');
+  const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
+  const ppn = Math.round(sub*0.11);
+  return `<div class="fsec">Rincian Item</div>
+  <table class="inv-table">
+    <thead><tr><th>Deskripsi</th><th>Qty</th><th>Harga Satuan</th><th>Subtotal</th><th></th></tr></thead>
+    <tbody id="inv-tbody">${rows}</tbody>
+    <tr class="inv-total-row"><td colspan="3" style="text-align:right">Subtotal</td><td>${fmt(sub)}</td><td></td></tr>
+    <tr class="inv-total-row"><td colspan="3" style="text-align:right">PPN 11%</td><td>${fmt(ppn)}</td><td></td></tr>
+    <tr class="inv-total-row" style="font-size:13px"><td colspan="3" style="text-align:right">TOTAL</td><td>${fmt(sub+ppn)}</td><td></td></tr>
+  </table>
+  <button class="add-row-btn" onclick="addInvRow()"><i class="ti ti-plus"></i> Tambah Manual Baris</button>`;
+}
+function addInvRow(){invItems.push({desc:'',qty:1,harga:0});renderForm();updatePreview();}
+function removeInvRow(i){if(invItems.length>1){invItems.splice(i,1);renderForm();updatePreview();}}
+function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID')}
+
+// ═══════════════ UPLOAD LOGIC ═══════════════
+function handleImageUpload(input, type) {
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      if (type === 'logo') {
+        uploadedLogo = e.target.result;
+        const elLogo = document.getElementById('name-logo');
+        if(elLogo) elLogo.textContent = file.name;
+        toast('✅', 'Logo / Kop Surat berhasil dimuat');
+      } else {
+        uploadedSign = e.target.result;
+        const elSign = document.getElementById('name-sign');
+        if(elSign) elSign.textContent = file.name;
+        toast('✅', 'Tanda tangan berhasil dimuat');
+      }
+      updatePreview();
+    }
+    
+    reader.readAsDataURL(file);
+  }
+}
+
+// ═══════════════ SYSTEM AUTO-WRITER LOGIC ═══════════════
+
+function runSystemSimulation() {
+  const btn = document.getElementById('ai-btn');
+  const area = document.getElementById('f-ai_content');
+  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Memproses Data...';
+  btn.classList.add('loading');
+  
+  area.style.display = 'block';
+
+  const p1 = document.getElementById('f-nama'); if(p1 && !p1.value) p1.value = 'Setyadi Aprilianto';
+  const p2 = document.getElementById('f-kota'); if(p2 && !p2.value) p2.value = 'Jakarta';
+  const p3 = document.getElementById('f-posisi'); if(p3 && !p3.value) p3.value = 'Project Manager';
+  const c1 = document.getElementById('f-company'); if(c1 && !c1.value) c1.value = 'PT Uniktif Media Indonesia';
+  
+  let txt = "";
+  const id = currentTmpl.id;
+
+  setTimeout(() => {
+    if(id === 'lamaran') {
+      txt = "Dengan hormat,\n\nSaya bermaksud menyampaikan ketertarikan saya untuk mengisi posisi Project Manager. Saya memiliki rekam jejak yang solid dalam memimpin siklus pengembangan perangkat lunak (SDLC), khususnya pada ekosistem teknologi berbasis .NET.\n\nSelain manajemen proyek, saya juga memiliki pengalaman teknis hands-on dalam mengimplementasikan pengujian otomatis (automated testing) menggunakan framework Playwright untuk flow sistem pembayaran e-commerce, serta terbiasa menyusun dokumen FSD dan TSD secara terstruktur.\n\nSebagai pendukung efisiensi operasional harian, saya telah terbiasa menggunakan ekosistem pengembangan perangkat macOS, seperti MacBook Pro M1, guna memastikan stabilitas proses kolaborasi dan testing.\n\nBesar harapan saya untuk mendiskusikan peluang kerja sama ini lebih lanjut secara langsung. Atas waktu dan perhatian Bapak/Ibu, saya ucapkan terima kasih.";
+    } else if(id === 'form_cuti') {
+      txt = "Bersama formulir administrasi ini, saya mengajukan permohonan cuti selama 3 (tiga) hari kerja.\n\nAdapun cuti yang saya ajukan ini merupakan alokasi penggunaan hak Carry Over Leave dari sisa cuti tahunan periode sebelumnya yang belum sempat terpakai. Selama masa absen saya, tanggung jawab pemantauan dan koordinasi tim proyek .NET akan dialihkan sementara kepada rekan terkait agar operasional tetap berjalan sesuai SLA yang telah ditentukan.\n\nMohon peninjauan dan persetujuan dari Bapak/Ibu atas pengajuan ini.";
+    } else if(id === 'pks' || id === 'mou') {
+      txt = "PASAL 1 - RUANG LINGKUP\nKedua belah pihak sepakat bekerja sama secara institusional dalam pengembangan infrastruktur verifikasi digital. Pihak Pertama menangani platform inti yang memproses sistem registrasi vendor (mencakup 17 tahapan alur verifikasi dokumen beruntun yang disepakati).\n\nPASAL 2 - INTEGRASI\nPihak Kedua bertanggung jawab secara penuh untuk mengintegrasikan mesin verifikasi menggunakan environment server IAPAYS atau OGS, sebelum proses eksekusi pencatatan akhirnya diteruskan ke sistem SAP.\n\nPASAL 3 - KETENTUAN KHUSUS\nSistem yang diintegrasikan wajib mampu mengakomodir fungsionalitas perhitungan aksi korporasi pasar modal secara otomatis, seperti kemampuan kalkulasi akurat terhadap Harga Teoritis pada saat proses eksekusi Right Issue.";
+    } else if(id === 'kontrak') {
+      txt = "PASAL 1 - PENEMPATAN\nPihak Kedua bersedia menerima pekerjaan secara profesional dari Pihak Pertama sebagai Project Manager untuk mengawal pengembangan infrastruktur .NET.\n\nPASAL 2 - FASILITAS\nPihak Pertama akan meminjamkan alat kerja berupa 1 (satu) unit perangkat MacBook Pro M1 yang wajib dipelihara kondisinya dan dikembalikan saat periode kontrak dinyatakan berakhir.\n\nPASAL 3 - TUGAS KHUSUS\nPihak Kedua bertanggung jawab mengawasi implementasi dan standarisasi logika aplikasi internal (termasuk modul operasional booking ruangan), dengan validasi sistem mutlak yang melarang pembuatan transaksi backdate (tanggal mundur) serta memastikan visibilitas operasional berjalan stabil hingga pukul 20:00 setiap harinya.";
+    } else if(id === 'resign') {
+      txt = "Melalui surat ini, saya bermaksud menyampaikan pengunduran diri saya secara administratif dari posisi Project Manager, efektif berlaku terhitung satu bulan sejak tanggal penyerahan dokumen ini.\n\nSaya sangat mengapresiasi arahan manajemen dan kerja sama tim selama ini. Saya berkomitmen penuh untuk menyusun dan menyelesaikan proses serah terima (handover) terkait seluruh tugas dokumentasi dan eksekusi proyek .NET yang sedang berjalan agar proses transisi dapat dilanjutkan dengan lancar tanpa hambatan prosedural.";
+    } else if(id === 'pengantar_rt' || id === 'domisili') {
+      txt = "Yang bertanda tangan di bawah ini menerangkan dengan sesungguhnya bahwa nama yang bersangkutan yang tercantum dalam dokumen ini adalah benar warga/penduduk yang berdomisili sah di wilayah administrasi kami.\n\nBerdasarkan catatan kependudukan yang kami miliki, yang bersangkutan berkelakuan baik, mematuhi tata tertib lingkungan, dan tidak pernah memiliki catatan riwayat masalah hukum apa pun.\n\nDemikian dokumen keterangan ini diterbitkan sebagai pemenuhan syarat kelengkapan administrasi yang bersangkutan. Agar pihak-pihak instansi terkait yang berkepentingan dapat memakluminya.";
+    } else {
+      txt = "Dokumen ini diterbitkan oleh sistem sebagai wujud perikatan atau permohonan yang resmi secara administratif.\n\nSubjek yang tercantum dalam dokumen ini menyatakan telah menyetujui seluruh ketentuan dan klausul yang tertuang di dalamnya. Segala bentuk perbedaan pendapat teknis atau sengketa prosedural yang mungkin timbul di masa mendatang disarankan untuk diselesaikan terlebih dahulu melalui proses musyawarah mufakat. Jika penyelesaian secara kekeluargaan tidak membuahkan hasil, tahapan penyelesaian akan merujuk pada standar ketentuan hukum yang berlaku umum.";
+    }
+
+    area.value = '';
+    let i = 0;
+    function typeIt() {
+      if(i < txt.length) {
+        area.value += txt.charAt(i);
+        i++;
+        updatePreview();
+        setTimeout(typeIt, 10);
+      } else {
+        btn.innerHTML = '<i class="ti ti-check"></i> Selesai Disusun';
+        btn.classList.remove('loading');
+        setTimeout(() => { btn.innerHTML = '<i class="ti ti-bolt"></i> Generate Ulang Dokumen'; }, 2000);
+      }
+    }
+    typeIt();
+  }, 500);
+}
+
+function runSystemFinansial() {
+  const btn = document.getElementById('ai-btn-fin');
+  btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Sistem Menarik Data...';
+  btn.classList.add('loading');
+
+  setTimeout(() => {
+    if(currentTmpl.id === 'invoice') {
+      const f1 = document.getElementById('f-from_company'); if(f1) f1.value = 'PT Uniktif Media Indonesia';
+      const f2 = document.getElementById('f-to_company'); if(f2) f2.value = 'PT Barito Pacific Tbk';
+      invItems = [
+        {desc: 'Pengembangan & Maintenance Website Corporate', qty: 1, harga: 15000000},
+        {desc: 'Integrasi Verifikasi Engine IAPAYS ke SAP', qty: 1, harga: 8500000}
+      ];
+    } else if(currentTmpl.id === 'slip_gaji') {
+      const f1 = document.getElementById('f-nama'); if(f1) f1.value = 'Setyadi Aprilianto';
+      const f2 = document.getElementById('f-posisi'); if(f2) f2.value = 'Project Manager';
+      const f3 = document.getElementById('f-gaji_pokok'); if(f3) f3.value = '18000000';
+      const f4 = document.getElementById('f-tunj_transport'); if(f4) f4.value = '15000000';
+      const c1 = document.getElementById('f-company'); if(c1) c1.value = 'PT Uniktif Media Indonesia';
+    } else if(currentTmpl.id === 'kwitansi') {
+      const f1 = document.getElementById('f-from_name'); if(f1) f1.value = 'Setyadi Aprilianto';
+      const f2 = document.getElementById('f-dari'); if(f2) f2.value = 'PT Mars Jawara Indonesia';
+      const f3 = document.getElementById('f-jumlah'); if(f3) f3.value = '5000000';
+      const f4 = document.getElementById('f-untuk'); if(f4) f4.value = 'Jasa maintenance dan pembaruan struktur data Wikipedia';
+    }
+
+    renderForm(); 
+    updatePreview();
+    btn.innerHTML = '<i class="ti ti-check"></i> Tabel Disusun';
+    btn.classList.remove('loading');
+    setTimeout(() => { btn.innerHTML = '<i class="ti ti-wand"></i> Auto-Generate Ulang Data'; }, 2000);
+  }, 700);
+}
+
+// ═══════════════ PREVIEW BUILDER ═══════════════
+function g(id){const el=document.getElementById('f-'+id);return el?el.value:'';}
+function fmtDate(d){if(!d)return '13 Mei 2026';try{return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}}
 
 function updatePreview(){
-  const g = id => document.getElementById(id)?.value || '';
-  const el = id => document.getElementById(id);
-  if(el('prev-nama')) el('prev-nama').textContent = g('f-nama') || '-';
-  if(el('prev-nik')) el('prev-nik').textContent = g('f-nik') || '-';
-  if(el('prev-ttl')) el('prev-ttl').textContent = g('f-ttl') || '-';
-  if(el('prev-alamat')) el('prev-alamat').textContent = g('f-alamat') || '-';
-  if(el('prev-tujuan')) el('prev-tujuan').textContent = g('f-tujuan') || '-';
-  if(el('prev-nomor')) el('prev-nomor').textContent = 'Nomor: '+(g('f-nomor')||'001/RT.01/V/2026');
-  const kota = g('f-kota')||'Jakarta';
-  let tgl = g('f-tanggal');
-  if(tgl){const d=new Date(tgl);tgl=d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});}
-  else tgl='12 Mei 2026';
-  if(el('prev-kota-tgl')) el('prev-kota-tgl').textContent = kota+', '+tgl;
-  if(el('prev-ketua')) el('prev-ketua').textContent = '( '+(g('f-ketua')||'________________')+' )';
-  if(el('prev-jabatan')) el('prev-jabatan').textContent = g('f-jabatan')||'Ketua RT 01/RW 02';
+  const prev = document.getElementById('doc-preview');
+  if(!prev) return;
+  
+  if(currentTmpl.isFin) {
+    if(currentTmpl.id==='invoice') prev.innerHTML = buildInvoicePreview();
+    else if(currentTmpl.id==='slip_gaji') prev.innerHTML = buildSlipGajiPreview();
+    else prev.innerHTML = buildKwitansiPreview();
+  } else {
+    prev.innerHTML = buildUniversalAIPreview();
+  }
 }
 
-function generateJSON(){
-  const g = id => document.getElementById(id)?.value || '';
-  const json = {
-    nomor_surat: g('f-nomor')||'001/RT.01/V/2026',
-    nama: g('f-nama'),
-    nik: g('f-nik'),
-    tempat_tanggal_lahir: g('f-ttl'),
-    alamat: g('f-alamat'),
-    keperluan: g('f-tujuan'),
-    kota: g('f-kota')||'Jakarta',
-    tanggal_surat: g('f-tanggal')||'2026-05-12',
-    ketua_rt: g('f-ketua'),
-    jabatan: g('f-jabatan')||'Ketua RT 01/RW 02',
-    template: 'surat_pengantar_rt_rw',
-    _meta: {generated_at: new Date().toISOString(), engine:'Docxtemplater+PizZip',version:'1.0'}
-  };
-  document.getElementById('json-output').textContent = JSON.stringify(json,null,2);
-  document.getElementById('json-modal').classList.add('open');
+function buildUniversalAIPreview() {
+  const isResmi = ['karier','hr'].includes(currentTmpl.cat);
+  const isLegal = currentTmpl.cat === 'legal';
+  const def = getFormDef(currentTmpl);
+
+  // KOP SURAT (Dinamis: Ada yang punya kop, ada yang tidak)
+  let html = '';
+  if(def.hasLogo) {
+    let logoHtml = uploadedLogo 
+      ? `<img src="${uploadedLogo}" style="max-width:54px; max-height:54px; object-fit:contain; border-radius:4px">` 
+      : `<div style="width:54px;height:54px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#888;"><i class="ti ti-layout-bottombar"></i></div>`;
+
+    html += `<div class="dp-lh">
+      <div style="flex-shrink:0; margin-right:14px; display:flex; justify-content:center; align-items:center">
+        ${logoHtml}
+      </div>
+      <div style="flex:1">
+        <div class="dp-org-name">${g('org') || g('company') || g('p1') || 'NAMA INSTITUSI / PERUSAHAAN'}</div>
+        <div class="dp-org-sub">Dokumen Dihasilkan secara Otomatis oleh Sistem</div>
+      </div>
+    </div>`;
+  } else {
+    // Kalau tanpa kop, berikan margin tambahan di atas
+    html += `<div style="margin-top:20px;"></div>`;
+  }
+
+  if(isResmi) {
+    html += `<div style="text-align:right; font-size:11px; margin-bottom:18px">${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</div>
+             <div style="font-size:11px; margin-bottom:20px">Kepada Yth.<br><strong>HRD / Manajemen</strong><br>${g('company')||'Perusahaan Terkait'}<br>di Tempat</div>`;
+  }
+
+  html += `<div class="dp-doc-title"><h2>${currentTmpl.name.toUpperCase()}</h2></div>`;
+  if(g('nomor')) html += `<div class="dp-doc-num">Nomor: ${g('nomor')}</div>`;
+
+  let meta = '';
+  if(g('nama') || g('p2')) {
+    meta = `<table class="dp-tbl" style="margin-bottom:16px; border:1px solid #eee; background:#fafafa;">`;
+    if(g('nama')) meta += `<tr><td style="padding:8px;width:30%">Nama Terkait</td><td style="padding:8px;width:5%">:</td><td style="padding:8px"><strong>${g('nama')}</strong></td></tr>`;
+    if(g('nik')) meta += `<tr><td style="padding:8px">NIK / ID</td><td style="padding:8px">:</td><td style="padding:8px">${g('nik')}</td></tr>`;
+    if(g('posisi')) meta += `<tr><td style="padding:8px">Jabatan / Posisi</td><td style="padding:8px">:</td><td style="padding:8px">${g('posisi')}</td></tr>`;
+    if(g('p1') && g('p2')) {
+      meta += `<tr><td style="padding:8px">Pihak Pertama</td><td style="padding:8px">:</td><td style="padding:8px"><strong>${g('p1')}</strong></td></tr>`;
+      meta += `<tr><td style="padding:8px">Pihak Kedua</td><td style="padding:8px">:</td><td style="padding:8px"><strong>${g('p2')}</strong></td></tr>`;
+    }
+    meta += `</table>`;
+    html += meta;
+  }
+
+  const aiContent = g('ai_content') || '<i style="color:#777">[ Silakan klik tombol "Auto-Generate Isi Dokumen" pada form di sebelah kiri untuk menghasilkan draf kalimat dokumen secara otomatis via sistem. ]</i>';
+  html += `<div style="white-space:pre-wrap; text-align:justify; font-size:11px; line-height:1.8; color:#111; margin-bottom:24px;">${aiContent}</div>`;
+
+  let signHtml = uploadedSign 
+    ? `<img src="${uploadedSign}" style="max-height:60px; object-fit:contain; margin:10px 0;">`
+    : `<div class="dp-sign-line" style="margin-top:50px"></div>`;
+
+  if(isLegal) {
+    html += `<div style="display:flex; justify-content:space-between; text-align:center; margin-top:40px; font-size:11px">
+      <div style="width:45%"><p>Pihak Pertama</p><div style="height:70px;display:flex;align-items:center;justify-content:center">${uploadedSign?`<img src="${uploadedSign}" style="max-height:50px">`:''}</div><p><strong>( ${g('p1')||'_______________'} )</strong></p></div>
+      <div style="width:45%"><p>Pihak Kedua</p><div style="height:70px"></div><p><strong>( ${g('p2')||'_______________'} )</strong></p></div>
+    </div>`;
+  } else {
+    html += `<div class="dp-sign"><div class="dp-sign-box">
+      ${!isResmi ? `<p>${g('kota')||'Jakarta'}, ${fmtDate(g('tanggal'))}</p>` : '<p>Hormat saya,</p>'}
+      <p>${g('jabatan')||''}</p>
+      ${signHtml}
+      <p style="${uploadedSign ? '' : 'margin-top:-10px'}"><strong>( ${g('ketua') || g('nama') || '________________'} )</strong></p>
+    </div></div>`;
+  }
+
+  return html;
 }
 
-function closeModal(){document.getElementById('json-modal').classList.remove('open')}
+// KHUSUS PREVIEW FINANSIAL
+function buildInvoicePreview(){
+  const sub = invItems.reduce((a,it)=>a+it.qty*it.harga,0);
+  const ppn = Math.round(sub*0.11);
+  const total = sub+ppn;
+  const rows = invItems.map(it=>`<tr><td>${it.desc||'—'}</td><td class="num">${it.qty}</td><td class="num">${fmt(it.harga)}</td><td class="num">${fmt(it.qty*it.harga)}</td></tr>`).join('');
+  
+  let logoHtml = uploadedLogo ? `<img src="${uploadedLogo}" style="max-height:40px; margin-right:12px; vertical-align:middle; border-radius:4px">` : '';
 
-function markStep3(){
-  document.getElementById('step2').classList.remove('active');
-  document.getElementById('step2').classList.add('done');
-  document.getElementById('step2').querySelector('.gen-step-num').innerHTML='<i class="ti ti-check" style="font-size:12px"></i>';
-  document.getElementById('step3').classList.add('active');
-  showToast('✅ Preview siap! Klik DOCX atau PDF untuk download.');
+  return `
+  <div class="inv-prev-header">
+    <div class="inv-prev-from">
+      ${logoHtml}
+      <div style="display:inline-block; vertical-align:middle">
+        <strong>${g('from_company')||'Pengirim'}</strong>Dokumen Tagihan Resmi
+      </div>
+    </div>
+    <div>
+      <div class="inv-badge">INVOICE</div>
+      <div style="font-size:10.5px;color:#555;font-family:Arial;margin-top:6px;text-align:right">
+        No: ${g('inv_no')||'INV/001'}<br>Tgl: ${fmtDate(g('inv_tanggal'))}
+      </div>
+    </div>
+  </div>
+  <div style="font-family:Arial;font-size:10.5px;margin-bottom:12px">
+    <strong>Ditagihkan kepada:</strong><br><strong style="font-size:12px">${g('to_company')||'Klien'}</strong>
+  </div>
+  <table class="inv-prev-tbl">
+    <thead><tr><th>Deskripsi Layanan</th><th class="num">Qty</th><th class="num">Harga</th><th class="num">Subtotal</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;margin-top:16px;font-family:Arial">
+    <div style="display:flex;gap:24px;font-size:10.5px;color:#555;margin-bottom:4px"><span>Subtotal</span><span>${fmt(sub)}</span></div>
+    <div style="display:flex;gap:24px;font-size:10.5px;color:#555;margin-bottom:6px"><span>PPN 11%</span><span>${fmt(ppn)}</span></div>
+    <div style="display:flex;gap:24px;font-size:12.5px;font-weight:900;color:#111;border-top:1px solid #ddd;padding-top:6px"><span>TOTAL</span><span>${fmt(total)}</span></div>
+  </div>`;
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
+function buildSlipGajiPreview(){
+  const gp=+g('gaji_pokok').replace(/\D/g,'')||0;
+  const tt=+g('tunj_transport').replace(/\D/g,'')||0;
+  
+  let logoHtml = uploadedLogo ? `<img src="${uploadedLogo}" style="max-height:30px; margin-right:10px; vertical-align:middle; border-radius:3px">` : '';
+
+  return `
+  <div style="background:#333;color:#fff;padding:16px 20px;border-radius:4px 4px 0 0;font-family:Arial;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <h3 style="font-size:14px;color:#fff;display:flex;align-items:center">${logoHtml} ${g('company')||'PT Perusahaan'}</h3>
+      <p style="font-size:10.5px;opacity:.8;color:#ddd;margin-top:4px">SLIP GAJI — ${g('periode')||'Mei 2026'}</p>
+    </div>
+  </div>
+  <div style="border:1px solid #ddd;border-top:none;font-family:Arial">
+    <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">DATA KARYAWAN</div>
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>${g('nama')||'Nama Karyawan'}</span><span>${g('posisi')||'Jabatan'}</span></div>
+    <div style="background:#f5f5f5;padding:8px 20px;font-size:9.5px;font-weight:700">PENDAPATAN</div>
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Gaji Pokok</span><span>${fmt(gp)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 20px;border-bottom:1px solid #eee;font-size:11px"><span>Tunjangan Transport</span><span>${fmt(tt)}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:12px 20px;background:#fdfdfd;font-weight:900;font-size:13px;color:#111"><span>TOTAL TAKE HOME PAY</span><span>${fmt(gp+tt)}</span></div>
+  </div>`;
 }
 
-function showAdminPanel(){
-  const tbody = document.getElementById('admin-table-body');
-  tbody.innerHTML = ADMIN_USERS.map(u=>`
-    <tr>
-      <td><strong>${u.name}</strong></td>
-      <td style="color:var(--c-gray-500)">${u.email}</td>
-      <td><span class="badge ${u.plan==='Pro'?'gold':u.plan==='Bisnis'?'blue':'green'}">${u.plan}</span></td>
-      <td>${u.docs}</td>
-      <td><span class="badge green">Aktif</span></td>
-    </tr>
-  `).join('');
-  document.getElementById('admin-modal').classList.add('open');
+function buildKwitansiPreview(){
+  const jml = g('jumlah')||'0';
+  let logoHtml = uploadedLogo ? `<img src="${uploadedLogo}" style="max-height:30px; margin-right:10px; vertical-align:middle; border-radius:3px">` : '';
+
+  return `
+  <div style="border:2px solid #333;border-radius:6px;font-family:Arial">
+    <div style="background:#333;color:#fff;padding:14px 20px;display:flex;justify-content:space-between">
+      <div><div style="font-size:16px;font-weight:900;display:flex;align-items:center">${logoHtml} KWITANSI</div></div>
+      <div style="text-align:right;font-size:10.5px;color:#ddd;display:flex;align-items:center">${fmtDate(g('tanggal'))}</div>
+    </div>
+    <div style="padding:20px">
+      <table class="dp-tbl" style="font-size:11px">
+        <tr><td style="padding:4px 0">Diterima oleh</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('from_name')||'—'}</strong></td></tr>
+        <tr><td style="padding:4px 0">Diterima dari</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong>${g('dari')||'—'}</strong></td></tr>
+        <tr><td style="padding:4px 0">Nominal</td><td style="padding:4px 0">:</td><td style="padding:4px 0"><strong style="color:#111;font-size:14px">Rp ${jml.replace(/\D/g,'')?Number(jml.replace(/\D/g,'')).toLocaleString('id-ID'):jml}</strong></td></tr>
+        <tr><td style="padding:4px 0;vertical-align:top">Keperluan</td><td style="padding:4px 0;vertical-align:top">:</td><td style="padding:4px 0;line-height:1.6">${g('untuk')||'—'}</td></tr>
+      </table>
+    </div>
+  </div>`;
 }
 
-function closeAdminModal(){document.getElementById('admin-modal').classList.remove('open')}
+// ═══════════════ EXPORT REAL LOGIC ═══════════════
+function doGenerate(){
+  step3done=true;
+  document.getElementById('st2').className='step done';
+  document.getElementById('st2').querySelector('.step-dot').innerHTML='<i class="ti ti-check" style="font-size:12px"></i>';
+  document.getElementById('st3').className='step active';
+  toast('✅',`${currentTmpl.name} siap diekspor!`);
+}
 
-// Set default date
-const today = new Date().toISOString().split('T')[0];
-const dateInput = document.getElementById('f-tanggal');
-if(dateInput) dateInput.value = today;
+function exportDoc(fmt){
+  if(!step3done) doGenerate();
+  const element = document.getElementById('doc-preview');
+  const filename = currentTmpl.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
-// Init
-renderTemplates();
-renderDocList();
+  if(fmt === 'PDF') {
+    toast('📄', `Sedang mengonversi ke PDF...`);
+    const opt = {
+      margin:       10,
+      filename:     filename + '.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save().then(() => {
+      toast('✅', 'PDF berhasil diunduh!');
+    });
+  } 
+  else if(fmt === 'DOCX') {
+    toast('📋', `Sedang mengonversi ke Word (DOC)...`);
+    const preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    const postHtml = "</body></html>";
+    const html = preHtml + element.innerHTML + postHtml;
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename + '.doc';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => { toast('✅', 'Word (DOC) berhasil diunduh!'); }, 1000);
+  }
+}
+
+function resetForm(){
+  document.querySelectorAll('.fi').forEach(el=> { if(el.tagName!=='SELECT' && el.type!=='date') el.value=''; });
+  step3done=false;
+  document.getElementById('st2').className='step active';
+  document.getElementById('st3').className='step';
+  document.getElementById('st3').querySelector('.step-dot').textContent='3';
+  
+  const aiArea = document.getElementById('f-ai_content');
+  if(aiArea) { aiArea.value = ''; aiArea.style.display = 'none'; }
+  
+  uploadedLogo = '';
+  uploadedSign = '';
+  const elLogo = document.getElementById('name-logo');
+  if(elLogo) elLogo.textContent = 'Klik untuk pilih (PNG/JPG)';
+  const elSign = document.getElementById('name-sign');
+  if(elSign) elSign.textContent = 'Klik untuk pilih (Transparan)';
+  
+  updatePreview();
+  toast('🔄','Seluruh isian form telah direset');
+}
+
+let dark=false;
+function toggleDark(){
+  dark=!dark;
+  document.documentElement.toggleAttribute('data-dark',dark);
+  document.getElementById('dk-btn').innerHTML=dark?'<i class="ti ti-sun"></i>':'<i class="ti ti-moon"></i>';
+}
+
+function toast(icon,msg){
+  const wrap=document.getElementById('toast-wrap');
+  const t=document.createElement('div');
+  t.className='toast';t.innerHTML=`<span>${icon}</span><span>${msg}</span>`;
+  wrap.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3000);
+}
+function navTo(page){ toast('🔗',`Menu ${page} sedang dalam penyempurnaan UI.`); }
+
+// INIT
+buildSidebar();
+renderForm();
 </script>
 </body>
 </html>
